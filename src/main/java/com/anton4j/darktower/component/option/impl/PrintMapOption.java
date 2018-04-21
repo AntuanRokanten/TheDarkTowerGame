@@ -1,18 +1,20 @@
 package com.anton4j.darktower.component.option.impl;
 
-import com.anton4j.darktower.component.option.Option;
+import com.anton4j.darktower.component.event.Event;
+import com.anton4j.darktower.component.option.EventOption;
 
 /**
  * @author anton
  */
-public class PrintMapOption extends Option {
+public class PrintMapOption extends EventOption {
 
     public PrintMapOption(int index) {
         super("Print map", index);
     }
 
     @Override
-    public void processOption() {
-
+    public Event optionEvent() {
+        return null;
     }
+
 }

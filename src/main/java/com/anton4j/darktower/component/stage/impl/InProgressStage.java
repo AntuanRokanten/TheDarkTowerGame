@@ -1,7 +1,9 @@
 package com.anton4j.darktower.component.stage.impl;
 
 import com.anton4j.darktower.component.option.impl.*;
+import com.anton4j.darktower.component.scene.Scene;
 import com.anton4j.darktower.component.stage.Stage;
+import com.anton4j.darktower.console.ConsoleLine;
 
 import static java.util.Arrays.asList;
 
@@ -11,18 +13,19 @@ import static java.util.Arrays.asList;
 public class InProgressStage extends Stage {
 
     public InProgressStage() {
-        super(asList(
-              new ExploreOption(0),
-              new TakeRestOption(1),
-              new MoveOption(2),
-              new CharInfoOption(3),
-              new PrintMapOption(4),
-              new SaveExitOption(5)
-        ));
+        super(new EndGameStage(), new Scene(asList(
+              new ExploreOption(1),
+              new TakeRestOption(2),
+              new MoveOption(3),
+              new CharInfoOption(4),
+              new PrintMapOption(5),
+              new SaveExitOption(6)
+        ), new ConsoleLine("TEST21")));
     }
 
     @Override
     public boolean stageCompleted() {
         return false; // boss defeated
     }
+
 }
