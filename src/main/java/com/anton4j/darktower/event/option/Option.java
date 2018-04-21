@@ -7,17 +7,22 @@ import com.anton4j.darktower.console.ConsoleLine;
  */
 public abstract class Option {
 
+    private final String value;
     private final int index;
 
-    protected Option(int index) {
+    protected Option(String value, int index) {
+        this.value = value;
         this.index = index;
     }
 
     public ConsoleLine consoleLine() {
-        return new ConsoleLine(index + " - " + optionValue());
+        return new ConsoleLine(index + " - " + value);
+    }
+
+    public int index() {
+        return index;
     }
 
     public abstract void processOption();
-    public abstract String optionValue();
 
 }
