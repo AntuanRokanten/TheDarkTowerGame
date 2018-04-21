@@ -7,7 +7,7 @@ import java.util.List;
 import static java.util.concurrent.TimeUnit.MILLISECONDS;
 
 /**
- * Game's main banner.
+ * Game's banner.
  *
  * @author anton
  */

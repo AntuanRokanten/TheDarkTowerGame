@@ -1,4 +1,4 @@
-package com.anton4j.darktower.event.option;
+package com.anton4j.darktower.component.option;
 
 import com.anton4j.darktower.console.ConsoleLine;
 
@@ -21,6 +21,10 @@ public abstract class Option {
 
     public int index() {
         return index;
+    }
+
+    public OptionAvailability canBeChosen() {
+        return OptionAvailability.available();
     }
 
     public abstract void processOption();

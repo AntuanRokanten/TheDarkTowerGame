@@ -1,6 +1,6 @@
-package com.anton4j.darktower.event.option.impl;
+package com.anton4j.darktower.component.option.impl;
 
-import com.anton4j.darktower.event.option.Option;
+import com.anton4j.darktower.component.option.Option;
 
 /**
  * @author anton
@@ -15,4 +15,5 @@ public class NewGameOption extends Option {
     public void processOption() {
 
     }
+
 }

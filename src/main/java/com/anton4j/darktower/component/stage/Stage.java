@@ -1,6 +1,6 @@
-package com.anton4j.darktower.event.stage;
+package com.anton4j.darktower.component.stage;
 
-import com.anton4j.darktower.event.option.Option;
+import com.anton4j.darktower.component.option.Option;
 
 import java.util.List;
 import java.util.Optional;
@@ -32,5 +32,7 @@ public abstract class Stage {
             // todo
         }
     }
+
+    public abstract boolean stageCompleted();
 
 }

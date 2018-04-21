@@ -1,7 +1,7 @@
-package com.anton4j.darktower.event.stage.impl;
+package com.anton4j.darktower.component.stage.impl;
 
-import com.anton4j.darktower.event.option.impl.*;
-import com.anton4j.darktower.event.stage.Stage;
+import com.anton4j.darktower.component.option.impl.*;
+import com.anton4j.darktower.component.stage.Stage;
 
 import static java.util.Arrays.asList;
 
@@ -21,4 +21,8 @@ public class InProgressStage extends Stage {
         ));
     }
 
+    @Override
+    public boolean stageCompleted() {
+        return false; // boss defeated
+    }
 }
