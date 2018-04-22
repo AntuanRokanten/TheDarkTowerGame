@@ -45,18 +45,15 @@ public class Game {
         intro.playIntro();
 
 
-        Stage currentStage = initialStage;
-        currentStage.getScene().processScene();
+        Stage stage = initialStage;
 
-//        while (!currentStage.stageCompleted()) {
-//            for (Option option : currentStage.options()) {
-//                option.consoleLine().println();
-//            }
-//
-//            String selectedIndex = ConsoleUtils.readLine();
-//
-////            currentStage.handleSelection(Integer.valueOf(selectedIndex));
-//        }
+        while (stage != null && !stage.stageCompleted()) {
+            stage.processScene();
+
+            if (stage.stageCompleted()) {
+                stage = stage.nextStage();
+            }
+        }
 
     }
 

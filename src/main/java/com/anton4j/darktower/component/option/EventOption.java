@@ -11,6 +11,11 @@ public abstract class EventOption extends Option {
         super(displayText, index);
     }
 
+    @Override
+    public Object processOption() {
+        return optionEvent().process();
+    }
+
     public abstract Event optionEvent();
 
 }

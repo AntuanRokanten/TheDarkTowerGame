@@ -12,4 +12,7 @@ public class ConsoleUtils {
         return scan.nextLine();
     }
 
+    public static void emptyLine() {
+        System.out.println();
+    }
 }

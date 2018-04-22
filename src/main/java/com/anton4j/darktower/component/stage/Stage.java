@@ -1,6 +1,6 @@
 package com.anton4j.darktower.component.stage;
 
-import com.anton4j.darktower.component.scene.Scene;
+import com.anton4j.darktower.component.scene.OptionsScene;
 
 /**
  * @author anton
@@ -8,35 +8,20 @@ import com.anton4j.darktower.component.scene.Scene;
 public abstract class Stage {
 
     private final Stage next;
-//    private final List<Option> options;
-    private final Scene scene;
+    private final OptionsScene optionsScene;
 
-    public Stage(Stage next, Scene scene) {
+    public Stage(Stage next, OptionsScene optionsScene) {
         this.next = next;
-//        this.options = options;
-        this.scene = scene;
+        this.optionsScene = optionsScene;
     }
 
-//    public final List<Option> options() {
-//        return options;
-//    }
+    // todo add process scene method and based on result set stage completed
+    public void processScene() {
+        optionsScene.processScene();
+    }
 
-//    public void handleSelection(int index) {
-//        Optional<Option> optionalOption = options
-//              .stream()
-//              .filter(option -> option.index() == index)
-//              .findFirst();
-//
-//        if (optionalOption.isPresent()) {
-////            optionalOption.get().;
-//        } else {
-//            // todo
-//        }
-//    }
-
-
-    public Scene getScene() {
-        return scene;
+    public OptionsScene getOptionsScene() {
+        return optionsScene;
     }
 
     public Stage nextStage() {

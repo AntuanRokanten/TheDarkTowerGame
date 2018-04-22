@@ -12,7 +12,8 @@ public class ValueOption<T> extends Option {
         this.value = value;
     }
 
-    public T getValue() {
+    @Override
+    public T processOption() {
         return value;
     }
 

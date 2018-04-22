@@ -1,7 +1,7 @@
 package com.anton4j.darktower.component.stage.impl;
 
 import com.anton4j.darktower.component.option.impl.*;
-import com.anton4j.darktower.component.scene.Scene;
+import com.anton4j.darktower.component.scene.OptionsScene;
 import com.anton4j.darktower.component.stage.Stage;
 import com.anton4j.darktower.console.ConsoleLine;
 
@@ -13,7 +13,7 @@ import static java.util.Arrays.asList;
 public class InProgressStage extends Stage {
 
     public InProgressStage() {
-        super(new EndGameStage(), new Scene(asList(
+        super(new EndGameStage(), new OptionsScene(asList(
               new ExploreOption(1),
               new TakeRestOption(2),
               new MoveOption(3),

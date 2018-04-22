@@ -15,8 +15,8 @@ public abstract class Option {
         this.index = index;
     }
 
-    public ConsoleLine consoleLine() {
-        return new ConsoleLine(index + " - " + displayText);
+    public void printConsoleLine() {
+        new ConsoleLine(index + " - " + displayText).println();
     }
 
     public int index() {
@@ -27,8 +27,6 @@ public abstract class Option {
         return OptionAvailability.available();
     }
 
-//    public final void processOption() {
-//        EventResult process = optionEvent().process();
-//    }
+    public abstract Object processOption();
 
 }
