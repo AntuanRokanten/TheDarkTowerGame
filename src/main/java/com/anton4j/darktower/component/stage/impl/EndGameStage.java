@@ -5,15 +5,15 @@ import com.anton4j.darktower.component.stage.Stage;
 /**
  * @author anton
  */
-public class EndGameStage extends Stage {
+public class EndGameStage extends Stage<Void> {
 
-    public EndGameStage() {
+    EndGameStage() {
         super(null, null);
     }
 
     @Override
-    public boolean stageCompleted() {
-        return true;
+    public boolean getCompletionStatus(Void stageResult) {
+        return false;
     }
 
 }

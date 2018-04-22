@@ -1,34 +1,46 @@
 package com.anton4j.darktower.component.stage;
 
 import com.anton4j.darktower.component.scene.OptionsScene;
+import com.anton4j.darktower.console.ConsoleLine;
 
 /**
  * @author anton
  */
-public abstract class Stage {
+public abstract class Stage<T> {
 
     private final Stage next;
-    private final OptionsScene optionsScene;
+    private final OptionsScene<T> optionsScene;
+    private final ConsoleLine stageIntro;
+    private boolean stageCompleted = false;
 
-    public Stage(Stage next, OptionsScene optionsScene) {
+    public Stage(Stage next, OptionsScene<T> optionsScene, ConsoleLine stageIntro) {
         this.next = next;
         this.optionsScene = optionsScene;
+        this.stageIntro = stageIntro;
+    }
+
+    public Stage(Stage next, OptionsScene<T> optionsScene) {
+        this(next, optionsScene, null);
     }
 
     // todo add process scene method and based on result set stage completed
     public void processScene() {
-        Object o = optionsScene.processScene();
-        System.err.println();
-    }
+        if (stageIntro != null) {
+            stageIntro.println();
+        }
 
-    public OptionsScene getOptionsScene() {
-        return optionsScene;
+        T o = optionsScene.processScene();
+        stageCompleted = getCompletionStatus(o);
     }
 
     public Stage nextStage() {
         return next;
     }
 
-    public abstract boolean stageCompleted();
+    public boolean stageCompleted() {
+        return stageCompleted;
+    }
+
+    public abstract boolean getCompletionStatus(T stageResult);
 
 }

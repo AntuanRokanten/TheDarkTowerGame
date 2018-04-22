@@ -19,8 +19,8 @@ public class OptionResult<T> {
         this.resultObj = resultObj;
     }
 
-    public EventResult.Status status() {
-        return status;
+    public boolean isSuccess() {
+        return status == EventResult.Status.SUCCESS;
     }
 
     public T getResultObj() {

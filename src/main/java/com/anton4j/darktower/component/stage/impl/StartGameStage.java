@@ -1,28 +1,30 @@
 package com.anton4j.darktower.component.stage.impl;
 
+import com.anton4j.darktower.character.Char;
 import com.anton4j.darktower.component.option.impl.LoadGameOption;
 import com.anton4j.darktower.component.option.impl.NewGameOption;
 import com.anton4j.darktower.component.scene.OptionsScene;
 import com.anton4j.darktower.component.stage.Stage;
-import com.anton4j.darktower.console.ConsoleLine;
 
 import static java.util.Arrays.asList;
 
 /**
  * @author anton
  */
-public class StartGameStage extends Stage {
+public class StartGameStage extends Stage<Char> {
 
     public StartGameStage() {
-        super(new InProgressStage(), new OptionsScene(asList(
-              new NewGameOption(1),
-              new LoadGameOption(2)
-        ), new ConsoleLine("Choose an option")));
+        super(new InProgressStage(),
+              new OptionsScene<>(asList(
+                    new NewGameOption(1),
+                    new LoadGameOption(2)
+              ))
+        );
     }
 
     @Override
-    public boolean stageCompleted() {
-        return false; // char created or game loaded
+    public boolean getCompletionStatus(Char stageResult) {
+        return true; // todo add comment
     }
 
 }

@@ -13,6 +13,10 @@ public abstract class Scene<T> {
         this.sceneTitle = sceneTitle;
     }
 
+    protected Scene() {
+        this(null);
+    }
+
     public abstract T processScene();
 
 }

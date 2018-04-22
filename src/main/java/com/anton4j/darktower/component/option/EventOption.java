@@ -1,8 +1,5 @@
 package com.anton4j.darktower.component.option;
 
-import com.anton4j.darktower.component.event.Event;
-import com.anton4j.darktower.component.event.EventResult;
-
 /**
  * @author anton
  */
@@ -12,13 +9,13 @@ public abstract class EventOption extends Option {
         super(displayText, index);
     }
 
-    @Override
-    public OptionResult processOption() {
-        EventResult process = optionEvent().process();
+//    @Override
+//    public OptionResult processOption() {
+//        EventResult process = optionEvent().process();
+//
+//        return new OptionResult<>(process.isSuccess(), process.resultObj());
+//    }
 
-        return new OptionResult<>(process.status(), process.resultObj());
-    }
-
-    public abstract Event optionEvent();
+//    public abstract Event optionEvent();
 
 }

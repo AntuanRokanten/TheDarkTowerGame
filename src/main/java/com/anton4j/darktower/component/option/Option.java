@@ -5,7 +5,7 @@ import com.anton4j.darktower.console.ConsoleLine;
 /**
  * @author anton
  */
-public abstract class Option {
+public abstract class Option<T> {
 
     private final String displayText;
     private final int index;
@@ -23,10 +23,6 @@ public abstract class Option {
         return index;
     }
 
-    public OptionAvailability canBeChosen() {
-        return OptionAvailability.available();
-    }
-
-    public abstract OptionResult processOption();
+    public abstract OptionResult<T> processOption();
 
 }

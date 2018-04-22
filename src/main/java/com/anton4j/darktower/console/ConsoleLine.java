@@ -30,6 +30,14 @@ public class ConsoleLine {
     }
 
     public void println() {
+        System.out.println(composeSting());
+    }
+
+    public void print() {
+        System.out.print(composeSting());
+    }
+
+    private String composeSting() {
         StringBuilder printValue = new StringBuilder();
 
         if (backgroundColor != null) {
@@ -41,8 +49,7 @@ public class ConsoleLine {
         }
 
         printValue.append(value).append(RESET);
-
-        System.out.println(printValue);
+        return printValue.toString();
     }
 
 }

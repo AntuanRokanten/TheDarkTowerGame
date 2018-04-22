@@ -5,7 +5,7 @@ import com.anton4j.darktower.component.event.EventResult;
 /**
  * @author anton
  */
-public class ValueOption<T> extends Option {
+public class ValueOption<T> extends Option<T> {
 
     private final T value;
 

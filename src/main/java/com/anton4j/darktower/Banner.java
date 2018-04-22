@@ -27,7 +27,7 @@ public class Banner {
             line.println();
             try {
                 MILLISECONDS.sleep(300);
-            } catch (InterruptedException e) {
+            } catch (InterruptedException ignored) {
             }
         }
     }

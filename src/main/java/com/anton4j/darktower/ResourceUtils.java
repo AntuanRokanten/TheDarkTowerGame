@@ -30,8 +30,6 @@ public class ResourceUtils {
                 lines.add(line);
             }
 
-            scanner.close();
-
         } catch (IOException e) {
             e.printStackTrace();
         }
