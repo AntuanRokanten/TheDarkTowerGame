@@ -17,7 +17,8 @@ public abstract class Stage {
 
     // todo add process scene method and based on result set stage completed
     public void processScene() {
-        optionsScene.processScene();
+        Object o = optionsScene.processScene();
+        System.err.println();
     }
 
     public OptionsScene getOptionsScene() {

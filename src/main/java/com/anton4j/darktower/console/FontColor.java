@@ -20,6 +20,7 @@ public enum FontColor implements ConsoleColor {
         this.value = value;
     }
 
+    // todo do not override value
     @Override
     public String value() {
         return value;

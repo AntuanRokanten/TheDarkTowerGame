@@ -13,14 +13,16 @@ import static java.util.Arrays.asList;
 public class InProgressStage extends Stage {
 
     public InProgressStage() {
-        super(new EndGameStage(), new OptionsScene(asList(
-              new ExploreOption(1),
-              new TakeRestOption(2),
-              new MoveOption(3),
-              new CharInfoOption(4),
-              new PrintMapOption(5),
-              new SaveExitOption(6)
-        ), new ConsoleLine("TEST21")));
+        super(new EndGameStage(),
+              new OptionsScene(asList(
+                    new ExploreOption(1),
+                    new TakeRestOption(2),
+                    new MoveOption(3),
+                    new CharInfoOption(4),
+                    new PrintMapOption(5),
+                    new SaveExitOption(6)
+              ),
+                    new ConsoleLine("TEST21")));
     }
 
     @Override

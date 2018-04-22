@@ -1,5 +1,7 @@
 package com.anton4j.darktower.component.option;
 
+import com.anton4j.darktower.component.event.EventResult;
+
 /**
  * @author anton
  */
@@ -13,8 +15,8 @@ public class ValueOption<T> extends Option {
     }
 
     @Override
-    public T processOption() {
-        return value;
+    public OptionResult<T> processOption() {
+        return new OptionResult<>(EventResult.Status.SUCCESS, value);
     }
 
 }

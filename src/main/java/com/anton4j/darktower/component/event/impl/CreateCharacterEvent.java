@@ -17,10 +17,10 @@ import java.util.List;
 /**
  * @author anton
  */
-public class CreateCharacterEvent implements Event {
+public class CreateCharacterEvent implements Event<Char> {
 
     @Override
-    public EventResult process() {
+    public EventResult<Char> process() {
         Race race = new OptionsScene<Race>(optionsFromEnumValues(Race.values()), new ConsoleLine("Choose race:"))
               .processScene();
 

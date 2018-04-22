@@ -1,6 +1,8 @@
 package com.anton4j.darktower.component.scene;
 
+import com.anton4j.darktower.component.event.EventResult;
 import com.anton4j.darktower.component.option.Option;
+import com.anton4j.darktower.component.option.OptionResult;
 import com.anton4j.darktower.console.ConsoleLine;
 import com.anton4j.darktower.console.ConsoleUtils;
 import com.anton4j.darktower.console.FontColor;
@@ -31,11 +33,19 @@ public class OptionsScene<T> extends Scene<T> {
 
         Optional<Option> selectedOption = getSelectedOption(line, options);
         if (selectedOption.isPresent()) {
-            Object o = selectedOption
+            OptionResult o = selectedOption
                   .get()
                   .processOption();
 
-            return (T) o; // todo
+            // todo return from event raw result then option checks it and returns result
+            // todo here we check if it was success if not repeat the scene
+            // todo e.g. load game may fail
+            if (o.status() == EventResult.Status.SUCCESS) {
+                return (T) o.getResultObj(); // todo
+            } else {
+                new ConsoleLine("Repeating a scene").println();
+                return processScene();
+            }
         } else {
             String indexes = options.stream().map(Option::index).map(String::valueOf).collect(Collectors.joining(", "));
             new ConsoleLine("Please enter a valid value. Possible values: " + indexes, FontColor.YELLOW).println();

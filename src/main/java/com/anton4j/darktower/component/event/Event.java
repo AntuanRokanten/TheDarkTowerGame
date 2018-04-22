@@ -3,8 +3,8 @@ package com.anton4j.darktower.component.event;
 /**
  * @author anton
  */
-public interface Event {
+public interface Event<T> {
 
-    EventResult process();
+    EventResult<T> process();
 
 }

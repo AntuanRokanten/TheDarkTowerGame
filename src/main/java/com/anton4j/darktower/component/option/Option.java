@@ -27,6 +27,6 @@ public abstract class Option {
         return OptionAvailability.available();
     }
 
-    public abstract Object processOption();
+    public abstract OptionResult processOption();
 
 }
