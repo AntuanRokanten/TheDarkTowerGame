@@ -19,6 +19,10 @@ public abstract class Option<T> {
         new ConsoleLine(index + " - " + displayText).println();
     }
 
+    public String displayText() {
+        return displayText;
+    }
+
     public int index() {
         return index;
     }

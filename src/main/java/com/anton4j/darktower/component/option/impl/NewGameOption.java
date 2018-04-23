@@ -2,7 +2,7 @@ package com.anton4j.darktower.component.option.impl;
 
 import com.anton4j.darktower.character.Char;
 import com.anton4j.darktower.character.Gender;
-import com.anton4j.darktower.character.Race;
+import com.anton4j.darktower.character.CharRace;
 import com.anton4j.darktower.component.event.EventResult;
 import com.anton4j.darktower.component.option.Option;
 import com.anton4j.darktower.component.option.OptionResult;
@@ -26,7 +26,7 @@ public class NewGameOption extends Option<Char> {
     public OptionResult<Char> processOption() {
         new ConsoleLine("In order to join Ka-Tet and start journey to the Dark tower first create a character", FontColor.BLUE).println();
 
-        Race race = new OptionsScene<>(optionsFromEnumValues(Race.values()), new ConsoleLine("Choose race:"))
+        CharRace charRace = new OptionsScene<>(optionsFromEnumValues(CharRace.values()), new ConsoleLine("Choose race:"))
               .processScene();
 
         Gender gender = new OptionsScene<>(optionsFromEnumValues(Gender.values()), new ConsoleLine("Choose gender:"))
@@ -37,7 +37,13 @@ public class NewGameOption extends Option<Char> {
 
         new ConsoleLine("Great! Are you ready to defeat all the enemies and reach the Dark Tower? Let's start.", FontColor.BLUE).println();
 
-        return new OptionResult<>(EventResult.Status.SUCCESS, new Char(gender, name, race));
+        Char character = new Char.CharBuilder()
+              .withGender(gender)
+              .withName(name)
+              .withRace(charRace)
+              .build();
+
+        return new OptionResult<>(EventResult.Status.SUCCESS, character);
     }
 
 

@@ -32,7 +32,10 @@ public class OptionsScene<T> extends Scene<T> {
             sceneTitle.println();
         }
 
-        options.forEach(Option::printConsoleLine);
+        for (int i = 0; i < options.size(); i++) {
+            new ConsoleLine((i + 1) + " - " + options.get(i).displayText()).println();
+        }
+
         String line = ConsoleUtils.readLine();
 
         Optional<Option<T>> selectedOption = getSelectedOption(line, options);
@@ -59,12 +62,13 @@ public class OptionsScene<T> extends Scene<T> {
         if (!isNumeric(line)) {
             return Optional.empty();
         } else {
-            int selectedIndex = Integer.parseInt(line);
+            int selectedIndex = Integer.parseInt(line) - 1;
 
-            return options
-                  .stream()
-                  .filter(option -> option.index() == selectedIndex)
-                  .findFirst();
+            if (selectedIndex >= 0 && selectedIndex < options.size()) {
+                return Optional.of(options.get(selectedIndex));
+            } else {
+                return Optional.empty();
+            }
         }
     }
 

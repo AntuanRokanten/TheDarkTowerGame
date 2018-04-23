@@ -3,6 +3,8 @@ package com.anton4j.darktower.character;
 /**
  * @author ant
  */
-public interface Race {
+public enum MobRace implements Race {
+
+    ORACLE, ZOMBIE, VAMPIRE
 
 }
