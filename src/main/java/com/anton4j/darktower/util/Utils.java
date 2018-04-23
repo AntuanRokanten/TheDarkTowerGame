@@ -11,7 +11,7 @@ import java.util.List;
  */
 public class Utils {
 
-    public static <T extends Enum> List<Option<T>> optionsFromEnumValues(T[] enumValues) {
+    public static <T extends Enum> List<Option<T>> optionsFromEnumValues(T[] enumValues) { // todo better create class
         List<Option<T>> raceOptions = new ArrayList<>();
         for (int i = 0; i < enumValues.length; i++) {
             T value = enumValues[i];

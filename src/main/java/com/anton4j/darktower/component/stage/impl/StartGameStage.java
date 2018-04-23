@@ -1,5 +1,6 @@
 package com.anton4j.darktower.component.stage.impl;
 
+import com.anton4j.darktower.GameContext;
 import com.anton4j.darktower.character.Char;
 import com.anton4j.darktower.component.option.impl.LoadGameOption;
 import com.anton4j.darktower.component.option.impl.NewGameOption;
@@ -23,8 +24,9 @@ public class StartGameStage extends Stage<Char> {
     }
 
     @Override
-    public boolean getCompletionStatus(Char stageResult) {
-        return true; // todo add comment
+    public boolean getCompletionStatus(Char character) {
+        GameContext.getInstance().setMainCharacter(character);
+        return true;
     }
 
 }

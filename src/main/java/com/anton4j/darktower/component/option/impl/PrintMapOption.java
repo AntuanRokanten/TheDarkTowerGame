@@ -17,6 +17,7 @@ public class PrintMapOption extends Option<Void> {
     @Override
     public OptionResult<Void> processOption() {
         GameContext.getInstance().getGameMap().print();
+        //todo print current location
         return new OptionResult<>(EventResult.Status.SUCCESS, null);
     }
 

@@ -1,5 +1,7 @@
 package com.anton4j.darktower;
 
+import com.anton4j.darktower.character.Char;
+
 /**
  * @author ant
  */
@@ -12,6 +14,7 @@ public class GameContext {
     }
 
     private ConsoleLines gameMap;
+    private Char mainCharacter;
 
     public ConsoleLines getGameMap() {
         return gameMap;
@@ -21,4 +24,11 @@ public class GameContext {
         this.gameMap = gameMap;
     }
 
+    public void setMainCharacter(Char character) {
+        this.mainCharacter = character;
+    }
+
+    public Char getMainCharacter() {
+        return mainCharacter;
+    }
 }
