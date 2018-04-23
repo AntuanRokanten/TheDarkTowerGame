@@ -15,12 +15,12 @@ public class InProgressStage extends Stage<RoundOutcome> {
     InProgressStage() {
         super(new EndGameStage(),
               new OptionsScene(asList(
-                    new ExploreOption(1),
-                    new TakeRestOption(2),
-                    new MoveOption(3),
-                    new CharInfoOption(4),
-                    new PrintMapOption(5),
-                    new SaveExitOption(6)
+                    new ExploreOption(),
+                    new TakeRestOption(),
+                    new MoveOption(),
+                    new CharInfoOption(),
+                    new PrintMapOption(),
+                    new SaveExitOption()
               )));
     }
 

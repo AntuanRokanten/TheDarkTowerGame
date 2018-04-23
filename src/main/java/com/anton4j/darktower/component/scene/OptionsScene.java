@@ -9,6 +9,7 @@ import com.anton4j.darktower.console.FontColor;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 /**
  * @author anton
@@ -51,7 +52,10 @@ public class OptionsScene<T> extends Scene<T> {
                 return processScene();
             }
         } else {
-            String indexes = options.stream().map(Option::index).map(String::valueOf).collect(Collectors.joining(", "));
+            String indexes = IntStream.range(1, options.size() + 1)
+                  .mapToObj(String::valueOf)
+                  .collect(Collectors.joining(", "));
+
             new ConsoleLine("Please enter a valid value. Possible values: " + indexes, FontColor.YELLOW).println();
 
             return processScene();

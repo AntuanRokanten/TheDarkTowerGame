@@ -8,8 +8,8 @@ import com.anton4j.darktower.component.option.OptionResult;
  */
 public class MoveOption extends Option {
 
-    public MoveOption(int index) {
-        super("Move to the next location", index);
+    public MoveOption() {
+        super("Move to the next location");
     }
 
 //    @Override

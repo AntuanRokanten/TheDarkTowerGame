@@ -19,7 +19,7 @@ public class Utils {
             String raceName = value.name();
             String displayText = raceName.substring(0, 1).toUpperCase() + raceName.substring(1).toLowerCase().replaceAll("_", " ");
 
-            ValueOption<T> option = new ValueOption<>(value, displayText, i + 1);
+            ValueOption<T> option = new ValueOption<>(value, displayText);
             raceOptions.add(option);
         }
         return raceOptions;

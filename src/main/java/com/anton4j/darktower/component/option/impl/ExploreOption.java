@@ -22,8 +22,8 @@ public class ExploreOption extends Option<RoundOutcome> {
 
     private static final Random RANDOM = new Random();
 
-    public ExploreOption(int index) {
-        super("Explore the location", index);
+    public ExploreOption() {
+        super("Explore the location");
     }
 
     @Override

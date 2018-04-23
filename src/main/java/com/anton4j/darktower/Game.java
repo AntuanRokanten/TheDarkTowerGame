@@ -27,7 +27,7 @@ public class Game {
               .map(line -> new ConsoleLine(line, FontColor.BLACK, BackgroundColor.WHITE))
               .collect(Collectors.toList());
 
-        Banner mainBanner = new Banner(bannerConsoleLines);
+        ConsoleLines mainBanner = new ConsoleLines(bannerConsoleLines);
 
         List<AudioTone> tones = new ArrayList<>();
         tones.add(new AudioTone(200, 500));
@@ -39,11 +39,20 @@ public class Game {
 
         this.intro = new Intro(mainBanner, mainAudio);
         this.initialStage = new StartGameStage();
+
+        List<String> mapFileLines = ResourceUtils.getResourceLines("map");
+
+        List<ConsoleLine> mapConsoleLines = mapFileLines
+              .stream()
+              .map(line -> new ConsoleLine(line, FontColor.GREEN))
+              .collect(Collectors.toList());
+
+        ConsoleLines gameMap = new ConsoleLines(mapConsoleLines);
+        GameContext.getInstance().setGameMap(gameMap);
     }
 
     public void start() {
         intro.playIntro();
-
 
         Stage stage = initialStage;
 

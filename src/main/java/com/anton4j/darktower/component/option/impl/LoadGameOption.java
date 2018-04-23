@@ -9,8 +9,8 @@ import com.anton4j.darktower.component.option.OptionResult;
  */
 public class LoadGameOption extends Option<Char> {
 
-    public LoadGameOption(int index) {
-        super("Load game", index);
+    public LoadGameOption() {
+        super("Load game");
     }
 
     @Override

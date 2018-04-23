@@ -8,8 +8,8 @@ import com.anton4j.darktower.component.option.OptionResult;
  */
 public class SaveExitOption extends Option {
 
-    public SaveExitOption(int index) {
-        super("Save and exit", index);
+    public SaveExitOption() {
+        super("Save and exit");
     }
 
     @Override

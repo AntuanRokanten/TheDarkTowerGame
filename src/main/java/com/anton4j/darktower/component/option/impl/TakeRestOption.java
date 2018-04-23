@@ -13,8 +13,8 @@ import com.anton4j.darktower.console.ProgressBar;
  */
 public class TakeRestOption extends Option<RoundOutcome> {
 
-    public TakeRestOption(int index) {
-        super("Take a rest", index);
+    public TakeRestOption() {
+        super("Take a rest");
     }
 
     @Override

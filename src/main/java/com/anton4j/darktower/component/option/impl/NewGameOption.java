@@ -18,8 +18,8 @@ import static com.anton4j.darktower.util.Utils.optionsFromEnumValues;
  */
 public class NewGameOption extends Option<Char> {
 
-    public NewGameOption(int index) {
-        super("New game", index);
+    public NewGameOption() {
+        super("New game");
     }
 
     @Override

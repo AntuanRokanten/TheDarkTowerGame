@@ -16,8 +16,8 @@ public class StartGameStage extends Stage<Char> {
     public StartGameStage() {
         super(new InProgressStage(),
               new OptionsScene<>(asList(
-                    new NewGameOption(1),
-                    new LoadGameOption(2)
+                    new NewGameOption(),
+                    new LoadGameOption()
               ))
         );
     }

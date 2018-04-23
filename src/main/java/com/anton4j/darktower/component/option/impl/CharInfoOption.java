@@ -8,8 +8,8 @@ import com.anton4j.darktower.component.option.OptionResult;
  */
 public class CharInfoOption extends Option {
 
-    public CharInfoOption(int index) {
-        super("Print character info", index);
+    public CharInfoOption() {
+        super("Print character info");
     }
 
     @Override

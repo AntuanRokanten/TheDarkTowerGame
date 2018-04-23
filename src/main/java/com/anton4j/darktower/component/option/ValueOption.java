@@ -9,8 +9,8 @@ public class ValueOption<T> extends Option<T> {
 
     private final T value;
 
-    public ValueOption(T value, String displayText, int index) {
-        super(displayText, index);
+    public ValueOption(T value, String displayText) {
+        super(displayText);
         this.value = value;
     }
 
