@@ -1,7 +1,6 @@
 package com.anton4j.darktower;
 
 import com.anton4j.darktower.character.Char;
-import com.anton4j.darktower.character.Creature;
 import com.anton4j.darktower.character.Mob;
 import com.anton4j.darktower.character.MobRace;
 import com.anton4j.darktower.util.RandomUtils;
@@ -14,7 +13,7 @@ import static com.anton4j.darktower.util.RandomUtils.randomBoolean;
  */
 public class CreatureFactory {
 
-    public static Creature createCharacterEnemy(Char character) {
+    public static Mob createCharacterEnemy(Char character) {
         MobRace[] mobRaces = MobRace.values();
         MobRace randomRace = mobRaces[RandomUtils.integer(mobRaces.length)];
 

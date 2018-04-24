@@ -1,5 +1,9 @@
 package com.anton4j.darktower.character;
 
+import com.anton4j.darktower.console.ConsoleLine;
+import com.anton4j.darktower.console.FontColor;
+import com.anton4j.darktower.util.RandomUtils;
+
 /**
  * @author ant
  */
@@ -18,6 +22,21 @@ public class Char extends Creature {
 
     public void levelUp() {
         level++;
+    }
+
+    public void fight(Mob mob) {
+        new ConsoleLine("Starting a battle", FontColor.PURPLE).println();
+
+        if (RandomUtils.randomBoolean()) {
+            new ConsoleLine("You won the fight!", FontColor.CYAN).println();
+        } else {
+            new ConsoleLine("You lost the fight!", FontColor.RED).println();
+        }
+    }
+
+    public void runAway(Mob enemy) {
+        new ConsoleLine("You are running away ...", FontColor.PURPLE).println();
+        // todo print result
     }
 
     public static class CharBuilder {
