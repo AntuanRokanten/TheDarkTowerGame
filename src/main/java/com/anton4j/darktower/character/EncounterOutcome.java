@@ -3,8 +3,8 @@ package com.anton4j.darktower.character;
 /**
  * @author ant
  */
-public enum FightOutcome {
+public enum EncounterOutcome {
 
-   VICTORY, DEFEAT
+   SUCCESS, FAILURE
 
 }

@@ -1,10 +1,9 @@
 package com.anton4j.darktower;
 
 import com.anton4j.darktower.console.ConsoleLine;
+import com.anton4j.darktower.console.ConsoleUtils;
 
 import java.util.List;
-
-import static java.util.concurrent.TimeUnit.MILLISECONDS;
 
 /**
  * @author ant
@@ -20,10 +19,7 @@ public class ConsoleLines {
     public void printSequentially() {
         for (ConsoleLine line : consoleLines) {
             line.println();
-            try {
-                MILLISECONDS.sleep(300);
-            } catch (InterruptedException ignored) {
-            }
+            ConsoleUtils.sleep(300);
         }
     }
 

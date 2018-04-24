@@ -1,7 +1,5 @@
 package com.anton4j.darktower.audio;
 
-import java.util.List;
-
 /**
  * Class representing an audio as a sequence of tones.
  *
@@ -12,9 +10,9 @@ public class Audio {
     /**
      * Collection of tones of this audio.
      */
-    private final List<AudioTone> tones;
+    private final AudioTone[] tones;
 
-    public Audio(List<AudioTone> tones) {
+    private Audio(AudioTone[] tones) {
         this.tones = tones;
     }
 
@@ -22,6 +20,10 @@ public class Audio {
         for (AudioTone tone : tones) {
             tone.play();
         }
+    }
+
+    public static Audio fromTones(AudioTone... audioTones) {
+        return new Audio(audioTones);
     }
 
 }

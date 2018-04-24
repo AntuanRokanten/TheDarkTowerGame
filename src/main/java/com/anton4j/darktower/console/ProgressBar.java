@@ -1,7 +1,6 @@
 package com.anton4j.darktower.console;
 
 import java.util.Collections;
-import java.util.concurrent.TimeUnit;
 
 /**
  * @author ant
@@ -16,10 +15,7 @@ public class ProgressBar {
 
     public void start() {
         for (int i = 1; i <= total; i = i + 3) {
-            try {
-                TimeUnit.MILLISECONDS.sleep(50);
-            } catch (InterruptedException ignored) {
-            }
+            ConsoleUtils.sleep(50);
             printProgress(total, i);
         }
     }

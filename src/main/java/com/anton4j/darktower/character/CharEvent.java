@@ -5,7 +5,7 @@ package com.anton4j.darktower.character;
  */
 public enum CharEvent {
 
-   FIGHT_VICTORY(50f), FIGHT_DEFEAT(30f), EXPLORATION(20f);
+   FIGHT_VICTORY(50f), FIGHT_DEFEAT(30f), EXPLORATION(20f), RUN_SUCCESS(15f);
 
    private final float experienceFactor;
 

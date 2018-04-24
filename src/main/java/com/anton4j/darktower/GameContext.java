@@ -1,6 +1,9 @@
 package com.anton4j.darktower;
 
 import com.anton4j.darktower.character.Char;
+import com.anton4j.darktower.console.ConsoleLine;
+import com.anton4j.darktower.console.FontColor;
+import com.anton4j.darktower.console.ProgressBar;
 
 /**
  * @author ant
@@ -31,4 +34,5 @@ public class GameContext {
     public Char getMainCharacter() {
         return mainCharacter;
     }
+
 }

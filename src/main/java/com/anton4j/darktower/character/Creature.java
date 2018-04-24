@@ -1,13 +1,14 @@
 package com.anton4j.darktower.character;
 
+import com.anton4j.darktower.audio.Audio;
+import com.anton4j.darktower.audio.AudioFactory;
 import com.anton4j.darktower.console.ConsoleLine;
 import com.anton4j.darktower.console.FontColor;
 import com.anton4j.darktower.util.RandomUtils;
 
-import java.util.concurrent.TimeUnit;
-
-import static com.anton4j.darktower.character.FightOutcome.DEFEAT;
-import static com.anton4j.darktower.character.FightOutcome.VICTORY;
+import static com.anton4j.darktower.character.EncounterOutcome.FAILURE;
+import static com.anton4j.darktower.character.EncounterOutcome.SUCCESS;
+import static com.anton4j.darktower.console.ConsoleUtils.sleep;
 import static com.anton4j.darktower.util.CalculateUtils.calculatePercentValue;
 import static com.anton4j.darktower.util.CalculateUtils.calculatePercentage;
 import static com.anton4j.darktower.util.RandomUtils.integerInRange;
@@ -18,111 +19,167 @@ import static com.anton4j.darktower.util.RandomUtils.randomBoolean;
  */
 public abstract class Creature {
 
-   private final Race race;
+    private final Race race;
 
-   private int vitality;
+    int vitality;
+    int strength;
+    int defence;
+    int speed;
 
-   private int strength;
-   private int defence;
+    int health;
 
-   private int health;
+    Creature(Race race, int vitality, int strength, int defence, int speed) {
+        this.defence = defence;
+        this.vitality = vitality;
+        this.strength = strength;
+        this.race = race;
+        this.speed = speed;
 
-   protected Creature(Race race, int vitality, int strength, int defence) {
-      this.defence = defence;
-      this.vitality = vitality;
-      this.strength = strength;
-      this.race = race;
+        this.health = vitality;
+    }
 
-      this.health = vitality;
-   }
+    public int vitality() {
+        return vitality;
+    }
 
-   public int vitality() {
-      return vitality;
-   }
+    public int speed() {
+        return speed;
+    }
 
-   public int strength() {
-      return strength;
-   }
+    public int strength() {
+        return strength;
+    }
 
-   public int defence() {
-      return defence;
-   }
+    public int defence() {
+        return defence;
+    }
 
-   public void runAway(Mob enemy) {
-      new ConsoleLine("You are running away ...", FontColor.PURPLE).println();
-      // todo print result
-   }
+    public EncounterOutcome runAway(Creature enemy) {
+        new ConsoleLine("Character is running away", FontColor.PURPLE).println();
 
-   public FightOutcome fight(Creature enemy) {
-      new ConsoleLine("Starting a battle", FontColor.PURPLE).println();
+        EncounterOutcome encounterOutcome;
+        if (this.speed >= enemy.speed) {
+            float speedPercentage = (100 - calculatePercentValue(this.speed, enemy.speed));
+            if (speedPercentage >= 30) {
+                encounterOutcome = SUCCESS;
+            } else if (this.health >= enemy.health) {
+                encounterOutcome = SUCCESS;
+            } else {
+                float healthPercentage = (100 - calculatePercentValue(enemy.health, this.health));
+                if (healthPercentage < 20) {
+                    encounterOutcome = SUCCESS;
+                } else {
+                    encounterOutcome = FAILURE;
+                }
+            }
+        } else {
+            float speedPercentage = (100 - calculatePercentValue(enemy.speed, this.speed));
+            if (speedPercentage >= 30) {
+                encounterOutcome = FAILURE;
+            } else if (enemy.health >= this.health) {
+                encounterOutcome = FAILURE;
+            } else {
+                float healthPercentage = (100 - calculatePercentValue(this.health, enemy.health));
+                if (healthPercentage < 20) {
+                    encounterOutcome = FAILURE;
+                } else {
+                    encounterOutcome = SUCCESS;
+                }
+            }
+        }
 
-      Creature attacks;
-      Creature defends;
+        if (encounterOutcome == SUCCESS) {
+            new ConsoleLine("Character successfully run away", FontColor.PURPLE).println();
+        } else {
+            new ConsoleLine("Character was caught by the creature", FontColor.PURPLE).println();
+        }
 
-      boolean thisAttacksFirst = RandomUtils.randomBoolean();
-      if (thisAttacksFirst) {
-         attacks = this;
-         defends = enemy;
-      } else {
-         attacks = enemy;
-         defends = this;
-      }
+        return encounterOutcome;
+    }
 
-      while (!attacks.isDefeated() && !defends.isDefeated()) {
-         new ConsoleLine(attacks.race + " attacks", FontColor.BLACK).println();
+    public EncounterOutcome fight(Creature enemy) {
+        new ConsoleLine("Starting a fight", FontColor.PURPLE).println();
 
-         boolean criticalHit = randomBoolean() && randomBoolean() && randomBoolean() && randomBoolean();
+        Creature attacks;
+        Creature defends;
 
-         float attackPercent;
-         if (criticalHit) {
-            new ConsoleLine(attacks.race + " performs a critical hit!", FontColor.RED).println();
-            attackPercent = 60f;
-         } else {
-            attackPercent = integerInRange(30, 40);
-         }
-         int hitStrength = calculatePercentage(attacks.strength, attackPercent);
+        boolean thisAttacksFirst = RandomUtils.randomBoolean();
+        if (thisAttacksFirst) {
+            attacks = this;
+            defends = enemy;
+        } else {
+            attacks = enemy;
+            defends = this;
+        }
 
-         int defence = calculatePercentage(defends.defence, integerInRange(5, 15));
+        while (!attacks.isDefeated() && !defends.isDefeated()) {
+            new ConsoleLine(attacks.race + " attacks", FontColor.BLACK).println();
 
-         int damage = hitStrength - defence;
-         if (damage < 0) {
-            damage = 0;
-         }
+            boolean criticalHit = randomBoolean() && randomBoolean() && randomBoolean() && randomBoolean();
 
-         int healthAfterHit = defends.health - damage;
-         if (healthAfterHit < 0) {
-            healthAfterHit = 0;
-         }
+            float attackPercent;
+            if (criticalHit) {
+                new ConsoleLine(attacks.race + " performs a critical hit!", FontColor.RED).println();
+                attackPercent = 60f;
+            } else {
+                attackPercent = integerInRange(30, 40);
+            }
+            int hitStrength = calculatePercentage(attacks.strength, attackPercent);
 
-         defends.health = healthAfterHit;
+            int defence = calculatePercentage(defends.defence, integerInRange(5, 15));
 
-         new ConsoleLine(defends.race + " health after attack: " + defends.health, FontColor.GREEN).println();
+            int damage = hitStrength - defence;
+            if (damage < 0) {
+                damage = 0;
+            }
 
-         Creature temp = defends;
-         defends = attacks;
-         attacks = temp;
+            int healthAfterHit = defends.health - damage;
+            if (healthAfterHit < 0) {
+                healthAfterHit = 0;
+            }
 
-         try {
-            TimeUnit.SECONDS.sleep(1);
-         } catch (InterruptedException ignored) {
-         }
-      }
+            defends.health = healthAfterHit;
 
-      return this.isDefeated() ? DEFEAT : VICTORY;
-   }
+            new ConsoleLine(defends.race + " health after attack: " + defends.health, FontColor.GREEN).println();
 
-   private boolean isDefeated() {
-      float percent = calculatePercentValue(vitality, health);
-      return percent < 5f;
-   }
+            Creature temp = defends;
+            defends = attacks;
+            attacks = temp;
 
-   @Override
-   public String toString() {
-      return "race = " + race +
+            sleep(1000);
+        }
+
+        EncounterOutcome fightOutcome;
+        Audio audio;
+        Creature winner;
+        if (this.isDefeated()) {
+            winner = enemy;
+            audio = AudioFactory.looseAudio();
+            fightOutcome = FAILURE;
+        } else {
+            winner = this;
+            audio = AudioFactory.winAudio();
+            fightOutcome = SUCCESS;
+        }
+        new Thread(audio::play).start();
+//        new ConsoleLine(winner.race + " won the fight!", FontColor.BLACK).println();
+
+        return fightOutcome;
+    }
+
+    private boolean isDefeated() {
+        float percent = calculatePercentValue(vitality, health);
+        return percent < 5f;
+    }
+
+    @Override
+    public String toString() {
+        return "race = " + race +
               ", vitality = " + vitality +
               ", strength = " + strength +
               ", defence = " + defence +
+              ", speed = " + speed +
               ", health = " + health;
-   }
+    }
 
 }

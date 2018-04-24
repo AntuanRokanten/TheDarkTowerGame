@@ -1,14 +1,14 @@
 package com.anton4j.darktower;
 
 import com.anton4j.darktower.audio.Audio;
-import com.anton4j.darktower.audio.AudioTone;
+import com.anton4j.darktower.audio.AudioFactory;
 import com.anton4j.darktower.component.stage.Stage;
 import com.anton4j.darktower.component.stage.impl.StartGameStage;
 import com.anton4j.darktower.console.BackgroundColor;
 import com.anton4j.darktower.console.ConsoleLine;
+import com.anton4j.darktower.console.ConsoleUtils;
 import com.anton4j.darktower.console.FontColor;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -29,13 +29,7 @@ public class Game {
 
         ConsoleLines mainBanner = new ConsoleLines(bannerConsoleLines);
 
-        List<AudioTone> tones = new ArrayList<>();
-        tones.add(new AudioTone(200, 500));
-        tones.add(new AudioTone(400, 500));
-        tones.add(new AudioTone(300, 500));
-        tones.add(new AudioTone(500, 500));
-        tones.add(new AudioTone(400, 500));
-        Audio mainAudio = new Audio(tones);
+        Audio mainAudio = AudioFactory.mainAudio();
 
         this.intro = new Intro(mainBanner, mainAudio);
         this.initialStage = new StartGameStage();
@@ -52,6 +46,9 @@ public class Game {
     }
 
     public void start() {
+        new ConsoleLine("This game contains sound. Please make sure your speakers are not too loud. Press enter to continue", FontColor.BLACK, BackgroundColor.CYAN).println();
+        ConsoleUtils.readLine();
+
         intro.playIntro();
 
         Stage stage = initialStage;
