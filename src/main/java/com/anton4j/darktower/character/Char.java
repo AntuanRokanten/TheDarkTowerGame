@@ -2,6 +2,7 @@ package com.anton4j.darktower.character;
 
 import com.anton4j.darktower.console.ConsoleLine;
 import com.anton4j.darktower.console.FontColor;
+import com.anton4j.darktower.util.CalculateUtils;
 
 import static com.anton4j.darktower.util.CalculateUtils.calculateFeature;
 
@@ -15,7 +16,7 @@ public class Char extends Creature {
 
     private int level = 1; // initial level value
 
-    private int expericenceToNextLevel;
+    private int experienceToNextLevel;
     private int experience = 0;
 
     private Char(Gender gender, String name, CharRace charRace, int vitality, int strength, int defence) {
@@ -23,16 +24,33 @@ public class Char extends Creature {
         this.name = name;
         this.gender = gender;
 
-        expericenceToNextLevel = 50;
+        experienceToNextLevel = calculateExperienceToNextLevel();
     }
 
-    public void levelUp() {
+    public void increaseExperience(CharEvent charEvent) {
+        if (experience == 0) {
+            experience = 30;
+        } else {
+            experience = CalculateUtils.calculateFeature(experience, charEvent.experienceFactor());
+        }
+
+        if (experience >= experienceToNextLevel) {
+            levelUp();
+            experienceToNextLevel = calculateExperienceToNextLevel();
+        }
+    }
+
+    private void levelUp() {
         level++;
+        new ConsoleLine("Your character level was increased to " + level, FontColor.BLACK).println();
     }
 
-    public void runAway(Mob enemy) {
-        new ConsoleLine("You are running away ...", FontColor.PURPLE).println();
-        // todo print result
+    private int calculateExperienceToNextLevel() {
+        if (experience == 0) {
+            return 100;
+        } else {
+            return experience * 2;
+        }
     }
 
     public static class CharBuilder {

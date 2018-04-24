@@ -4,6 +4,10 @@ import com.anton4j.darktower.console.ConsoleLine;
 import com.anton4j.darktower.console.FontColor;
 import com.anton4j.darktower.util.RandomUtils;
 
+import java.util.concurrent.TimeUnit;
+
+import static com.anton4j.darktower.character.FightOutcome.DEFEAT;
+import static com.anton4j.darktower.character.FightOutcome.VICTORY;
 import static com.anton4j.darktower.util.CalculateUtils.calculatePercentValue;
 import static com.anton4j.darktower.util.CalculateUtils.calculatePercentage;
 import static com.anton4j.darktower.util.RandomUtils.integerInRange;
@@ -44,7 +48,12 @@ public abstract class Creature {
       return defence;
    }
 
-   public void fight(Creature enemy) {
+   public void runAway(Mob enemy) {
+      new ConsoleLine("You are running away ...", FontColor.PURPLE).println();
+      // todo print result
+   }
+
+   public FightOutcome fight(Creature enemy) {
       new ConsoleLine("Starting a battle", FontColor.PURPLE).println();
 
       Creature attacks;
@@ -60,10 +69,13 @@ public abstract class Creature {
       }
 
       while (!attacks.isDefeated() && !defends.isDefeated()) {
+         new ConsoleLine(attacks.race + " attacks", FontColor.BLACK).println();
+
          boolean criticalHit = randomBoolean() && randomBoolean() && randomBoolean() && randomBoolean();
 
          float attackPercent;
          if (criticalHit) {
+            new ConsoleLine(attacks.race + " performs a critical hit!", FontColor.RED).println();
             attackPercent = 60f;
          } else {
             attackPercent = integerInRange(30, 40);
@@ -84,13 +96,19 @@ public abstract class Creature {
 
          defends.health = healthAfterHit;
 
+         new ConsoleLine(defends.race + " health after attack: " + defends.health, FontColor.GREEN).println();
+
          Creature temp = defends;
          defends = attacks;
          attacks = temp;
+
+         try {
+            TimeUnit.SECONDS.sleep(1);
+         } catch (InterruptedException ignored) {
+         }
       }
 
-      // todo show who was defeated
-      new ConsoleLine(toString() + " was defeated").println();
+      return this.isDefeated() ? DEFEAT : VICTORY;
    }
 
    private boolean isDefeated() {

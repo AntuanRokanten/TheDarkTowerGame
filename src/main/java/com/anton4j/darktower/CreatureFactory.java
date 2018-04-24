@@ -23,7 +23,6 @@ public class CreatureFactory {
         int defenceFactor;
 
         if (randomBoolean() && randomBoolean() && randomBoolean()) { // to make event appear rarely
-            System.err.println("BINGO!!"); // todo remove
             strengthFactor = integerInRange(5, 20);
             vitalityFactor = integerInRange(5, 20);
             defenceFactor = integerInRange(5, 20);

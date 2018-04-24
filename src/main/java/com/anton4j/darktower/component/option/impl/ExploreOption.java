@@ -2,9 +2,7 @@ package com.anton4j.darktower.component.option.impl;
 
 import com.anton4j.darktower.CreatureFactory;
 import com.anton4j.darktower.GameContext;
-import com.anton4j.darktower.character.Char;
-import com.anton4j.darktower.character.Mob;
-import com.anton4j.darktower.character.RoundOutcome;
+import com.anton4j.darktower.character.*;
 import com.anton4j.darktower.character.battle.EncounterOption;
 import com.anton4j.darktower.component.event.EventResult;
 import com.anton4j.darktower.component.option.Option;
@@ -32,7 +30,10 @@ public class ExploreOption extends Option<RoundOutcome> {
     public OptionResult<RoundOutcome> processOption() {
         new ConsoleLine("You are exploring a current location...", FontColor.GREEN).println();
 
-        if (randomBoolean()) {
+        if (randomBoolean() && randomBoolean()) {
+            new ConsoleLine("You have explored new territories in the current location", FontColor.YELLOW).println();
+            // todo print result
+        } else {
             ConsoleUtils.beep();
 
             new ConsoleLine("You encountered a beast", FontColor.PURPLE).println();
@@ -47,15 +48,25 @@ public class ExploreOption extends Option<RoundOutcome> {
                   .processScene();
 
             if (encounterOption == FIGHT) {
-                mainCharacter.fight(enemy);
+                FightOutcome fightOutcome = mainCharacter.fight(enemy);
+
+                CharEvent fightVictory;
+                if (fightOutcome == FightOutcome.VICTORY) {
+                    new ConsoleLine("Congrats! Your character won the fight!", FontColor.CYAN).println();
+                    fightVictory = CharEvent.FIGHT_VICTORY;
+                } else if (fightOutcome == FightOutcome.DEFEAT) {
+                    new ConsoleLine("Your character lost the battle. Take a rest in order to heal.", FontColor.RED).println();
+                    fightVictory = CharEvent.FIGHT_DEFEAT;
+                } else {
+                    return new OptionResult<>(EventResult.Status.ERROR, null);
+                }
+                mainCharacter.increaseExperience(fightVictory);
+
             } else if (encounterOption == RUN_AWAY ) {
                 mainCharacter.runAway(enemy);
             } else {
                 return new OptionResult<>(EventResult.Status.ERROR, null);
             }
-        } else {
-            new ConsoleLine("You have explored new territories in the current location", FontColor.YELLOW).println();
-            // todo print result
         }
 
         return new OptionResult<>(EventResult.Status.SUCCESS, new RoundOutcome());
