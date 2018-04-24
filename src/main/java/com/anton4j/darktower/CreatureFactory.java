@@ -5,6 +5,7 @@ import com.anton4j.darktower.character.Mob;
 import com.anton4j.darktower.character.MobRace;
 import com.anton4j.darktower.util.RandomUtils;
 
+import static com.anton4j.darktower.util.CalculateUtils.calculateFeature;
 import static com.anton4j.darktower.util.RandomUtils.integerInRange;
 import static com.anton4j.darktower.util.RandomUtils.randomBoolean;
 
@@ -47,10 +48,6 @@ public class CreatureFactory {
         int strength = calculateFeature(character.strength(), strengthFactor);
 
         return new Mob(randomRace, vitality, strength, defence);
-    }
-
-    private static int calculateFeature(int value, float factor) {
-        return value + (int) (value * (factor / 100.0f));
     }
 
 }

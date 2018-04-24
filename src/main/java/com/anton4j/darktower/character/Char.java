@@ -2,7 +2,8 @@ package com.anton4j.darktower.character;
 
 import com.anton4j.darktower.console.ConsoleLine;
 import com.anton4j.darktower.console.FontColor;
-import com.anton4j.darktower.util.RandomUtils;
+
+import static com.anton4j.darktower.util.CalculateUtils.calculateFeature;
 
 /**
  * @author ant
@@ -14,24 +15,19 @@ public class Char extends Creature {
 
     private int level = 1; // initial level value
 
+    private int expericenceToNextLevel;
+    private int experience = 0;
+
     private Char(Gender gender, String name, CharRace charRace, int vitality, int strength, int defence) {
         super(charRace, vitality, strength, defence);
         this.name = name;
         this.gender = gender;
+
+        expericenceToNextLevel = 50;
     }
 
     public void levelUp() {
         level++;
-    }
-
-    public void fight(Mob mob) {
-        new ConsoleLine("Starting a battle", FontColor.PURPLE).println();
-
-        if (RandomUtils.randomBoolean()) {
-            new ConsoleLine("You won the fight!", FontColor.CYAN).println();
-        } else {
-            new ConsoleLine("You lost the fight!", FontColor.RED).println();
-        }
     }
 
     public void runAway(Mob enemy) {
@@ -67,11 +63,6 @@ public class Char extends Creature {
 
             return new Char(gender, name, charRace, vitality, strength, defence);
         }
-
-        private int calculateFeature(int value, float factor) {
-            return value + (int) (value * (factor / 100.0f));
-        }
-
     }
 
 }
