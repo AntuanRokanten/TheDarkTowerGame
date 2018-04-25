@@ -70,7 +70,7 @@ public class ExploreOption extends Option<RoundOutcome> {
         return new OptionResult<>(EventResult.Status.SUCCESS, new RoundOutcome());
     }
 
-    private CharEvent processFight(Char mainCharacter, Mob enemy) {
+    private CharEvent processFight(Creature mainCharacter, Creature enemy) {
         EncounterOutcome fightOutcome = mainCharacter.fight(enemy);
 
         CharEvent charEvent;

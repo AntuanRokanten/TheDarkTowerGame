@@ -48,7 +48,6 @@ public class OptionsScene<T> extends Scene<T> {
             if (o.isSuccess()) {
                 return o.getResultObj();
             } else {
-                new ConsoleLine("Repeating a scene").println();
                 return processScene();
             }
         } else {
