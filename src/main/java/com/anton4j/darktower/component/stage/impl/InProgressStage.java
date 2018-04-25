@@ -13,21 +13,22 @@ import static java.util.Arrays.asList;
  */
 public class InProgressStage extends Stage<RoundOutcome> {
 
-    InProgressStage() {
+    InProgressStage(GameContext gameContext) {
         super(new EndGameStage(),
               new OptionsScene(asList(
-                    new ExploreOption(),
-                    new TakeRestOption(),
-                    new MoveOption(),
-                    new CharInfoOption(),
-                    new PrintMapOption(),
-                    new SaveExitOption()
-              )));
+                    new ExploreOption(gameContext),
+                    new TakeRestOption(gameContext),
+                    new MoveOption(gameContext),
+                    new CharInfoOption(gameContext),
+                    new PrintMapOption(gameContext),
+                    new SaveExitOption(gameContext)
+              )),
+              gameContext);
     }
 
     @Override
     public boolean getCompletionStatus(RoundOutcome stageResult) {
-        return GameContext.getInstance().getGameMap().isFinalDestination();
+        return gameContext.getGameMap().isFinalDestination();
     }
 
 }

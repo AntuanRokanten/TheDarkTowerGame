@@ -11,13 +11,13 @@ import com.anton4j.darktower.component.option.OptionResult;
  */
 public class TakeRestOption extends Option<RoundOutcome> {
 
-    public TakeRestOption() {
-        super("Take a rest");
+    public TakeRestOption(GameContext gameContext) {
+        super(gameContext, "Take a rest");
     }
 
     @Override
     public OptionResult<RoundOutcome> processOption() {
-        GameContext.getInstance().getMainCharacter().takeRest();
+        gameContext.getMainCharacter().takeRest();
 
         return new OptionResult<>(EventResult.Status.SUCCESS, new RoundOutcome());
     }

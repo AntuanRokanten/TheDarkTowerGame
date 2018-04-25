@@ -24,15 +24,15 @@ import static com.anton4j.darktower.util.Utils.optionsFromEnumValues;
  */
 public class ExploreOption extends Option<RoundOutcome> {
 
-    public ExploreOption() {
-        super("Explore the location");
+    public ExploreOption(GameContext gameContext) {
+        super(gameContext, "Explore the location");
     }
 
     @Override
     public OptionResult<RoundOutcome> processOption() {
         new ConsoleLine("You are exploring a current location...", FontColor.GREEN).println();
 
-        Char mainCharacter = GameContext.getInstance().getMainCharacter();
+        Char mainCharacter = gameContext.getMainCharacter();
 
         CharEvent charEvent;
         if (randomBoolean() && randomBoolean()) {
@@ -47,7 +47,7 @@ public class ExploreOption extends Option<RoundOutcome> {
             new ConsoleLine("Beast stats: " + enemy.toString(), FontColor.PURPLE).println();
             new ConsoleLine("Your stats: " + mainCharacter.toString(), FontColor.WHITE).println();
 
-            EncounterOption encounterOption = new OptionsScene<>(optionsFromEnumValues(EncounterOption.values()))
+            EncounterOption encounterOption = new OptionsScene<>(optionsFromEnumValues(EncounterOption.values(), gameContext))
                   .processScene();
 
             if (encounterOption == FIGHT) {
@@ -64,7 +64,7 @@ public class ExploreOption extends Option<RoundOutcome> {
                 return processOption();
             }
         }
-        charEvent.logEvent();
+        charEvent.logEvent(gameContext);
         mainCharacter.increaseExperience(charEvent);
 
         return new OptionResult<>(EventResult.Status.SUCCESS, new RoundOutcome());

@@ -1,9 +1,11 @@
 package com.anton4j.darktower.console.location;
 
+import java.io.Serializable;
+
 /**
  * @author ant
  */
-public class Location {
+public class Location implements Serializable {
 
     /**
      * Location title.

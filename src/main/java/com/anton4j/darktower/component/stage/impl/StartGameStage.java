@@ -14,18 +14,19 @@ import static java.util.Arrays.asList;
  */
 public class StartGameStage extends Stage<Char> {
 
-    public StartGameStage() {
-        super(new InProgressStage(),
+    public StartGameStage(GameContext gameContext) {
+        super(new InProgressStage(gameContext),
               new OptionsScene<>(asList(
-                    new NewGameOption(),
-                    new LoadGameOption()
-              ))
+                    new NewGameOption(gameContext),
+                    new LoadGameOption(gameContext)
+              )),
+              gameContext
         );
     }
 
     @Override
     public boolean getCompletionStatus(Char character) {
-        GameContext.getInstance().setMainCharacter(character);
+        gameContext.setMainCharacter(character);
         return true;
     }
 

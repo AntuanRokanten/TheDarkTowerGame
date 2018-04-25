@@ -13,13 +13,13 @@ import com.anton4j.darktower.console.FontColor;
  */
 public class CharInfoOption extends Option<Void> {
 
-    public CharInfoOption() {
-        super("Print character info");
+    public CharInfoOption(GameContext gameContext) {
+        super(gameContext, "Print character info");
     }
 
     @Override
     public OptionResult<Void> processOption() {
-        Char mainCharacter = GameContext.getInstance().getMainCharacter();
+        Char mainCharacter = gameContext.getMainCharacter();
 
         new ConsoleLine(mainCharacter.charInfo(), FontColor.WHITE).println();
         return new OptionResult<>(EventResult.Status.SUCCESS, null);

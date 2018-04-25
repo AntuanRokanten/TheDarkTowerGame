@@ -1,9 +1,11 @@
 package com.anton4j.darktower.console;
 
+import java.io.Serializable;
+
 /**
  * @author anton
  */
-public class ConsoleLine {
+public class ConsoleLine implements Serializable {
 
     private static final String RESET = "\u001B[0m";
 

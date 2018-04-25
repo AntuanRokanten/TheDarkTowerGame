@@ -6,6 +6,8 @@ import com.anton4j.darktower.console.ConsoleLine;
 import com.anton4j.darktower.console.FontColor;
 import com.anton4j.darktower.util.RandomUtils;
 
+import java.io.Serializable;
+
 import static com.anton4j.darktower.character.EncounterOutcome.FAILURE;
 import static com.anton4j.darktower.character.EncounterOutcome.SUCCESS;
 import static com.anton4j.darktower.console.ConsoleUtils.sleep;
@@ -17,7 +19,7 @@ import static com.anton4j.darktower.util.RandomUtils.randomBoolean;
 /**
  * @author ant
  */
-public abstract class Creature {
+public abstract class Creature implements Serializable {
 
     final Race race;
 

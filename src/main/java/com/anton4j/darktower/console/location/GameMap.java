@@ -5,10 +5,12 @@ import com.anton4j.darktower.character.Char;
 import com.anton4j.darktower.console.ConsoleLine;
 import com.anton4j.darktower.console.FontColor;
 
+import java.io.Serializable;
+
 /**
  * @author ant
  */
-public class GameMap {
+public class GameMap implements Serializable {
 
     private final ConsoleLines graphicMap;
     private Location location;

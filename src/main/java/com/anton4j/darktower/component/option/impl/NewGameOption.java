@@ -1,5 +1,6 @@
 package com.anton4j.darktower.component.option.impl;
 
+import com.anton4j.darktower.GameContext;
 import com.anton4j.darktower.character.Char;
 import com.anton4j.darktower.character.Gender;
 import com.anton4j.darktower.character.CharRace;
@@ -18,18 +19,18 @@ import static com.anton4j.darktower.util.Utils.optionsFromEnumValues;
  */
 public class NewGameOption extends Option<Char> {
 
-    public NewGameOption() {
-        super("New game");
+    public NewGameOption(GameContext gameContext) {
+        super(gameContext, "New game");
     }
 
     @Override
     public OptionResult<Char> processOption() {
         new ConsoleLine("In order to join Ka-Tet and start journey to the Dark tower first create a character", FontColor.BLUE).println();
 
-        CharRace charRace = new OptionsScene<>(optionsFromEnumValues(CharRace.values()), new ConsoleLine("Choose race:"))
+        CharRace charRace = new OptionsScene<>(optionsFromEnumValues(CharRace.values(), gameContext), new ConsoleLine("Choose race:"))
               .processScene();
 
-        Gender gender = new OptionsScene<>(optionsFromEnumValues(Gender.values()), new ConsoleLine("Choose gender:"))
+        Gender gender = new OptionsScene<>(optionsFromEnumValues(Gender.values(), gameContext), new ConsoleLine("Choose gender:"))
               .processScene();
 
         String name = new InputScene(new ConsoleLine("Enter name:"))

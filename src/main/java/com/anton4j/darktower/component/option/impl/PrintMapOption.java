@@ -13,13 +13,13 @@ import com.anton4j.darktower.console.location.GameMap;
  */
 public class PrintMapOption extends Option<Void> {
 
-    public PrintMapOption() {
-        super("Print map");
+    public PrintMapOption(GameContext gameContext) {
+        super(gameContext, "Print map");
     }
 
     @Override
     public OptionResult<Void> processOption() {
-        GameMap gameMap = GameContext.getInstance().getGameMap();
+        GameMap gameMap = gameContext.getGameMap();
 
         new ConsoleLine("Character is currently at " + gameMap.currentLocationTitle() + " location", FontColor.YELLOW).println();
         gameMap.print();

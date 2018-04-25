@@ -11,14 +11,14 @@ import com.anton4j.darktower.console.location.GameMap;
  */
 public class MoveOption extends Option<Void> {
 
-    public MoveOption() {
-        super("Move to the next location");
+    public MoveOption(GameContext gameContext) {
+        super(gameContext, "Move to the next location");
     }
 
     @Override
     public OptionResult<Void> processOption() {
-        GameMap gameMap = GameContext.getInstance().getGameMap();
-        gameMap.moveToNextLocation(GameContext.getInstance().getMainCharacter());
+        GameMap gameMap = gameContext.getGameMap();
+        gameMap.moveToNextLocation(gameContext.getMainCharacter());
 
         return new OptionResult<>(EventResult.Status.SUCCESS, null);
     }

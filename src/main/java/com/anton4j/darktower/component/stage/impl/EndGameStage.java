@@ -8,7 +8,7 @@ import com.anton4j.darktower.component.stage.Stage;
 public class EndGameStage extends Stage<Void> {
 
     EndGameStage() {
-        super(null, null);
+        super(null, null, null);
     }
 
     @Override

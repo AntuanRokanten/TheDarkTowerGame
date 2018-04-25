@@ -3,12 +3,13 @@ package com.anton4j.darktower;
 import com.anton4j.darktower.console.ConsoleLine;
 import com.anton4j.darktower.console.ConsoleUtils;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
  * @author ant
  */
-public class ConsoleLines {
+public class ConsoleLines implements Serializable {
 
     private final List<ConsoleLine> consoleLines;
 

@@ -5,12 +5,12 @@ import com.anton4j.darktower.audio.Audio;
 /**
  * @author anton
  */
-public class Intro {
+public class GameIntro {
 
     private final ConsoleLines mainBanner;
     private final Audio mainAudio;
 
-    public Intro(ConsoleLines mainBanner, Audio mainAudio) {
+    public GameIntro(ConsoleLines mainBanner, Audio mainAudio) {
         this.mainBanner = mainBanner;
         this.mainAudio = mainAudio;
     }

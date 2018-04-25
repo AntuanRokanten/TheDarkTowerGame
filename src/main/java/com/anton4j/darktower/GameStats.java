@@ -1,9 +1,11 @@
 package com.anton4j.darktower;
 
+import java.io.Serializable;
+
 /**
  * @author ant
  */
-public class GameStats {
+public class GameStats implements Serializable {
 
     private int locationsExplored = 0;
     private int fightWins = 0;
@@ -17,7 +19,7 @@ public class GameStats {
         fightWins++;
     }
 
-    public void fighLost() {
+    public void fightLost() {
         fightLosses++;
     }
 

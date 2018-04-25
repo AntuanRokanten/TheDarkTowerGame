@@ -8,19 +8,19 @@ import com.anton4j.darktower.GameContext;
 public enum CharEvent {
 
     FIGHT_VICTORY(50f) {
-        public void logEvent() {
-            GameContext.getInstance().getGameStats().fightWin();
+        public void logEvent(GameContext gameContext) {
+            gameContext.getGameStats().fightWin();
         }
     }, FIGHT_DEFEAT(30f) {
-        public void logEvent() {
-            GameContext.getInstance().getGameStats().fighLost();
+        public void logEvent(GameContext gameContext) {
+            gameContext.getGameStats().fightLost();
         }
     }, EXPLORATION(20f) {
-        public void logEvent() {
-            GameContext.getInstance().getGameStats().locationExplored();
+        public void logEvent(GameContext gameContext) {
+            gameContext.getGameStats().locationExplored();
         }
     }, RUN_SUCCESS(15f) {
-        public void logEvent() {
+        public void logEvent(GameContext gameContext) {
             // no need to log
         }
     };
@@ -35,6 +35,6 @@ public enum CharEvent {
         return experienceFactor;
     }
 
-    public abstract void logEvent();
+    public abstract void logEvent(GameContext gameContext);
 
 }

@@ -7,12 +7,14 @@ import com.anton4j.darktower.console.ProgressBar;
 import com.anton4j.darktower.util.CalculateUtils;
 import com.anton4j.darktower.util.RandomUtils;
 
+import java.io.Serializable;
+
 import static com.anton4j.darktower.util.CalculateUtils.calculateFeature;
 
 /**
  * @author ant
  */
-public class Char extends Creature {
+public class Char extends Creature implements Serializable {
 
     private final String name;
     private final Gender gender;

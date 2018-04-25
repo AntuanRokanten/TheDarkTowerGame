@@ -3,27 +3,37 @@ package com.anton4j.darktower;
 import com.anton4j.darktower.character.Char;
 import com.anton4j.darktower.console.location.GameMap;
 
+import java.io.Serializable;
+
 /**
+ * Context of the whole game.
+ *
  * @author ant
  */
-public class GameContext {
+public class GameContext implements Serializable {
 
-    private static final GameContext INSTANCE = new GameContext();
+    /**
+     * Map of the game.
+     */
+    private final GameMap gameMap;
 
-    public static GameContext getInstance() {
-        return INSTANCE;
-    }
+    /**
+     * Statistics of the game.
+     */
+    private final GameStats gameStats;
 
-    private GameMap gameMap;
+    /**
+     * Game main character.
+     */
     private Char mainCharacter;
-    private GameStats gameStats;
+
+    public GameContext(GameMap gameMap) {
+        this.gameMap = gameMap;
+        this.gameStats = new GameStats();
+    }
 
     public GameMap getGameMap() {
         return gameMap;
-    }
-
-    public void setGameMap(GameMap gameMap) {
-        this.gameMap = gameMap;
     }
 
     public void setMainCharacter(Char character) {
@@ -35,10 +45,6 @@ public class GameContext {
     }
 
     public GameStats getGameStats() {
-        if (gameStats == null) {
-            gameStats = new GameStats();
-        }
-
         return gameStats;
     }
 }

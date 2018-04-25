@@ -1,5 +1,6 @@
 package com.anton4j.darktower.component.option;
 
+import com.anton4j.darktower.GameContext;
 import com.anton4j.darktower.component.event.EventResult;
 
 /**
@@ -9,8 +10,8 @@ public class ValueOption<T> extends Option<T> {
 
     private final T value;
 
-    public ValueOption(T value, String displayText) {
-        super(displayText);
+    public ValueOption(T value, String displayText, GameContext gameContext) {
+        super(gameContext, displayText);
         this.value = value;
     }
 

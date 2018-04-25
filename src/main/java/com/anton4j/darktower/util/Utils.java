@@ -1,5 +1,6 @@
 package com.anton4j.darktower.util;
 
+import com.anton4j.darktower.GameContext;
 import com.anton4j.darktower.component.option.Option;
 import com.anton4j.darktower.component.option.ValueOption;
 
@@ -11,7 +12,7 @@ import java.util.List;
  */
 public class Utils {
 
-    public static <T extends Enum> List<Option<T>> optionsFromEnumValues(T[] enumValues) { // todo better create class
+    public static <T extends Enum> List<Option<T>> optionsFromEnumValues(T[] enumValues, GameContext gameContext) { // todo better create class
         List<Option<T>> raceOptions = new ArrayList<>();
         for (int i = 0; i < enumValues.length; i++) {
             T value = enumValues[i];
@@ -19,7 +20,7 @@ public class Utils {
             String raceName = value.name();
             String displayText = raceName.substring(0, 1).toUpperCase() + raceName.substring(1).toLowerCase().replaceAll("_", " ");
 
-            ValueOption<T> option = new ValueOption<>(value, displayText);
+            ValueOption<T> option = new ValueOption<>(value, displayText, gameContext);
             raceOptions.add(option);
         }
         return raceOptions;

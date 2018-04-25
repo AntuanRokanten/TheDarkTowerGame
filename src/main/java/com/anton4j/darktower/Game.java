@@ -19,10 +19,18 @@ import java.util.stream.Collectors;
  */
 public class Game {
 
-    private final Intro intro;
+    private final GameIntro intro;
     private final Stage initialStage;
+    private final GameContext gameContext;
 
     public Game() {
+        this.gameContext = initContext();
+        this.intro = initIntro();
+
+        this.initialStage = new StartGameStage(gameContext);
+    }
+
+    private GameIntro initIntro() {
         List<String> bannerFileLines = ResourceUtils.getResourceLines("banner");
         List<ConsoleLine> bannerConsoleLines = bannerFileLines
               .stream()
@@ -33,10 +41,10 @@ public class Game {
 
         Audio mainAudio = AudioFactory.mainAudio();
 
-        this.intro = new Intro(mainBanner, mainAudio);
-        this.initialStage = new StartGameStage();
+        return new GameIntro(mainBanner, mainAudio);
+    }
 
-        // todo map refactor
+    private GameContext initContext() {
         List<String> mapFileLines = ResourceUtils.getResourceLines("map");
 
         List<ConsoleLine> mapConsoleLines = mapFileLines
@@ -46,13 +54,13 @@ public class Game {
 
         ConsoleLines graphicalMap = new ConsoleLines(mapConsoleLines);
 
-        Location theDarkTower = new Location("The Dark Tower", null, 10);
+        Location theDarkTower = new Location("The Dark Tower", null, 9);
         Location discordia = new Location("Discordia", theDarkTower, 7);
-        Location thunderclap = new Location("Thunderclap", discordia, 1);
+        Location thunderclap = new Location("Thunderclap", discordia, 4);
         Location borderlands = new Location("Borderlands", thunderclap, 0);
         GameMap gameMap = new GameMap(graphicalMap, borderlands);
 
-        GameContext.getInstance().setGameMap(gameMap);
+        return new GameContext(gameMap);
     }
 
     public void start() {
