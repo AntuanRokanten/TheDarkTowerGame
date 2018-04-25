@@ -34,9 +34,10 @@ public class ExploreOption extends Option<RoundOutcome> {
 
         Char mainCharacter = GameContext.getInstance().getMainCharacter();
 
+        CharEvent charEvent;
         if (randomBoolean() && randomBoolean()) {
             new ConsoleLine("You have explored new territories in the current location", FontColor.YELLOW).println();
-            mainCharacter.increaseExperience(EXPLORATION);
+            charEvent = EXPLORATION;
         } else {
             ConsoleUtils.beep();
 
@@ -50,36 +51,38 @@ public class ExploreOption extends Option<RoundOutcome> {
                   .processScene();
 
             if (encounterOption == FIGHT) {
-                processFight(mainCharacter, enemy);
-
+                charEvent = processFight(mainCharacter, enemy);
             } else if (encounterOption == RUN_AWAY) {
                 EncounterOutcome runOutcome = mainCharacter.runAway(enemy);
                 if (runOutcome == SUCCESS) {
-                    mainCharacter.increaseExperience(CharEvent.RUN_SUCCESS);
+                    charEvent = RUN_SUCCESS;
                 } else {
-                    processFight(mainCharacter, enemy);
+                    charEvent = processFight(mainCharacter, enemy);
                 }
             } else {
-                return new OptionResult<>(EventResult.Status.ERROR, null);
+                new ConsoleLine("Please try again", FontColor.RED).println();
+                return processOption();
             }
         }
+        charEvent.logEvent();
+        mainCharacter.increaseExperience(charEvent);
 
         return new OptionResult<>(EventResult.Status.SUCCESS, new RoundOutcome());
     }
 
-    private void processFight(Char mainCharacter, Mob enemy) {
+    private CharEvent processFight(Char mainCharacter, Mob enemy) {
         EncounterOutcome fightOutcome = mainCharacter.fight(enemy);
 
-        CharEvent fightVictory;
+        CharEvent charEvent;
         if (fightOutcome == SUCCESS) {
             new ConsoleLine("Character won the fight!", FontColor.CYAN).println();
-            fightVictory = FIGHT_VICTORY;
+            charEvent = FIGHT_VICTORY;
         } else {
             new ConsoleLine("Character lost the battle. Take a rest in order to heal.", FontColor.RED).println();
-            fightVictory = FIGHT_DEFEAT;
+            charEvent = FIGHT_DEFEAT;
         }
 
-        mainCharacter.increaseExperience(fightVictory);
+        return charEvent;
     }
 
 }

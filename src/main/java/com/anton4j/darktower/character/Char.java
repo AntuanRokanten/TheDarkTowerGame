@@ -20,7 +20,7 @@ public class Char extends Creature {
     /**
      * Character level. Initially character is of 1 level.
      */
-    private int level = 1;
+    private int level = 0;
 
     private int experienceToNextLevel = 100;
     private int experience = 0;
@@ -91,6 +91,10 @@ public class Char extends Creature {
               "\nHealth: " + health + " (" + (int) healthPercentage + "% of vitality)" +
               "\nLevel: " + level +
               "\nExperience: " + experience + " (gain " + experienceToNextLevel + " to get next level)";
+    }
+
+    public int level() {
+        return level;
     }
 
     public static class CharBuilder {

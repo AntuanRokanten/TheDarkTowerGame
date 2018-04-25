@@ -8,6 +8,8 @@ import com.anton4j.darktower.console.BackgroundColor;
 import com.anton4j.darktower.console.ConsoleLine;
 import com.anton4j.darktower.console.ConsoleUtils;
 import com.anton4j.darktower.console.FontColor;
+import com.anton4j.darktower.console.location.GameMap;
+import com.anton4j.darktower.console.location.Location;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -34,6 +36,7 @@ public class Game {
         this.intro = new Intro(mainBanner, mainAudio);
         this.initialStage = new StartGameStage();
 
+        // todo map refactor
         List<String> mapFileLines = ResourceUtils.getResourceLines("map");
 
         List<ConsoleLine> mapConsoleLines = mapFileLines
@@ -41,7 +44,14 @@ public class Game {
               .map(line -> new ConsoleLine(line, FontColor.GREEN))
               .collect(Collectors.toList());
 
-        ConsoleLines gameMap = new ConsoleLines(mapConsoleLines);
+        ConsoleLines graphicalMap = new ConsoleLines(mapConsoleLines);
+
+        Location theDarkTower = new Location("The Dark Tower", null, 10);
+        Location discordia = new Location("Discordia", theDarkTower, 7);
+        Location thunderclap = new Location("Thunderclap", discordia, 1);
+        Location borderlands = new Location("Borderlands", thunderclap, 0);
+        GameMap gameMap = new GameMap(graphicalMap, borderlands);
+
         GameContext.getInstance().setGameMap(gameMap);
     }
 

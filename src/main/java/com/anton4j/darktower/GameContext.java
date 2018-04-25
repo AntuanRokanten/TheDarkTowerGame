@@ -1,9 +1,7 @@
 package com.anton4j.darktower;
 
 import com.anton4j.darktower.character.Char;
-import com.anton4j.darktower.console.ConsoleLine;
-import com.anton4j.darktower.console.FontColor;
-import com.anton4j.darktower.console.ProgressBar;
+import com.anton4j.darktower.console.location.GameMap;
 
 /**
  * @author ant
@@ -16,14 +14,15 @@ public class GameContext {
         return INSTANCE;
     }
 
-    private ConsoleLines gameMap;
+    private GameMap gameMap;
     private Char mainCharacter;
+    private GameStats gameStats;
 
-    public ConsoleLines getGameMap() {
+    public GameMap getGameMap() {
         return gameMap;
     }
 
-    public void setGameMap(ConsoleLines gameMap) {
+    public void setGameMap(GameMap gameMap) {
         this.gameMap = gameMap;
     }
 
@@ -35,4 +34,11 @@ public class GameContext {
         return mainCharacter;
     }
 
+    public GameStats getGameStats() {
+        if (gameStats == null) {
+            gameStats = new GameStats();
+        }
+
+        return gameStats;
+    }
 }
