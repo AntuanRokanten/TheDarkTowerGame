@@ -32,7 +32,7 @@ public class ProgressBar {
               ']' +
               String.join("", Collections.nCopies((int) (Math.log10(total)) - (int) (Math.log10(current)), " "));
 
-        new ConsoleLine(bar, FontColor.BLACK).print();
+        new ConsoleLine(bar, FontColor.WHITE).print();
     }
 
 }

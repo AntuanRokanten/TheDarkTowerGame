@@ -12,6 +12,8 @@ import static java.util.Arrays.asList;
  */
 public class InProgressStage extends Stage<RoundOutcome> {
 
+    // todo create chain of locations and put it into context then here put true only if tower is reached and man in black is defeated!
+
     InProgressStage() {
         super(new EndGameStage(),
               new OptionsScene(asList(

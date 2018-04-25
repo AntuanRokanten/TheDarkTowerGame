@@ -4,9 +4,10 @@ import com.anton4j.darktower.console.ConsoleLine;
 import com.anton4j.darktower.console.ConsoleUtils;
 import com.anton4j.darktower.console.FontColor;
 import com.anton4j.darktower.console.ProgressBar;
+import com.anton4j.darktower.util.CalculateUtils;
+import com.anton4j.darktower.util.RandomUtils;
 
 import static com.anton4j.darktower.util.CalculateUtils.calculateFeature;
-import static com.anton4j.darktower.util.CalculateUtils.calculatePercentage;
 
 /**
  * @author ant
@@ -53,15 +54,11 @@ public class Char extends Creature {
         new ConsoleLine("Character is resting...", FontColor.GREEN).println();
         new ProgressBar(500).start();
 
-        if (health == 0) {
-            health = calculatePercentage(vitality, 40);
-        } else {
-            int healthAfterRest = calculateFeature(this.health, 50f);
-            if (healthAfterRest > vitality) {
-                healthAfterRest = vitality;
-            }
-            this.health = healthAfterRest;
+        int healthAfterRest = health + calculateFeature(vitality, RandomUtils.integerInRange(20, 30));
+        if (healthAfterRest > vitality) {
+            healthAfterRest = vitality;
         }
+        this.health = healthAfterRest;
 
         ConsoleUtils.emptyLine();
         new ConsoleLine("Character health increased to " + health, FontColor.GREEN).println();
@@ -76,11 +73,24 @@ public class Char extends Creature {
         defence = calculateFeature(defence, newLevelFactor + gender.defenceFactor());
         strength = calculateFeature(strength, newLevelFactor + gender.strengthFactor());
 
-        new ConsoleLine("Character level was increased to " + level, FontColor.BLACK).println();
+        new ConsoleLine("Character level was increased to " + level, FontColor.WHITE).println();
     }
 
     private int calculateExperienceToNextLevel() {
         return experienceToNextLevel * 3;
+    }
+
+    public String charInfo() {
+        float healthPercentage = CalculateUtils.calculatePercentValue(vitality, health);
+
+        return "        Character info" +
+              "\nName: " + name +
+              "\nRace: " + race +
+              "\nStats: strength = " +
+              strength + "; defence = " + defence + "; speed = " + speed + "; vitality = " + vitality +
+              "\nHealth: " + health + " (" + (int) healthPercentage + "% of vitality)" +
+              "\nLevel: " + level +
+              "\nExperience: " + experience + " (gain " + experienceToNextLevel + " to get next level)";
     }
 
     public static class CharBuilder {

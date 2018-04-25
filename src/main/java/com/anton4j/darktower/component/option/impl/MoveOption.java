@@ -12,11 +12,6 @@ public class MoveOption extends Option {
         super("Move to the next location");
     }
 
-//    @Override
-//    public OptionAvailability canBeChosen() {
-//        return OptionAvailability.notAvailable("You need to gain more experience and strength in order to mode to the next location");
-//    }
-
     @Override
     public OptionResult processOption() {
         return null;

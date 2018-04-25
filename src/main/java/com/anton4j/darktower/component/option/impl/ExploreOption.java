@@ -44,7 +44,7 @@ public class ExploreOption extends Option<RoundOutcome> {
 
             Mob enemy = CreatureFactory.createCharacterEnemy(mainCharacter);
             new ConsoleLine("Beast stats: " + enemy.toString(), FontColor.PURPLE).println();
-            new ConsoleLine("Your stats: " + mainCharacter.toString(), FontColor.BLACK).println();
+            new ConsoleLine("Your stats: " + mainCharacter.toString(), FontColor.WHITE).println();
 
             EncounterOption encounterOption = new OptionsScene<>(optionsFromEnumValues(EncounterOption.values()))
                   .processScene();

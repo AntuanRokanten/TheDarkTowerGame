@@ -19,7 +19,7 @@ import static com.anton4j.darktower.util.RandomUtils.randomBoolean;
  */
 public abstract class Creature {
 
-    private final Race race;
+    final Race race;
 
     int vitality;
     int strength;
@@ -113,7 +113,7 @@ public abstract class Creature {
         }
 
         while (!attacks.isDefeated() && !defends.isDefeated()) {
-            new ConsoleLine(attacks.race + " attacks", FontColor.BLACK).println();
+            new ConsoleLine(attacks.race + " attacks", FontColor.WHITE).println();
 
             boolean criticalHit = randomBoolean() && randomBoolean() && randomBoolean() && randomBoolean();
 
@@ -162,7 +162,7 @@ public abstract class Creature {
             fightOutcome = SUCCESS;
         }
         new Thread(audio::play).start();
-//        new ConsoleLine(winner.race + " won the fight!", FontColor.BLACK).println();
+//        new ConsoleLine(winner.race + " won the fight!", FontColor.WHITE).println();
 
         return fightOutcome;
     }

@@ -24,7 +24,7 @@ public class Game {
         List<String> bannerFileLines = ResourceUtils.getResourceLines("banner");
         List<ConsoleLine> bannerConsoleLines = bannerFileLines
               .stream()
-              .map(line -> new ConsoleLine(line, FontColor.BLACK, BackgroundColor.WHITE))
+              .map(line -> new ConsoleLine(line, FontColor.WHITE, BackgroundColor.WHITE))
               .collect(Collectors.toList());
 
         ConsoleLines mainBanner = new ConsoleLines(bannerConsoleLines);
@@ -46,7 +46,7 @@ public class Game {
     }
 
     public void start() {
-        new ConsoleLine("This game contains sound. Please make sure your speakers are not too loud. Press enter to continue", FontColor.BLACK, BackgroundColor.CYAN).println();
+        new ConsoleLine("This game contains sound. Please make sure your speakers are not too loud. Press enter to continue", FontColor.WHITE, BackgroundColor.CYAN).println();
         ConsoleUtils.readLine();
 
         intro.playIntro();
