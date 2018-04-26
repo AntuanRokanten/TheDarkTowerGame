@@ -27,7 +27,7 @@ public class Game {
         this.gameContext = initContext();
         this.intro = initIntro();
 
-        this.initialStage = new StartGameStage(gameContext);
+        this.initialStage = new StartGameStage();
     }
 
     private GameIntro initIntro() {
@@ -44,7 +44,7 @@ public class Game {
         return new GameIntro(mainBanner, mainAudio);
     }
 
-    private GameContext initContext() {
+    private GameContext initContext() { // todo do not initialize context here
         List<String> mapFileLines = ResourceUtils.getResourceLines("map");
 
         List<ConsoleLine> mapConsoleLines = mapFileLines
@@ -69,10 +69,11 @@ public class Game {
 
         intro.playIntro();
 
+        GameContext context = gameContext;
         Stage stage = initialStage;
 
         while (stage != null && !stage.stageCompleted()) {
-            stage.processScene();
+            context = stage.processScene(context);
 
             if (stage.stageCompleted()) {
                 stage = stage.nextStage();

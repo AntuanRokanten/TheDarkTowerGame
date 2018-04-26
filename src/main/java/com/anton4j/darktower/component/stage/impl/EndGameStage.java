@@ -1,5 +1,7 @@
 package com.anton4j.darktower.component.stage.impl;
 
+import com.anton4j.darktower.GameContext;
+import com.anton4j.darktower.component.scene.Scene;
 import com.anton4j.darktower.component.stage.Stage;
 
 /**
@@ -7,13 +9,17 @@ import com.anton4j.darktower.component.stage.Stage;
  */
 public class EndGameStage extends Stage<Void> {
 
-    EndGameStage() {
-        super(null, null, null);
+    public EndGameStage() {
+        super(null);
     }
 
     @Override
-    public boolean getCompletionStatus(Void stageResult) {
-        return false;
+    public Scene<Void> stageScene(GameContext gameContext) {
+        return null;
     }
 
+    @Override
+    public boolean getCompletionStatus(Void stageResult, GameContext gameContext) {
+        return false;
+    }
 }

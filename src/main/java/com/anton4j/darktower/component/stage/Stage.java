@@ -1,7 +1,7 @@
 package com.anton4j.darktower.component.stage;
 
 import com.anton4j.darktower.GameContext;
-import com.anton4j.darktower.component.scene.OptionsScene;
+import com.anton4j.darktower.component.scene.Scene;
 import com.anton4j.darktower.console.ConsoleLine;
 
 /**
@@ -10,39 +10,39 @@ import com.anton4j.darktower.console.ConsoleLine;
 public abstract class Stage<T> {
 
     private final Stage next;
-    private final OptionsScene<T> optionsScene;
     private final ConsoleLine stageIntro;
     private boolean stageCompleted = false;
-    protected final GameContext gameContext;
 
-    public Stage(Stage next, OptionsScene<T> optionsScene, ConsoleLine stageIntro, GameContext gameContext) {
+    public Stage(Stage next, ConsoleLine stageIntro) {
         this.next = next;
-        this.optionsScene = optionsScene;
         this.stageIntro = stageIntro;
-        this.gameContext = gameContext;
     }
 
-    public Stage(Stage next, OptionsScene<T> optionsScene, GameContext gameContext) {
-        this(next, optionsScene, null, gameContext);
+    public Stage(Stage next) {
+        this(next, null);
     }
 
-    public void processScene() {
+    public GameContext processScene(GameContext gameContext) {
         if (stageIntro != null) {
             stageIntro.println();
         }
 
-        T o = optionsScene.processScene();
-        stageCompleted = getCompletionStatus(o);
+        T sceneResult = stageScene(gameContext).processScene();
+        stageCompleted = getCompletionStatus(sceneResult, gameContext);
+
+        return gameContext;
     }
 
     public Stage nextStage() {
         return next;
     }
 
+    public abstract Scene<T> stageScene(GameContext gameContext);
+
     public boolean stageCompleted() {
         return stageCompleted;
     }
 
-    public abstract boolean getCompletionStatus(T stageResult);
+    public abstract boolean getCompletionStatus(T stageResult, GameContext gameContext);
 
 }
