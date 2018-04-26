@@ -2,7 +2,8 @@ package com.anton4j.darktower;
 
 import com.anton4j.darktower.audio.Audio;
 import com.anton4j.darktower.audio.AudioFactory;
-import com.anton4j.darktower.component.stage.Stage;
+import com.anton4j.darktower.component.scene.YesNoScene;
+import com.anton4j.darktower.component.stage.GameStage;
 import com.anton4j.darktower.component.stage.impl.StartGameStage;
 import com.anton4j.darktower.console.BackgroundColor;
 import com.anton4j.darktower.console.ConsoleLine;
@@ -14,38 +15,27 @@ import com.anton4j.darktower.console.location.Location;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import static com.anton4j.darktower.ResourceUtils.getResourceLines;
+
 /**
  * @author anton
  */
 public class Game {
 
-    private final GameIntro intro;
-    private final Stage initialStage;
+    private final IntroOutro intro;
+    private final IntroOutro outro;
+    private final GameStage initialStage;
     private final GameContext gameContext;
 
     public Game() {
-        this.gameContext = initContext();
         this.intro = initIntro();
-
+        this.outro = initOutro();
         this.initialStage = new StartGameStage();
+        this.gameContext = initContext();
     }
 
-    private GameIntro initIntro() {
-        List<String> bannerFileLines = ResourceUtils.getResourceLines("banner");
-        List<ConsoleLine> bannerConsoleLines = bannerFileLines
-              .stream()
-              .map(line -> new ConsoleLine(line, FontColor.WHITE, BackgroundColor.WHITE))
-              .collect(Collectors.toList());
-
-        ConsoleLines mainBanner = new ConsoleLines(bannerConsoleLines);
-
-        Audio mainAudio = AudioFactory.mainAudio();
-
-        return new GameIntro(mainBanner, mainAudio);
-    }
-
-    private GameContext initContext() { // todo do not initialize context here
-        List<String> mapFileLines = ResourceUtils.getResourceLines("map");
+    private GameContext initContext() {
+        List<String> mapFileLines = getResourceLines("map");
 
         List<ConsoleLine> mapConsoleLines = mapFileLines
               .stream()
@@ -54,32 +44,66 @@ public class Game {
 
         ConsoleLines graphicalMap = new ConsoleLines(mapConsoleLines);
 
-        Location theDarkTower = new Location("The Dark Tower", null, 9);
-        Location discordia = new Location("Discordia", theDarkTower, 7);
-        Location thunderclap = new Location("Thunderclap", discordia, 4);
-        Location borderlands = new Location("Borderlands", thunderclap, 0);
+        Location theDarkTower = new Location("The Dark Tower", null, 3); // 8
+        Location discordia = new Location("Discordia", theDarkTower, 2); // 7
+        Location thunderclap = new Location("Thunderclap", discordia, 1); // 4
+        Location borderlands = new Location("Borderlands", thunderclap, 0); // 0
         GameMap gameMap = new GameMap(graphicalMap, borderlands);
 
-        return new GameContext(gameMap);
+        GameContext gameContext = new GameContext();
+        gameContext.setGameMap(gameMap);
+        gameContext.setGameStats(new GameStats());
+        return gameContext;
+    }
+
+    private IntroOutro initIntro() {
+        return initIntroOutro("banner", "The man in Black fled across the Desert, and the Gunslinger followed...");
+    }
+
+    private IntroOutro initOutro() {
+        return initIntroOutro("end-banner", "You have reached the Dark Tower!");
+    }
+
+    private IntroOutro initIntroOutro(String bannerFileName, String text) {
+        List<String> bannerFileLines = getResourceLines(bannerFileName);
+
+        List<ConsoleLine> bannerConsoleLines = bannerFileLines
+              .stream()
+              .map(line -> new ConsoleLine(line, FontColor.WHITE, BackgroundColor.GRAY))
+              .collect(Collectors.toList());
+
+        ConsoleLines lines = new ConsoleLines(bannerConsoleLines);
+
+        Audio mainAudio = AudioFactory.mainAudio();
+
+        return new IntroOutro(lines, mainAudio, new ConsoleLine(text, FontColor.BLUE));
     }
 
     public void start() {
         new ConsoleLine("This game contains sound. Please make sure your speakers are not too loud. Press enter to continue", FontColor.WHITE, BackgroundColor.CYAN).println();
         ConsoleUtils.readLine();
 
-        intro.playIntro();
+        intro.play();
 
-        GameContext context = gameContext;
-        Stage stage = initialStage;
-
+        GameStage stage = initialStage;
         while (stage != null && !stage.stageCompleted()) {
-            context = stage.processScene(context);
+            stage.processScene(gameContext);
 
             if (stage.stageCompleted()) {
                 stage = stage.nextStage();
             }
         }
 
+        outro.play();
+        new ConsoleLine(gameContext.getGameStats().toString(), FontColor.CYAN).println();
+
+        YesNoScene.Response response = new YesNoScene(new ConsoleLine("Start game again?")).processScene();
+
+        if (response.isPositive()) {
+            new Game().start();
+        } else {
+            new ConsoleLine("See you soon!").print();
+        }
     }
 
 }

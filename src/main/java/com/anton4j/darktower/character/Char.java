@@ -20,7 +20,7 @@ public class Char extends Creature implements Serializable {
     private final Gender gender;
 
     /**
-     * Character level. Initially character is of 1 level.
+     * Character level. Initially character is of 0 level.
      */
     private int level = 0;
 
@@ -37,7 +37,7 @@ public class Char extends Creature implements Serializable {
         if (experience == 0) {
             experience = (int) charEvent.experienceFactor();
         } else {
-            experience = calculateFeature(experience, charEvent.experienceFactor());
+            experience = calculateFeature(experienceToNextLevel, charEvent.experienceFactor());
         }
 
         new ConsoleLine("Character experience increased to " + experience, FontColor.CYAN).println();

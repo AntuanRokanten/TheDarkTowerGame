@@ -17,6 +17,6 @@ public abstract class Scene<T> {
         this(null);
     }
 
-    public abstract T processScene();
+    public abstract T processScene(); // todo return is not used
 
 }

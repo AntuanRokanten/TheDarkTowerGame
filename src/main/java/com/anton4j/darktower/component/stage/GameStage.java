@@ -7,33 +7,32 @@ import com.anton4j.darktower.console.ConsoleLine;
 /**
  * @author anton
  */
-public abstract class Stage<T> {
+public abstract class GameStage<T> {
 
-    private final Stage next;
+    private final GameStage next;
     private final ConsoleLine stageIntro;
-    private boolean stageCompleted = false;
 
-    public Stage(Stage next, ConsoleLine stageIntro) {
+    private boolean stageCompleted;
+
+    public GameStage(GameStage next, ConsoleLine stageIntro) {
         this.next = next;
         this.stageIntro = stageIntro;
     }
 
-    public Stage(Stage next) {
+    public GameStage(GameStage next) {
         this(next, null);
     }
 
-    public GameContext processScene(GameContext gameContext) {
+    public void processScene(GameContext gameContext) {
         if (stageIntro != null) {
             stageIntro.println();
         }
 
-        T sceneResult = stageScene(gameContext).processScene();
-        stageCompleted = getCompletionStatus(sceneResult, gameContext);
-
-        return gameContext;
+        T sceneResult = stageScene(gameContext).processScene(); // todo result is not used
+        stageCompleted = getCompletionStatus(gameContext);
     }
 
-    public Stage nextStage() {
+    public GameStage nextStage() {
         return next;
     }
 
@@ -43,6 +42,6 @@ public abstract class Stage<T> {
         return stageCompleted;
     }
 
-    public abstract boolean getCompletionStatus(T stageResult, GameContext gameContext);
+    public abstract boolean getCompletionStatus(GameContext gameContext);
 
 }

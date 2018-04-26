@@ -153,19 +153,14 @@ public abstract class Creature implements Serializable {
 
         EncounterOutcome fightOutcome;
         Audio audio;
-        Creature winner;
         if (this.isDefeated()) {
-            winner = enemy;
             audio = AudioFactory.looseAudio();
             fightOutcome = FAILURE;
         } else {
-            winner = this;
             audio = AudioFactory.winAudio();
             fightOutcome = SUCCESS;
         }
         new Thread(audio::play).start();
-//        new ConsoleLine(winner.race + " won the fight!", FontColor.WHITE).println();
-
         return fightOutcome;
     }
 

@@ -5,21 +5,21 @@ import com.anton4j.darktower.character.RoundOutcome;
 import com.anton4j.darktower.component.option.impl.*;
 import com.anton4j.darktower.component.scene.OptionsScene;
 import com.anton4j.darktower.component.scene.Scene;
-import com.anton4j.darktower.component.stage.Stage;
+import com.anton4j.darktower.component.stage.GameStage;
 
 import static java.util.Arrays.asList;
 
 /**
  * @author anton
  */
-public class InProgressStage extends Stage<RoundOutcome> {
+public class InProgressStage extends GameStage<RoundOutcome> {
 
     InProgressStage() {
-        super(new EndGameStage());
+        super(null);
     }
 
     @Override
-    public boolean getCompletionStatus(RoundOutcome stageResult, GameContext gameContext) {
+    public boolean getCompletionStatus(GameContext gameContext) {
         return gameContext.getGameMap().isFinalDestination();
     }
 
@@ -31,7 +31,8 @@ public class InProgressStage extends Stage<RoundOutcome> {
               new MoveOption(gameContext),
               new CharInfoOption(gameContext),
               new PrintMapOption(gameContext),
-              new SaveExitOption(gameContext)
+              new SaveOption(gameContext),
+              new ExitOption(gameContext)
         ));
     }
 }

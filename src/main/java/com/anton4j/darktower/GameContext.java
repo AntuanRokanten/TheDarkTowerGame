@@ -15,29 +15,20 @@ public class GameContext implements Serializable {
     /**
      * Map of the game.
      */
-    private final GameMap gameMap;
+    private GameMap gameMap;
 
     /**
      * Statistics of the game.
      */
-    private final GameStats gameStats;
+    private GameStats gameStats;
 
     /**
      * Game main character.
      */
     private Char mainCharacter;
 
-    public GameContext(GameMap gameMap) {
-        this.gameMap = gameMap;
-        this.gameStats = new GameStats();
-    }
-
     public GameMap getGameMap() {
         return gameMap;
-    }
-
-    public void setMainCharacter(Char character) {
-        this.mainCharacter = character;
     }
 
     public Char getMainCharacter() {
@@ -47,4 +38,27 @@ public class GameContext implements Serializable {
     public GameStats getGameStats() {
         return gameStats;
     }
+
+    public void setGameMap(GameMap gameMap) {
+        this.gameMap = gameMap;
+    }
+
+    public void setGameStats(GameStats gameStats) {
+        this.gameStats = gameStats;
+    }
+
+    public void setMainCharacter(Char mainCharacter) {
+        this.mainCharacter = mainCharacter;
+    }
+
+    public void copyFrom(GameContext gameContext) {
+        this.mainCharacter = gameContext.getMainCharacter();
+        this.gameMap = gameContext.getGameMap();
+        this.gameStats = gameContext.getGameStats();
+    }
+
+    public boolean isInitialized() {
+        return gameMap != null && mainCharacter != null && gameStats != null;
+    }
+
 }

@@ -2,8 +2,8 @@ package com.anton4j.darktower.component.option.impl;
 
 import com.anton4j.darktower.GameContext;
 import com.anton4j.darktower.character.Char;
-import com.anton4j.darktower.character.Gender;
 import com.anton4j.darktower.character.CharRace;
+import com.anton4j.darktower.character.Gender;
 import com.anton4j.darktower.component.event.EventResult;
 import com.anton4j.darktower.component.option.Option;
 import com.anton4j.darktower.component.option.OptionResult;
@@ -17,15 +17,15 @@ import static com.anton4j.darktower.util.Utils.optionsFromEnumValues;
 /**
  * @author anton
  */
-public class NewGameOption extends Option<Char> {
+public class NewGameOption extends Option<GameContext> {
 
     public NewGameOption(GameContext gameContext) {
         super(gameContext, "New game");
     }
 
     @Override
-    public OptionResult<Char> processOption() {
-        new ConsoleLine("In order to join Ka-Tet and start journey to the Dark tower first create a character", FontColor.BLUE).println();
+    public OptionResult<GameContext> processOption() {
+        new ConsoleLine("In order to join Ka-Tet and start journey to the Dark end-banner first create a character", FontColor.BLUE).println();
 
         CharRace charRace = new OptionsScene<>(optionsFromEnumValues(CharRace.values(), gameContext), new ConsoleLine("Choose race:"))
               .processScene();
@@ -44,8 +44,8 @@ public class NewGameOption extends Option<Char> {
               .withRace(charRace)
               .build();
 
-        return new OptionResult<>(EventResult.Status.SUCCESS, character);
+        gameContext.setMainCharacter(character);
+        return new OptionResult<>(EventResult.Status.SUCCESS, gameContext);
     }
-
 
 }

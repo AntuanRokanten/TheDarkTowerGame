@@ -9,10 +9,10 @@ import com.anton4j.darktower.component.option.OptionResult;
 /**
  * @author anton
  */
-public class SaveExitOption extends Option<Void> {
+public class SaveOption extends Option<Void> {
 
-    public SaveExitOption(GameContext gameContext) {
-        super(gameContext, "Save and exit");
+    public SaveOption(GameContext gameContext) {
+        super(gameContext, "Save");
     }
 
     @Override

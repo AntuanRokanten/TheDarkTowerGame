@@ -12,7 +12,7 @@ public enum BackgroundColor implements ConsoleColor {
     BLUE("\u001B[44m"),
     PURPLE("\u001B[45m"),
     CYAN("\u001B[46m"),
-    WHITE("\u001B[47m");
+    GRAY("\u001B[47m");
 
     private final String value;
 

@@ -31,7 +31,7 @@ public class GameMap implements Serializable {
                 new ConsoleLine("Character moved to " + location.title() + " location", FontColor.YELLOW).println();
             } else {
                 new ConsoleLine("Character cannot move to the next location." +
-                      "\nCharacter should gain level " + location.next().accessLevel(), FontColor.RED).println();
+                      "\nYou should gain level " + location.next().accessLevel(), FontColor.RED).println();
             }
         } else {
             new ConsoleLine("Character already reached the final destination", FontColor.YELLOW).println();
@@ -47,7 +47,7 @@ public class GameMap implements Serializable {
         return location.title();
     }
 
-    private boolean canMoveToNextLocation(Char character) {
+    public boolean canMoveToNextLocation(Char character) {
         return character.level() >= location.next().accessLevel();
     }
 

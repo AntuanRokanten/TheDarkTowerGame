@@ -33,6 +33,9 @@ public class ExploreOption extends Option<RoundOutcome> {
         new ConsoleLine("You are exploring a current location...", FontColor.GREEN).println();
 
         Char mainCharacter = gameContext.getMainCharacter();
+        if (gameContext.getGameMap().canMoveToNextLocation(mainCharacter)) {
+            new ConsoleLine("The character is ready to move closer to the destination!", FontColor.BLUE).println();
+        }
 
         CharEvent charEvent;
         if (randomBoolean() && randomBoolean()) {
