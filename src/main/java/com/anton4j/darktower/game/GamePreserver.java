@@ -75,7 +75,7 @@ public class GamePreserver {
             GameContext context = (GameContext) ois.readObject();
             return Optional.of(context);
         } catch (ClassNotFoundException | IOException e) {
-            new ConsoleLine("Great! Are you ready to defeat all the enemies and reach the Dark Tower? Let's startCannot restore game state from file", FontColor.RED).println();
+            new ConsoleLine("Cannot restore game state from file", FontColor.RED).println();
             return Optional.empty();
         }
     }
