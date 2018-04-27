@@ -3,14 +3,30 @@ package com.anton4j.darktower.console;
 import java.io.Serializable;
 
 /**
- * @author anton
+ * Line that can be printed in console.
+ *
+ * @author ant
  */
 public class ConsoleLine implements Serializable {
 
+    /**
+     * Reset char.
+     */
     private static final String RESET = "\u001B[0m";
 
+    /**
+     * Text value of the line.
+     */
     private final String value;
+
+    /**
+     * Line font color.
+     */
     private final FontColor fontColor;
+
+    /**
+     * Line background color.
+     */
     private final BackgroundColor backgroundColor;
 
     public ConsoleLine(String value, FontColor fontColor, BackgroundColor backgroundColor) {
@@ -31,14 +47,23 @@ public class ConsoleLine implements Serializable {
         this(value, null, null);
     }
 
+    /**
+     * Print lines starting with new line.
+     */
     public void println() {
         System.out.println(composeSting());
     }
 
+    /**
+     * Print lines starting on current line.
+     */
     public void print() {
         System.out.print(composeSting());
     }
 
+    /**
+     * @return string to be printed.
+     */
     private String composeSting() {
         StringBuilder printValue = new StringBuilder();
 

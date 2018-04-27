@@ -1,7 +1,9 @@
 package com.anton4j.darktower.console;
 
 /**
- * @author anton
+ * Background console color.
+ *
+ * @author ant
  */
 public enum BackgroundColor implements ConsoleColor {
 

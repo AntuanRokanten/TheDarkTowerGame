@@ -1,7 +1,9 @@
 package com.anton4j.darktower;
 
+import com.anton4j.darktower.game.Game;
+
 /**
- * @author anton
+ * @author ant
  */
 public class Main {
 

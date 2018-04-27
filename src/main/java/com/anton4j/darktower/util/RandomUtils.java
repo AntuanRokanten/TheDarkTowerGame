@@ -13,10 +13,6 @@ public class RandomUtils {
         return RANDOM.nextBoolean();
     }
 
-    public static int integer() {
-        return RANDOM.nextInt();
-    }
-
     /**
      * @param bound bound on the random number to be returned. Must be positive.
      * @return bounded positive integer value.

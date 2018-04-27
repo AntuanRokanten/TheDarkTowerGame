@@ -1,10 +1,15 @@
 package com.anton4j.darktower.console;
 
 /**
- * @author anton
+ * Console color.
+ *
+ * @author ant
  */
 public interface ConsoleColor {
 
+    /**
+     * @return value to be printed.
+     */
     String value();
 
 }

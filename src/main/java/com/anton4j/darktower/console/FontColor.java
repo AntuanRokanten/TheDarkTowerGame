@@ -1,7 +1,9 @@
 package com.anton4j.darktower.console;
 
 /**
- * @author anton
+ * Console font color.
+ *
+ * @author ant
  */
 public enum FontColor implements ConsoleColor {
 
@@ -20,7 +22,6 @@ public enum FontColor implements ConsoleColor {
         this.value = value;
     }
 
-    // todo do not override value
     @Override
     public String value() {
         return value;

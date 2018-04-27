@@ -3,10 +3,15 @@ package com.anton4j.darktower.console;
 import java.util.Collections;
 
 /**
+ * Console progress bar.
+ *
  * @author ant
  */
 public class ProgressBar {
 
+    /**
+     * Total point of the bar.
+     */
     private final long total;
 
     public ProgressBar(long total) {
@@ -20,7 +25,7 @@ public class ProgressBar {
         }
     }
 
-    private static void printProgress(long total, long current) {
+    private void printProgress(long total, long current) {
         int percent = (int) (current * 100 / total);
 
         String bar = "\r" +

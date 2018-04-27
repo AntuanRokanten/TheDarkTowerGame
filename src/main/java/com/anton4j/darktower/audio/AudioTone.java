@@ -8,14 +8,14 @@ import javax.sound.sampled.SourceDataLine;
 /**
  * Class represents a single audio tone.
  *
- * @author anton
+ * @author ant
  */
 public class AudioTone {
 
     /**
      * Rate of the tone.
      */
-    private float rate;
+    private final float rate;
 
     /**
      * Frequency of the tone.
