@@ -2,34 +2,43 @@ package com.anton4j.darktower.game.character;
 
 import com.anton4j.darktower.audio.Audio;
 import com.anton4j.darktower.audio.AudioFactory;
-import com.anton4j.darktower.game.character.encounter.EncounterOutcome;
 import com.anton4j.darktower.console.ConsoleLine;
 import com.anton4j.darktower.console.FontColor;
+import com.anton4j.darktower.game.character.encounter.EncounterOutcome;
 import com.anton4j.darktower.util.RandomUtils;
 
 import java.io.Serializable;
 
+import static com.anton4j.darktower.console.ConsoleUtils.sleep;
 import static com.anton4j.darktower.game.character.encounter.EncounterOutcome.FAILURE;
 import static com.anton4j.darktower.game.character.encounter.EncounterOutcome.SUCCESS;
-import static com.anton4j.darktower.console.ConsoleUtils.sleep;
 import static com.anton4j.darktower.util.CalculateUtils.calculatePercentValue;
 import static com.anton4j.darktower.util.CalculateUtils.calculatePercentage;
 import static com.anton4j.darktower.util.RandomUtils.integerInRange;
 import static com.anton4j.darktower.util.RandomUtils.randomBoolean;
 
 /**
+ * Creature that can be created in the game.
+ *
  * @author ant
  */
 public abstract class Creature implements Serializable {
 
+    /**
+     * Creature's race.
+     */
     final Race race;
 
+    /**
+     * Current health value.
+     */
+    int health;
+
+    /* stats */
     int vitality;
     int strength;
     int defence;
     int speed;
-
-    int health;
 
     Creature(Race race, int vitality, int strength, int defence, int speed) {
         this.defence = defence;
@@ -41,22 +50,41 @@ public abstract class Creature implements Serializable {
         this.health = vitality;
     }
 
+
+    /**
+     * Maximum health value.
+     */
     public int vitality() {
         return vitality;
     }
 
+    /**
+     * Speed value.
+     */
     public int speed() {
         return speed;
     }
 
+    /**
+     * Strength value.
+     */
     public int strength() {
         return strength;
     }
 
+    /**
+     * Defence value.
+     */
     public int defence() {
         return defence;
     }
 
+    /**
+     * Tries to run away from the specified creature.
+     *
+     * @param enemy creature from which this creature runs away.
+     * @return run away outcome.
+     */
     public EncounterOutcome runAway(Creature enemy) {
         new ConsoleLine("Character is running away", FontColor.PURPLE).println();
 
@@ -100,6 +128,12 @@ public abstract class Creature implements Serializable {
         return encounterOutcome;
     }
 
+    /**
+     * Fights specified creature.
+     *
+     * @param enemy creature to fight with.
+     * @return fight outcome.
+     */
     public EncounterOutcome fight(Creature enemy) {
         new ConsoleLine("Starting a fight", FontColor.PURPLE).println();
 
@@ -165,6 +199,9 @@ public abstract class Creature implements Serializable {
         return fightOutcome;
     }
 
+    /**
+     * @return true if current creature health level is lower then 5% so it is considered defeated.
+     */
     private boolean isDefeated() {
         float percent = calculatePercentValue(vitality, health);
         return percent < 5f;

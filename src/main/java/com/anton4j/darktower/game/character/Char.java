@@ -12,11 +12,20 @@ import java.io.Serializable;
 import static com.anton4j.darktower.util.CalculateUtils.calculateFeature;
 
 /**
+ * Class for main game character
+ *
  * @author ant
  */
 public class Char extends Creature implements Serializable {
 
+    /**
+     * Name of the character.
+     */
     private final String name;
+
+    /**
+     * Character gender.
+     */
     private final Gender gender;
 
     /**
@@ -24,7 +33,14 @@ public class Char extends Creature implements Serializable {
      */
     private int level = 0;
 
+    /**
+     * Experience value that should be reached in order to get next level.
+     */
     private int experienceToNextLevel = 100;
+
+    /**
+     * Current character experience.
+     */
     private int experience = 0;
 
     private Char(Gender gender, String name, CharRace charRace, int vitality, int strength, int defence, int speed) {
@@ -33,6 +49,11 @@ public class Char extends Creature implements Serializable {
         this.gender = gender;
     }
 
+    /**
+     * Increases experience based on specified event.
+     *
+     * @param charEvent character event.
+     */
     public void increaseExperience(CharEvent charEvent) {
         if (experience == 0) {
             experience = (int) charEvent.experienceFactor();
@@ -47,6 +68,9 @@ public class Char extends Creature implements Serializable {
         }
     }
 
+    /**
+     * Increases character's health.
+     */
     public void takeRest() {
         if (health == vitality) {
             new ConsoleLine("No need to rest. Character is full of energy!", FontColor.GREEN).println();
@@ -66,22 +90,9 @@ public class Char extends Creature implements Serializable {
         new ConsoleLine("Character health increased to " + health, FontColor.GREEN).println();
     }
 
-    private void levelUp() {
-        level++;
-
-        int newLevelFactor = 30;
-        vitality = calculateFeature(vitality, newLevelFactor + gender.vitalityFactor());
-        speed = calculateFeature(speed, newLevelFactor + gender.speedFactor());
-        defence = calculateFeature(defence, newLevelFactor + gender.defenceFactor());
-        strength = calculateFeature(strength, newLevelFactor + gender.strengthFactor());
-
-        new ConsoleLine("Character level was increased to " + level, FontColor.WHITE).println();
-    }
-
-    private int calculateExperienceToNextLevel() {
-        return experienceToNextLevel * 3;
-    }
-
+    /**
+     * @return formatted character information.
+     */
     public String charInfo() {
         float healthPercentage = CalculateUtils.calculatePercentValue(vitality, health);
 
@@ -95,31 +106,80 @@ public class Char extends Creature implements Serializable {
               "\nExperience: " + experience + " (gain " + experienceToNextLevel + " to get next level)";
     }
 
+    /**
+     * Increments level of the character.
+     */
+    private void levelUp() {
+        level++;
+
+        int newLevelFactor = 30;
+        vitality = calculateFeature(vitality, newLevelFactor + gender.vitalityFactor());
+        speed = calculateFeature(speed, newLevelFactor + gender.speedFactor());
+        defence = calculateFeature(defence, newLevelFactor + gender.defenceFactor());
+        strength = calculateFeature(strength, newLevelFactor + gender.strengthFactor());
+
+        new ConsoleLine("Character level was increased to " + level, FontColor.WHITE).println();
+    }
+
+    /**
+     * @return experience needed to get next level.
+     */
+    private int calculateExperienceToNextLevel() {
+        return experienceToNextLevel * 3;
+    }
+
+    /**
+     * @return current level of the character,
+     */
     public int level() {
         return level;
     }
 
+    /**
+     * Character builder class.
+     */
     public static class CharBuilder {
 
         private String name;
         private Gender gender;
         private CharRace charRace;
 
+        /**
+         * Sets name of the character.
+         *
+         * @param name name to be set.
+         * @return current builder instance.
+         */
         public CharBuilder withName(String name) {
             this.name = name;
             return this;
         }
 
+        /**
+         * Sets name gender of the character.
+         *
+         * @param gender gender to be set.
+         * @return current builder instance.
+         */
         public CharBuilder withGender(Gender gender) {
             this.gender = gender;
             return this;
         }
 
+        /**
+         * Sets race of the character.
+         *
+         * @param charRace race to be set.
+         * @return current builder instance.
+         */
         public CharBuilder withRace(CharRace charRace) {
             this.charRace = charRace;
             return this;
         }
 
+        /**
+         * Builds {@link Char} instance.
+         */
         public Char build() {
             int vitality = calculateFeature(charRace.vitality(), gender.vitalityFactor());
             int strength = calculateFeature(charRace.strength(), gender.strengthFactor());

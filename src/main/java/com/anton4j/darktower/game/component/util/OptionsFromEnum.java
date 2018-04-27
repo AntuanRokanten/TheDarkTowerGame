@@ -1,8 +1,8 @@
 package com.anton4j.darktower.game.component.util;
 
+import com.anton4j.darktower.game.GameContext;
 import com.anton4j.darktower.game.component.option.Option;
 import com.anton4j.darktower.game.component.option.ValueOption;
-import com.anton4j.darktower.game.GameContext;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -12,7 +12,7 @@ import java.util.List;
  *
  * @author ant
  */
-public class OptionsFromEnum<T extends Enum>  {
+public class OptionsFromEnum<T extends Enum> {
 
     /**
      * Enum values to be comverted.

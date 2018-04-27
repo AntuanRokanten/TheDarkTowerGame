@@ -9,6 +9,8 @@ import com.anton4j.darktower.game.component.stage.GameStage;
 import static java.util.Arrays.asList;
 
 /**
+ * Stage for game process.
+ *
  * @author ant
  */
 public class InProgressStage extends GameStage<Void> {

@@ -20,6 +20,7 @@ import java.util.stream.Collectors;
 public class GamePreserver {
 
     private static final GamePreserver INSTANCE = new GamePreserver();
+    private final Path saveFolder = Paths.get(System.getProperty("user.home") + File.separator + "darktower" + File.separator);
 
     /**
      * @return single instance of this class.
@@ -27,8 +28,6 @@ public class GamePreserver {
     public static GamePreserver getInstance() {
         return INSTANCE;
     }
-
-    private final Path saveFolder = Paths.get(System.getProperty("user.home") + File.separator + "darktower" + File.separator);
 
     /**
      * Saves context to the disk.
@@ -67,6 +66,7 @@ public class GamePreserver {
 
     /**
      * Restores game context from the specified file.
+     *
      * @param savePath save file path.
      * @return optional containing context.
      */

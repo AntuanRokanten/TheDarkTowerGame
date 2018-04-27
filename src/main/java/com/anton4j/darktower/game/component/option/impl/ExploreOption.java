@@ -1,5 +1,9 @@
 package com.anton4j.darktower.game.component.option.impl;
 
+import com.anton4j.darktower.console.ConsoleLine;
+import com.anton4j.darktower.console.ConsoleUtils;
+import com.anton4j.darktower.console.FontColor;
+import com.anton4j.darktower.game.GameContext;
 import com.anton4j.darktower.game.character.*;
 import com.anton4j.darktower.game.character.encounter.EncounterOption;
 import com.anton4j.darktower.game.character.encounter.EncounterOutcome;
@@ -7,10 +11,6 @@ import com.anton4j.darktower.game.component.option.Option;
 import com.anton4j.darktower.game.component.option.OptionResult;
 import com.anton4j.darktower.game.component.scene.OptionsScene;
 import com.anton4j.darktower.game.component.util.OptionsFromEnum;
-import com.anton4j.darktower.console.ConsoleLine;
-import com.anton4j.darktower.console.ConsoleUtils;
-import com.anton4j.darktower.console.FontColor;
-import com.anton4j.darktower.game.GameContext;
 
 import java.util.List;
 
@@ -21,6 +21,8 @@ import static com.anton4j.darktower.game.character.encounter.EncounterOutcome.SU
 import static com.anton4j.darktower.util.RandomUtils.randomBoolean;
 
 /**
+ * Option for exploring location.
+ *
  * @author ant
  */
 public class ExploreOption extends Option<Void> {

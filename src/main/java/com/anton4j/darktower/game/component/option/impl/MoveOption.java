@@ -6,6 +6,8 @@ import com.anton4j.darktower.game.component.option.OptionResult;
 import com.anton4j.darktower.game.location.GameMap;
 
 /**
+ * Option for moving to the next location.
+ *
  * @author ant
  */
 public class MoveOption extends Option<Void> {

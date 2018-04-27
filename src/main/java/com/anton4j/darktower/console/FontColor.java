@@ -26,5 +26,5 @@ public enum FontColor implements ConsoleColor {
     public String value() {
         return value;
     }
-    
+
 }

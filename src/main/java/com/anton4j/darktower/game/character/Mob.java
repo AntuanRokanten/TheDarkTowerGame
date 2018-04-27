@@ -1,6 +1,9 @@
 package com.anton4j.darktower.game.character;
 
 /**
+ * Non-personified creature.
+ * Used as enemy for {@link Char}.
+ *
  * @author ant
  */
 public class Mob extends Creature {

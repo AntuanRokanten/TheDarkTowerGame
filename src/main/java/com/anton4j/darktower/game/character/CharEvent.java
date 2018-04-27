@@ -3,23 +3,43 @@ package com.anton4j.darktower.game.character;
 import com.anton4j.darktower.game.GameContext;
 
 /**
+ * Events that can happen to the {@link Char} and increases its level.
+ *
  * @author ant
  */
 public enum CharEvent {
 
+    /**
+     * Event when character wins a fight.
+     */
     FIGHT_VICTORY(50f) {
         public void logEvent(GameContext gameContext) {
             gameContext.getGameStats().fightWin();
         }
-    }, FIGHT_DEFEAT(30f) {
+    },
+
+    /**
+     * Event when character loses a fight.
+     */
+    FIGHT_DEFEAT(30f) {
         public void logEvent(GameContext gameContext) {
             gameContext.getGameStats().fightLost();
         }
-    }, EXPLORATION(20f) {
+    },
+
+    /**
+     * Event when character explores new areas.
+     */
+    EXPLORATION(20f) {
         public void logEvent(GameContext gameContext) {
             gameContext.getGameStats().areaExplored();
         }
-    }, RUN_SUCCESS(15f) {
+    },
+
+    /**
+     * Event when character runs away from another creature.
+     */
+    RUN_SUCCESS(15f) {
         public void logEvent(GameContext gameContext) {
             // no need to log
         }
@@ -31,10 +51,18 @@ public enum CharEvent {
         this.experienceFactor = experienceFactor;
     }
 
+    /**
+     * @return factor by which character experience should be increased.
+     */
     public float experienceFactor() {
         return experienceFactor;
     }
 
+    /**
+     * Logs the event to the context.
+     *
+     * @param gameContext game context.
+     */
     public abstract void logEvent(GameContext gameContext);
 
 }

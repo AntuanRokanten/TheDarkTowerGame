@@ -1,8 +1,8 @@
 package com.anton4j.darktower.game.component.stage;
 
+import com.anton4j.darktower.console.ConsoleLine;
 import com.anton4j.darktower.game.GameContext;
 import com.anton4j.darktower.game.component.scene.Scene;
-import com.anton4j.darktower.console.ConsoleLine;
 
 /**
  * Stage of the game.

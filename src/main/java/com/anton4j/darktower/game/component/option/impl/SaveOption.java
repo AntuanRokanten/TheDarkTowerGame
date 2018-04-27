@@ -6,6 +6,8 @@ import com.anton4j.darktower.game.component.option.Option;
 import com.anton4j.darktower.game.component.option.OptionResult;
 
 /**
+ * Option that saves current game state.
+ *
  * @author ant
  */
 public class SaveOption extends Option<Void> {

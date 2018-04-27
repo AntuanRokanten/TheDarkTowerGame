@@ -7,10 +7,18 @@ import static com.anton4j.darktower.util.RandomUtils.integerInRange;
 import static com.anton4j.darktower.util.RandomUtils.randomBoolean;
 
 /**
+ * Factory for creating {@link Creature}
+ *
  * @author ant
  */
 public class CreatureFactory {
 
+    /**
+     * Creates enemy for the specified character.
+     *
+     * @param character character for which enemy should be created.
+     * @return enemy for the character.
+     */
     public static Mob createCharacterEnemy(Char character) {
         MobRace[] mobRaces = MobRace.values();
         MobRace randomRace = mobRaces[RandomUtils.integer(mobRaces.length)];

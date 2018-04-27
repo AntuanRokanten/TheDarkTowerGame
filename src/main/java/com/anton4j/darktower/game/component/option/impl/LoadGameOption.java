@@ -1,13 +1,13 @@
 package com.anton4j.darktower.game.component.option.impl;
 
+import com.anton4j.darktower.console.ConsoleLine;
+import com.anton4j.darktower.console.FontColor;
 import com.anton4j.darktower.game.GameContext;
 import com.anton4j.darktower.game.GamePreserver;
 import com.anton4j.darktower.game.component.option.Option;
 import com.anton4j.darktower.game.component.option.OptionResult;
 import com.anton4j.darktower.game.component.option.ValueOption;
 import com.anton4j.darktower.game.component.scene.OptionsScene;
-import com.anton4j.darktower.console.ConsoleLine;
-import com.anton4j.darktower.console.FontColor;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -19,6 +19,8 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 /**
+ * Option that loads a previously saved game.
+ *
  * @author ant
  */
 public class LoadGameOption extends Option<GameContext> {

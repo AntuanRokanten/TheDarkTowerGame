@@ -22,6 +22,11 @@ public abstract class Scene<T> {
         this(null);
     }
 
+    /**
+     * Processes this scene.
+     *
+     * @return processing result.
+     */
     public abstract T processScene();
 
 }

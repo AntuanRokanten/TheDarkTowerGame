@@ -10,6 +10,8 @@ import com.anton4j.darktower.game.component.stage.GameStage;
 import static java.util.Arrays.asList;
 
 /**
+ * Game stage that initiates game context.
+ *
  * @author ant
  */
 public class StartGameStage extends GameStage<GameContext> {

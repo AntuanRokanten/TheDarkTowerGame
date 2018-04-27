@@ -1,10 +1,10 @@
 package com.anton4j.darktower.game.component.scene;
 
-import com.anton4j.darktower.game.component.option.Option;
-import com.anton4j.darktower.game.component.option.OptionResult;
 import com.anton4j.darktower.console.ConsoleLine;
 import com.anton4j.darktower.console.ConsoleUtils;
 import com.anton4j.darktower.console.FontColor;
+import com.anton4j.darktower.game.component.option.Option;
+import com.anton4j.darktower.game.component.option.OptionResult;
 
 import java.util.List;
 import java.util.Optional;
@@ -12,10 +12,15 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 /**
+ * Scene for displaying a list of options on the console.
+ *
  * @author ant
  */
 public class OptionsScene<T> extends Scene<T> {
 
+    /**
+     * Options of the scene.
+     */
     private final List<Option<T>> options;
 
     public OptionsScene(List<Option<T>> options, ConsoleLine sceneTitle) {
@@ -25,6 +30,29 @@ public class OptionsScene<T> extends Scene<T> {
 
     public OptionsScene(List<Option<T>> options) {
         this.options = options;
+    }
+
+    private static <T> Optional<Option<T>> getSelectedOption(String line, List<Option<T>> options) {
+        if (!isNumeric(line)) {
+            return Optional.empty();
+        } else {
+            int selectedIndex = Integer.parseInt(line) - 1;
+
+            if (selectedIndex >= 0 && selectedIndex < options.size()) {
+                return Optional.of(options.get(selectedIndex));
+            } else {
+                return Optional.empty();
+            }
+        }
+    }
+
+    private static boolean isNumeric(String str) {
+        try {
+            Integer.parseInt(str);
+        } catch (NumberFormatException nfe) {
+            return false;
+        }
+        return true;
     }
 
     @Override
@@ -59,29 +87,6 @@ public class OptionsScene<T> extends Scene<T> {
 
             return processScene();
         }
-    }
-
-    private static <T> Optional<Option<T>> getSelectedOption(String line, List<Option<T>> options) {
-        if (!isNumeric(line)) {
-            return Optional.empty();
-        } else {
-            int selectedIndex = Integer.parseInt(line) - 1;
-
-            if (selectedIndex >= 0 && selectedIndex < options.size()) {
-                return Optional.of(options.get(selectedIndex));
-            } else {
-                return Optional.empty();
-            }
-        }
-    }
-
-    private static boolean isNumeric(String str) {
-        try {
-            Integer.parseInt(str);
-        } catch (NumberFormatException nfe) {
-            return false;
-        }
-        return true;
     }
 
 }

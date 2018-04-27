@@ -16,12 +16,6 @@ public class Audio {
         this.tones = tones;
     }
 
-    public void play() {
-        for (AudioTone tone : tones) {
-            tone.play();
-        }
-    }
-
     /**
      * Creates {@link Audio} from the array of {@link AudioTone}
      *
@@ -30,6 +24,12 @@ public class Audio {
      */
     public static Audio fromTones(AudioTone... audioTones) {
         return new Audio(audioTones);
+    }
+
+    public void play() {
+        for (AudioTone tone : tones) {
+            tone.play();
+        }
     }
 
 }

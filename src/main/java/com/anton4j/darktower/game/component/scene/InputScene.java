@@ -5,6 +5,8 @@ import com.anton4j.darktower.console.ConsoleUtils;
 import com.anton4j.darktower.console.FontColor;
 
 /**
+ * Scene for retrieving value typed to the console.
+ *
  * @author ant
  */
 public class InputScene extends Scene<String> {

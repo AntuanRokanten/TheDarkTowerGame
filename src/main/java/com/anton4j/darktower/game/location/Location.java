@@ -3,6 +3,8 @@ package com.anton4j.darktower.game.location;
 import java.io.Serializable;
 
 /**
+ * Location of a map.
+ *
  * @author ant
  */
 public class Location implements Serializable {
@@ -28,15 +30,23 @@ public class Location implements Serializable {
         this.accessLevel = accessLevel;
     }
 
-
+    /**
+     * @return title of this location.
+     */
     public String title() {
         return title;
     }
 
+    /**
+     * @return location that goes after this location.
+     */
     public Location next() {
         return next;
     }
 
+    /**
+     * @return level needed for accessing location.
+     */
     public int accessLevel() {
         return accessLevel;
     }

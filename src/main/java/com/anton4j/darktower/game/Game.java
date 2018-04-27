@@ -2,10 +2,10 @@ package com.anton4j.darktower.game;
 
 import com.anton4j.darktower.audio.Audio;
 import com.anton4j.darktower.audio.AudioFactory;
+import com.anton4j.darktower.console.*;
 import com.anton4j.darktower.game.component.scene.YesNoScene;
 import com.anton4j.darktower.game.component.stage.GameStage;
 import com.anton4j.darktower.game.component.stage.impl.StartGameStage;
-import com.anton4j.darktower.console.*;
 import com.anton4j.darktower.game.location.GameMap;
 import com.anton4j.darktower.game.location.Location;
 
@@ -50,7 +50,7 @@ public class Game {
 
     /**
      * Initiates context of the game.
-     *
+     * <p>
      * return initiated game context.
      */
     private GameContext initContext() {
@@ -98,10 +98,10 @@ public class Game {
         return new IntroOutro(lines, mainAudio, new ConsoleLine(text, FontColor.BLUE));
     }
 
-   /**
-    * Starts game.
-    */
-   public void start() {
+    /**
+     * Starts game.
+     */
+    public void start() {
         new ConsoleLine("This game contains sound. Please make sure your speakers are not too loud. Press enter to continue", FontColor.WHITE, BackgroundColor.CYAN).println();
         ConsoleUtils.readLine();
 

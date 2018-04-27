@@ -1,5 +1,8 @@
 package com.anton4j.darktower.game.component.option.impl;
 
+import com.anton4j.darktower.console.ConsoleLine;
+import com.anton4j.darktower.console.FontColor;
+import com.anton4j.darktower.game.GameContext;
 import com.anton4j.darktower.game.character.Char;
 import com.anton4j.darktower.game.character.CharRace;
 import com.anton4j.darktower.game.character.Gender;
@@ -8,11 +11,10 @@ import com.anton4j.darktower.game.component.option.OptionResult;
 import com.anton4j.darktower.game.component.scene.InputScene;
 import com.anton4j.darktower.game.component.scene.OptionsScene;
 import com.anton4j.darktower.game.component.util.OptionsFromEnum;
-import com.anton4j.darktower.console.ConsoleLine;
-import com.anton4j.darktower.console.FontColor;
-import com.anton4j.darktower.game.GameContext;
 
 /**
+ * Option that creates a new game.
+ *
  * @author ant
  */
 public class NewGameOption extends Option<GameContext> {

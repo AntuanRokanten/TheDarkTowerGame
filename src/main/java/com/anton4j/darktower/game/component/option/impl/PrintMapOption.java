@@ -1,13 +1,15 @@
 package com.anton4j.darktower.game.component.option.impl;
 
+import com.anton4j.darktower.console.ConsoleLine;
+import com.anton4j.darktower.console.FontColor;
 import com.anton4j.darktower.game.GameContext;
 import com.anton4j.darktower.game.component.option.Option;
 import com.anton4j.darktower.game.component.option.OptionResult;
-import com.anton4j.darktower.console.ConsoleLine;
-import com.anton4j.darktower.console.FontColor;
 import com.anton4j.darktower.game.location.GameMap;
 
 /**
+ * Option that prints game map.
+ *
  * @author ant
  */
 public class PrintMapOption extends Option<Void> {

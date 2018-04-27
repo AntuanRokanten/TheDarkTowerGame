@@ -1,18 +1,27 @@
 package com.anton4j.darktower.game.location;
 
-import com.anton4j.darktower.console.ConsoleLines;
-import com.anton4j.darktower.game.character.Char;
 import com.anton4j.darktower.console.ConsoleLine;
+import com.anton4j.darktower.console.ConsoleLines;
 import com.anton4j.darktower.console.FontColor;
+import com.anton4j.darktower.game.character.Char;
 
 import java.io.Serializable;
 
 /**
+ * Map of the game.
+ *
  * @author ant
  */
 public class GameMap implements Serializable {
 
+    /**
+     * Graphic representation of the map.
+     */
     private final ConsoleLines graphicMap;
+
+    /**
+     * Current map location.
+     */
     private Location location;
 
     public GameMap(ConsoleLines graphicMap, Location location) {
@@ -20,10 +29,18 @@ public class GameMap implements Serializable {
         this.location = location;
     }
 
+    /**
+     * Prints map graphics.
+     */
     public void print() {
         graphicMap.print();
     }
 
+    /**
+     * Moves to next location if possible.
+     *
+     * @param character main game character.
+     */
     public void moveToNextLocation(Char character) {
         if (!isFinalDestination()) {
             if (canMoveToNextLocation(character)) {
@@ -39,14 +56,28 @@ public class GameMap implements Serializable {
         }
     }
 
+    /**
+     * Checks if current location is the final one.
+     *
+     * @return true if this location if a final destination.
+     */
     public boolean isFinalDestination() {
         return location.next() == null;
     }
 
+    /**
+     * @return title of the current location.
+     */
     public String currentLocationTitle() {
         return location.title();
     }
 
+    /**
+     * Checks if the character can move to the next location.
+     *
+     * @param character character for checking.
+     * @return true if character can move to the next locatin.
+     */
     public boolean canMoveToNextLocation(Char character) {
         return character.level() >= location.next().accessLevel();
     }

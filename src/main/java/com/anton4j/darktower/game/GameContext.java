@@ -31,32 +31,40 @@ public class GameContext implements Serializable {
         return gameMap;
     }
 
-    public Char getMainCharacter() {
-        return mainCharacter;
-    }
-
-    public GameStats getGameStats() {
-        return gameStats;
-    }
-
     public void setGameMap(GameMap gameMap) {
         this.gameMap = gameMap;
     }
 
-    public void setGameStats(GameStats gameStats) {
-        this.gameStats = gameStats;
+    public Char getMainCharacter() {
+        return mainCharacter;
     }
 
     public void setMainCharacter(Char mainCharacter) {
         this.mainCharacter = mainCharacter;
     }
 
+    public GameStats getGameStats() {
+        return gameStats;
+    }
+
+    public void setGameStats(GameStats gameStats) {
+        this.gameStats = gameStats;
+    }
+
+    /**
+     * Copies context from specified.
+     *
+     * @param gameContext context from which to copy.
+     */
     public void copyFrom(GameContext gameContext) {
         this.mainCharacter = gameContext.getMainCharacter();
         this.gameMap = gameContext.getGameMap();
         this.gameStats = gameContext.getGameStats();
     }
 
+    /**
+     * @return true if context was fully initialized; false otherwise.
+     */
     public boolean isInitialized() {
         return gameMap != null && mainCharacter != null && gameStats != null;
     }
