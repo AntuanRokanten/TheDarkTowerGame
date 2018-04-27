@@ -15,13 +15,30 @@ import java.util.stream.Collectors;
 import static com.anton4j.darktower.util.ResourceUtils.getResourceLines;
 
 /**
+ * Main game class.
+ *
  * @author ant
  */
 public class Game {
 
+    /**
+     * Game intro.
+     */
     private final IntroOutro intro;
+
+    /**
+     * Game outro.
+     */
     private final IntroOutro outro;
+
+    /**
+     * First stage of the game.
+     */
     private final GameStage initialStage;
+
+    /**
+     * Context of the game.
+     */
     private final GameContext gameContext;
 
     public Game() {
@@ -31,6 +48,11 @@ public class Game {
         this.gameContext = initContext();
     }
 
+    /**
+     * Initiates context of the game.
+     *
+     * return initiated game context.
+     */
     private GameContext initContext() {
         List<String> mapFileLines = getResourceLines("map");
 
@@ -76,7 +98,10 @@ public class Game {
         return new IntroOutro(lines, mainAudio, new ConsoleLine(text, FontColor.BLUE));
     }
 
-    public void start() {
+   /**
+    * Starts game.
+    */
+   public void start() {
         new ConsoleLine("This game contains sound. Please make sure your speakers are not too loud. Press enter to continue", FontColor.WHITE, BackgroundColor.CYAN).println();
         ConsoleUtils.readLine();
 

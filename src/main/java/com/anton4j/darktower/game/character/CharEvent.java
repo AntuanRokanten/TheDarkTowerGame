@@ -17,7 +17,7 @@ public enum CharEvent {
         }
     }, EXPLORATION(20f) {
         public void logEvent(GameContext gameContext) {
-            gameContext.getGameStats().locationExplored();
+            gameContext.getGameStats().areaExplored();
         }
     }, RUN_SUCCESS(15f) {
         public void logEvent(GameContext gameContext) {

@@ -5,16 +5,19 @@ import java.util.Scanner;
 import java.util.concurrent.TimeUnit;
 
 /**
+ * Utils methods for working with console.
+ *
  * @author ant
  */
 public class ConsoleUtils {
+
+    private static final Scanner scanner = new Scanner(System.in);
 
     /**
      * @return value entered in console.
      */
     public static String readLine() {
-        Scanner scan = new Scanner(System.in); // todo
-        return scan.nextLine().trim();
+        return scanner.nextLine().trim();
     }
 
     /**

@@ -9,10 +9,16 @@ import java.util.List;
 import java.util.Scanner;
 
 /**
+ * Utils for working with resources.
+ *
  * @author ant
  */
 public class ResourceUtils {
 
+    /**
+     * @param fileName name of the resource text file.
+     * @return list of lines of the file; empty list if file is not found.
+     */
     public static List<String> getResourceLines(String fileName) {
         ClassLoader classLoader = ClassLoader.getSystemClassLoader();
 

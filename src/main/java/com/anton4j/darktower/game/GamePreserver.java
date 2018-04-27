@@ -21,12 +21,20 @@ public class GamePreserver {
 
     private static final GamePreserver INSTANCE = new GamePreserver();
 
+    /**
+     * @return single instance of this class.
+     */
     public static GamePreserver getInstance() {
         return INSTANCE;
     }
 
     private final Path saveFolder = Paths.get(System.getProperty("user.home") + File.separator + "darktower" + File.separator);
 
+    /**
+     * Saves context to the disk.
+     *
+     * @param gameContext context to be saved.
+     */
     public void save(GameContext gameContext) {
         try {
             createFoldersIfNeeded();
@@ -44,6 +52,9 @@ public class GamePreserver {
         }
     }
 
+    /**
+     * @return list of saves currently present on the disk.
+     */
     public List<Path> listSaves() {
         try {
             createFoldersIfNeeded();
@@ -54,6 +65,11 @@ public class GamePreserver {
         }
     }
 
+    /**
+     * Restores game context from the specified file.
+     * @param savePath save file path.
+     * @return optional containing context.
+     */
     public Optional<GameContext> restoreFrom(Path savePath) {
         try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(savePath.toFile()))) {
             GameContext context = (GameContext) ois.readObject();
