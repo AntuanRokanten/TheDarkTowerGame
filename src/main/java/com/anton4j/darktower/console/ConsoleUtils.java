@@ -11,13 +11,16 @@ import java.util.concurrent.TimeUnit;
  */
 public class ConsoleUtils {
 
-    private static final Scanner scanner = new Scanner(System.in);
-
     /**
      * @return value entered in console.
      */
     public static String readLine() {
-        return scanner.nextLine().trim();
+        Scanner scanner = new Scanner(System.in);
+        if (scanner.hasNextLine()) {
+            return scanner.nextLine().trim();
+        } else {
+            return "";
+        }
     }
 
     /**

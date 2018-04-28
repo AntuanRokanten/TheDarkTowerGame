@@ -30,4 +30,5 @@ public class InputSceneTest extends OutStreamsInterceprtorTest {
         assertEquals(sceneEnteredValue, sceneResult);
         assertEquals(sceneTitle + "\u001B[0m\n", outContent.toString());
     }
+
 }
