@@ -10,6 +10,7 @@ import com.anton4j.darktower.util.RandomUtils;
 import java.io.Serializable;
 
 import static com.anton4j.darktower.util.CalculateUtils.calculateFeature;
+import static com.anton4j.darktower.util.CalculateUtils.calculatePercentage;
 
 /**
  * Class for main game character
@@ -80,7 +81,7 @@ public class Char extends Creature implements Serializable {
         new ConsoleLine("Character is resting...", FontColor.GREEN).println();
         new ProgressBar(500).start();
 
-        int healthAfterRest = health + calculateFeature(vitality, RandomUtils.integerInRange(20, 30));
+        int healthAfterRest = health + calculatePercentage(vitality, RandomUtils.integerInRange(20, 30));
         if (healthAfterRest > vitality) {
             healthAfterRest = vitality;
         }

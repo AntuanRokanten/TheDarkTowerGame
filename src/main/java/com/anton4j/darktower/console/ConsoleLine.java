@@ -12,7 +12,7 @@ public class ConsoleLine implements Serializable {
     /**
      * Reset char.
      */
-    private static final String RESET = "\u001B[0m";
+    static final String RESET = "\u001B[0m";
 
     /**
      * Text value of the line.
