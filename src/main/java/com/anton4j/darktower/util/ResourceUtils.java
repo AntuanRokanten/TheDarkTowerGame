@@ -1,12 +1,15 @@
 package com.anton4j.darktower.util;
 
-import java.io.File;
+import com.anton4j.darktower.console.ConsoleLine;
+import com.anton4j.darktower.console.FontColor;
+
+import java.io.BufferedReader;
 import java.io.IOException;
-import java.net.URL;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.Scanner;
 
 /**
  * Utils for working with resources.
@@ -20,24 +23,23 @@ public class ResourceUtils {
      * @return list of lines of the file; empty list if file is not found.
      */
     public static List<String> getResourceLines(String fileName) {
-        ClassLoader classLoader = ClassLoader.getSystemClassLoader();
-
-        URL resource = classLoader.getResource(fileName);
-        if (resource == null) {
+        InputStream is = ResourceUtils.class.getClassLoader().getResourceAsStream(fileName);
+        if (is == null) {
+            new ConsoleLine("Cannot find resource text file with name " + fileName, FontColor.RED).println();
             return Collections.emptyList();
         }
 
-        File file = new File(resource.getFile());
+        BufferedReader reader = new BufferedReader(new InputStreamReader(is));
 
         List<String> lines = new ArrayList<>();
-        try (Scanner scanner = new Scanner(file)) {
-            while (scanner.hasNextLine()) {
-                String line = scanner.nextLine();
+        try {
+            String line = reader.readLine();
+            while (line != null) {
                 lines.add(line);
+                line = reader.readLine();
             }
-
         } catch (IOException e) {
-            e.printStackTrace();
+            new ConsoleLine("Cannot load resource file text", FontColor.RED).println();
         }
 
         return lines;
