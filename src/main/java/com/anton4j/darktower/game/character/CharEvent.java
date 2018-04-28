@@ -12,7 +12,7 @@ public enum CharEvent {
     /**
      * Event when character wins a fight.
      */
-    FIGHT_VICTORY(50f) {
+    FIGHT_VICTORY(40f) {
         public void logEvent(GameContext gameContext) {
             gameContext.getGameStats().fightWin();
         }
@@ -45,6 +45,9 @@ public enum CharEvent {
         }
     };
 
+    /**
+     * Factor by which experience should be increased when the event occurs.
+     */
     private final float experienceFactor;
 
     CharEvent(float experienceFactor) {

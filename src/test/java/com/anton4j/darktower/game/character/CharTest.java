@@ -1,7 +1,6 @@
 package com.anton4j.darktower.game.character;
 
 import com.anton4j.darktower.util.TestRandomUtils;
-import org.apache.commons.lang3.reflect.MethodUtils;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -9,9 +8,7 @@ import java.util.UUID;
 
 import static com.anton4j.darktower.util.CalculateUtils.calculateFeature;
 import static org.apache.commons.lang3.reflect.FieldUtils.readField;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.fail;
+import static org.junit.Assert.*;
 
 /**
  * @author ant
@@ -71,6 +68,11 @@ public class CharTest {
     public void increaseExperience() throws IllegalAccessException {
         // ARRANGE
         CharEvent charEvent = TestRandomUtils.randomEnum(CharEvent.values());
+        int speed = character.speed;
+        int vitality = character.vitality;
+        int defence = character.defence;
+        int strength = character.strength;
+        int health = character.health;
 
         // ACT
         character.increaseExperience(charEvent);
@@ -83,17 +85,27 @@ public class CharTest {
 
         // ARRANGE
         charEvent = TestRandomUtils.randomEnum(CharEvent.values());
+
+        // ACT
         character.increaseExperience(charEvent);
 
+        // ASSERT
         actualExp = (Integer) readField(character, "experience", true);
         assertEquals((Integer) calculateFeature(expToNextLevel, charEvent.experienceFactor()), actualExp);
 
         if (actualExp > expToNextLevel) {
-            Integer actualLevel = (Integer) readField(character, "level", true);
-            Integer expectedLevel = 1;
+            int actualLevel = character.level();
+            int expectedLevel = 1;
             assertEquals(expectedLevel, actualLevel);
 
-            // todo assert stats increased.
+            // asserting stats increased
+            assertTrue(strength < character.strength);
+            assertTrue(speed < character.speed);
+            assertTrue(vitality < character.vitality);
+            assertTrue(defence < character.defence);
+
+            // asserting health remains same
+            assertEquals(health, character.health);
         }
     }
 
@@ -118,25 +130,10 @@ public class CharTest {
 
     @Test
     public void charInfo() {
-        fail();
-    }
+        String actualCharInfo = character.charInfo();
 
-    @Test
-    public void level() throws Exception {
-        // ASSERT
-        assertEquals(0, character.level());
-
-        // ACT
-        MethodUtils.invokeExactMethod(character, "levelUp");
-
-        // ASSERT
-        assertEquals(1, character.level());
-
-        // ACT
-        MethodUtils.invokeExactMethod(character, "levelUp");
-
-        // ASSERT
-        assertEquals(2, character.level());
+        assertNotNull(actualCharInfo);
+        assertFalse(actualCharInfo.trim().isEmpty());
     }
 
 }

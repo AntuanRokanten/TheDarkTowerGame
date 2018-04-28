@@ -1,11 +1,8 @@
 package com.anton4j.darktower.console;
 
-import org.junit.After;
-import org.junit.Before;
+import com.anton4j.darktower.OutStreamsInterceprtorTest;
 import org.junit.Test;
 
-import java.io.ByteArrayOutputStream;
-import java.io.PrintStream;
 import java.util.UUID;
 
 import static org.junit.Assert.assertEquals;
@@ -13,16 +10,7 @@ import static org.junit.Assert.assertEquals;
 /**
  * @author ant
  */
-public class ConsoleLineTest {
-
-    private final ByteArrayOutputStream outContent = new ByteArrayOutputStream();
-    private final ByteArrayOutputStream errContent = new ByteArrayOutputStream();
-
-    @Before
-    public void setUpStreams() {
-        System.setOut(new PrintStream(outContent));
-        System.setErr(new PrintStream(errContent));
-    }
+public class ConsoleLineTest extends OutStreamsInterceprtorTest {
 
     @Test
     public void println() {
@@ -60,12 +48,6 @@ public class ConsoleLineTest {
         String actual = outContent.toString();
 
         assertEquals(expected, actual);
-    }
-
-    @After
-    public void restoreStreams() {
-        System.setOut(System.out);
-        System.setErr(System.err);
     }
 
 }
