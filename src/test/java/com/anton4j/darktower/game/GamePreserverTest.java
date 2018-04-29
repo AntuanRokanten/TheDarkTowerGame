@@ -3,11 +3,9 @@ package com.anton4j.darktower.game;
 import com.anton4j.darktower.OutStreamsInterceprtorTest;
 import com.anton4j.darktower.console.ConsoleLines;
 import com.anton4j.darktower.game.character.Char;
-import com.anton4j.darktower.game.character.CharRace;
-import com.anton4j.darktower.game.character.Gender;
 import com.anton4j.darktower.game.location.GameMap;
 import com.anton4j.darktower.game.location.Location;
-import com.anton4j.darktower.util.TestRandomUtils;
+import com.anton4j.darktower.util.TestCharUtils;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -43,15 +41,7 @@ public class GamePreserverTest extends OutStreamsInterceprtorTest {
         Location location = new Location(UUID.randomUUID().toString(), null, 0);
         GameMap gameMap = new GameMap(new ConsoleLines(Collections.emptyList()), location);
 
-        Gender gender = TestRandomUtils.randomEnum(Gender.values());
-        CharRace race = TestRandomUtils.randomEnum(CharRace.values());
-        String name = UUID.randomUUID().toString();
-
-        Char character = new Char.CharBuilder()
-              .withGender(gender)
-              .withRace(race)
-              .withName(name)
-              .build();
+        Char character = TestCharUtils.randomChar();
 
         gameContext = new GameContext();
         gameContext.setGameMap(gameMap);

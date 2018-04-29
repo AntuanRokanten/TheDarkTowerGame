@@ -1,5 +1,7 @@
 package com.anton4j.darktower.game.character;
 
+import com.anton4j.darktower.OutStreamsInterceprtorTest;
+import com.anton4j.darktower.game.character.encounter.EncounterOutcome;
 import com.anton4j.darktower.util.TestRandomUtils;
 import org.junit.Before;
 import org.junit.Test;
@@ -14,7 +16,7 @@ import static org.junit.Assert.*;
 /**
  * @author ant
  */
-public class CharTest {
+public class CharTest extends OutStreamsInterceprtorTest {
 
     private Char character;
 
@@ -66,13 +68,214 @@ public class CharTest {
     }
 
     @Test
-    public void testCreateCharEnemy() throws Exception {
+    public void fightWinTest() {
+        // ARRANGE
+        Mob enemy = CreatureFactory.createCharacterEnemy(character);
+        enemy.health = 10; // to ensure win
+
         // ACT
-        Mob characterEnemy = CreatureFactory.createCharacterEnemy(character);
+        EncounterOutcome outcome = character.fight(enemy);
 
         // ASSERT
-        assertNotNull(characterEnemy);
-//        character.fight();
+        assertEquals(EncounterOutcome.SUCCESS, outcome);
+
+        String fightLog = outContent.toString();
+        assertTrue(fightLog.contains("Starting a fight"));
+        assertTrue(fightLog.contains(charRace + " attacks"));
+        assertTrue(fightLog.contains(enemy.race + " health after attack"));
+
+        assertTrue(enemy.health < 10);
+        assertTrue(character.health <= character.vitality);
+    }
+
+    @Test
+    public void fightLoseTest() {
+        // ARRANGE
+        Mob enemy = CreatureFactory.createCharacterEnemy(character);
+        character.health = 10; // to ensure fight will be lost
+
+        // ACT
+        EncounterOutcome outcome = character.fight(enemy);
+
+        // ASSERT
+        assertEquals(EncounterOutcome.FAILURE, outcome);
+
+        String fightLog = outContent.toString();
+        assertTrue(fightLog.contains("Starting a fight"));
+        assertTrue(fightLog.contains(enemy.race + " attacks"));
+        assertTrue(fightLog.contains(character.race + " health after attack"));
+
+        assertTrue(character.health < 10);
+        assertTrue(enemy.health <= enemy.vitality);
+    }
+
+    @Test
+    public void runAwaySuccessSpeedHigher() {
+        // ARRANGE
+        Mob enemy = CreatureFactory.createCharacterEnemy(character);
+        enemy.speed = 10; // to ensure run success
+
+        // ACT
+        EncounterOutcome outcome = character.runAway(enemy);
+
+        // ASSERT
+        assertEquals(EncounterOutcome.SUCCESS, outcome);
+
+        String consoleOutput = outContent.toString();
+
+        assertTrue(consoleOutput.contains("Character is running away"));
+        assertTrue(consoleOutput.contains("Character successfully run away")); // not asserting font color
+    }
+
+    @Test
+    public void runAwaySuccessSpeedSlightlyHigherHealthHigher() {
+        // ARRANGE
+        Mob enemy = CreatureFactory.createCharacterEnemy(character);
+        enemy.speed = character.speed - 1;
+        enemy.health = character.health - 1;
+
+        // ACT
+        EncounterOutcome outcome = character.runAway(enemy);
+
+        // ASSERT
+        assertEquals(EncounterOutcome.SUCCESS, outcome);
+
+        String consoleOutput = outContent.toString();
+
+        assertTrue(consoleOutput.contains("Character is running away"));
+        assertTrue(consoleOutput.contains("Character successfully run away")); // not asserting font color
+    }
+
+    @Test
+    public void runAwaySuccessSpeedSlightlyHigherHealthSlightlyLower() {
+        // ARRANGE
+        Mob enemy = CreatureFactory.createCharacterEnemy(character);
+        enemy.speed = character.speed - 1;
+        character.health = enemy.health - 1;
+
+        // ACT
+        EncounterOutcome outcome = character.runAway(enemy);
+
+        // ASSERT
+        assertEquals(EncounterOutcome.SUCCESS, outcome);
+
+        String consoleOutput = outContent.toString();
+
+        assertTrue(consoleOutput.contains("Character is running away"));
+        assertTrue(consoleOutput.contains("Character successfully run away")); // not asserting font color
+    }
+
+    @Test
+    public void runAwayFailureSpeedSlightlyHigherHealthLower() {
+        // ARRANGE
+        Mob enemy = CreatureFactory.createCharacterEnemy(character);
+        enemy.speed = character.speed - 1;
+        character.health = enemy.health - 100;
+
+        // ACT
+        EncounterOutcome outcome = character.runAway(enemy);
+
+        // ASSERT
+        assertEquals(EncounterOutcome.FAILURE, outcome);
+
+        String consoleOutput = outContent.toString();
+
+        assertTrue(consoleOutput.contains("Character is running away"));
+        assertTrue(consoleOutput.contains("Character was caught by the creature")); // not asserting font color
+    }
+
+    @Test
+    public void runAwayFailureSpeedSlightlyLowerHealthSlightlyLower() {
+        // ARRANGE
+        Mob enemy = CreatureFactory.createCharacterEnemy(character);
+        character.speed = enemy.speed - 1;
+        character.health = enemy.health - 1;
+
+        // ACT
+        EncounterOutcome outcome = character.runAway(enemy);
+
+        // ASSERT
+        assertEquals(EncounterOutcome.FAILURE, outcome);
+
+        String consoleOutput = outContent.toString();
+
+        assertTrue(consoleOutput.contains("Character is running away"));
+        assertTrue(consoleOutput.contains("Character was caught by the creature")); // not asserting font color
+    }
+
+    @Test
+    public void runAwayFailureSpeedSlightlyLowerHealthSlightlyHigher() {
+        // ARRANGE
+        Mob enemy = CreatureFactory.createCharacterEnemy(character);
+        character.speed = enemy.speed - 1;
+        enemy.health = character.health - 1;
+
+        // ACT
+        EncounterOutcome outcome = character.runAway(enemy);
+
+        // ASSERT
+        assertEquals(EncounterOutcome.FAILURE, outcome);
+
+        String consoleOutput = outContent.toString();
+
+        assertTrue(consoleOutput.contains("Character is running away"));
+        assertTrue(consoleOutput.contains("Character was caught by the creature")); // not asserting font color
+    }
+
+    @Test
+    public void runAwayFailureSpeedSlightlyLowerHealthHigher() {
+        // ARRANGE
+        Mob enemy = CreatureFactory.createCharacterEnemy(character);
+        character.speed = enemy.speed - 1;
+        enemy.health = character.health - 100;
+
+        // ACT
+        EncounterOutcome outcome = character.runAway(enemy);
+
+        // ASSERT
+        assertEquals(EncounterOutcome.SUCCESS, outcome);
+
+        String consoleOutput = outContent.toString();
+
+        assertTrue(consoleOutput.contains("Character is running away"));
+        assertTrue(consoleOutput.contains("Character successfully run away")); // not asserting font color
+    }
+
+    @Test
+    public void runAwayFailureHealth() {
+        // ARRANGE
+        Mob enemy = CreatureFactory.createCharacterEnemy(character);
+        enemy.speed = character.speed - 1;
+        character.health = enemy.health - 100;
+
+        // ACT
+        EncounterOutcome outcome = character.runAway(enemy);
+
+        // ASSERT
+        assertEquals(EncounterOutcome.FAILURE, outcome);
+
+        String consoleOutput = outContent.toString();
+
+        assertTrue(consoleOutput.contains("Character is running away"));
+        assertTrue(consoleOutput.contains("Character was caught by the creature")); // not asserting font color
+    }
+
+    @Test
+    public void runAwayFailureSpeedLower() {
+        // ARRANGE
+        Mob enemy = CreatureFactory.createCharacterEnemy(character);
+        character.speed = 10; // to ensure run failure
+
+        // ACT
+        EncounterOutcome outcome = character.runAway(enemy);
+
+        // ASSERT
+        assertEquals(EncounterOutcome.FAILURE, outcome);
+
+        String consoleOutput = outContent.toString();
+
+        assertTrue(consoleOutput.contains("Character is running away"));
+        assertTrue(consoleOutput.contains("Character was caught by the creature")); // not asserting font color
     }
 
     @Test

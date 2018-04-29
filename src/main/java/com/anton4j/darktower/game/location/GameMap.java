@@ -53,7 +53,6 @@ public class GameMap implements Serializable {
             }
         } else {
             new ConsoleLine("Character already reached the final destination", FontColor.YELLOW).println();
-
         }
     }
 
@@ -106,7 +105,6 @@ public class GameMap implements Serializable {
 
     @Override
     public int hashCode() {
-
         return Objects.hash(graphicMap, location);
     }
 }

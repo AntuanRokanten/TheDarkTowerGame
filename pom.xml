@@ -7,6 +7,11 @@
     <groupId>com.anton4j.darktower</groupId>
     <artifactId>dark-tower</artifactId>
     <version>0.1</version>
+
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    </properties>
+
     <build>
         <plugins>
             <plugin>
@@ -16,6 +21,7 @@
                     <source>8</source>
                     <target>8</target>
                 </configuration>
+                <version>3.7.0</version>
             </plugin>
 
             <plugin>
@@ -28,6 +34,7 @@
                         </manifest>
                     </archive>
                 </configuration>
+                <version>3.1.0</version>
             </plugin>
 
             <plugin>
@@ -64,18 +71,11 @@
                             <goal>report</goal>
                         </goals>
                         <configuration>
-                            <!-- Sets the path to the file which contains the execution data. -->
                             <dataFile>target/jacoco.exec</dataFile>
-                            <!-- Sets the output directory for the code coverage report. -->
                             <outputDirectory>target/jacoco-ut</outputDirectory>
                         </configuration>
                     </execution>
                 </executions>
-                <configuration>
-                    <systemPropertyVariables>
-                        <jacoco-agent.destfile>target/jacoco.exec</jacoco-agent.destfile>
-                    </systemPropertyVariables>
-                </configuration>
             </plugin>
 
         </plugins>

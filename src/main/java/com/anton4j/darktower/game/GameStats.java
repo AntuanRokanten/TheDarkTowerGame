@@ -65,7 +65,6 @@ public class GameStats implements Serializable {
 
     @Override
     public int hashCode() {
-
         return Objects.hash(areasExplored, fightWins, fightLoses);
     }
 }

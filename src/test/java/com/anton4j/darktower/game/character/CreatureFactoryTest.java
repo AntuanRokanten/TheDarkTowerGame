@@ -1,11 +1,9 @@
 package com.anton4j.darktower.game.character;
 
 import com.anton4j.darktower.util.CalculateUtils;
-import com.anton4j.darktower.util.TestRandomUtils;
+import com.anton4j.darktower.util.TestCharUtils;
 import org.junit.Before;
 import org.junit.Test;
-
-import java.util.UUID;
 
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
@@ -19,15 +17,7 @@ public class CreatureFactoryTest {
 
     @Before
     public void setup() {
-        CharRace charRace = TestRandomUtils.randomEnum(CharRace.values());
-        Gender gender = TestRandomUtils.randomEnum(Gender.values());
-        String name = UUID.randomUUID().toString();
-
-        character = new Char.CharBuilder()
-              .withGender(gender)
-              .withRace(charRace)
-              .withName(name)
-              .build();
+        character = TestCharUtils.randomChar();
     }
 
     @Test
