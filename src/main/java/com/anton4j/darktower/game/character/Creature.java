@@ -50,7 +50,6 @@ public abstract class Creature implements Serializable {
         this.health = vitality;
     }
 
-
     /**
      * Maximum health value.
      */

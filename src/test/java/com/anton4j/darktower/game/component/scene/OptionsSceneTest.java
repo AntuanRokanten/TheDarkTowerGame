@@ -47,4 +47,5 @@ public class OptionsSceneTest extends OutStreamsInterceprtorTest {
 
         verifyNoMoreInteractions(gameContext);
     }
+
 }

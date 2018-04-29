@@ -65,6 +65,16 @@ public class CharTest {
     }
 
     @Test
+    public void testCreateCharEnemy() throws Exception {
+        // ACT
+        Mob characterEnemy = CreatureFactory.createCharacterEnemy(character);
+
+        // ASSERT
+        assertNotNull(characterEnemy);
+//        character.fight();
+    }
+
+    @Test
     public void increaseExperience() throws IllegalAccessException {
         // ARRANGE
         CharEvent charEvent = TestRandomUtils.randomEnum(CharEvent.values());

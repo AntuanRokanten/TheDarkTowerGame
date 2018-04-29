@@ -66,6 +66,13 @@ public class GameMap implements Serializable {
     }
 
     /**
+     * @return current location.
+     */
+    public Location currentLocation() {
+        return location;
+    }
+
+    /**
      * @return title of the current location.
      */
     public String currentLocationTitle() {
@@ -79,7 +86,12 @@ public class GameMap implements Serializable {
      * @return true if character can move to the next locatin.
      */
     public boolean canMoveToNextLocation(Char character) {
-        return character.level() >= location.next().accessLevel();
+        Location next = location.next();
+        if (next == null) {
+            return false;
+        } else {
+            return character.level() >= next.accessLevel();
+        }
     }
 
 }

@@ -30,14 +30,19 @@ public class Char extends Creature implements Serializable {
     private final Gender gender;
 
     /**
-     * Character level. Initially character is of 0 level.
+     * Character level. Initially character is of 1 level.
      */
-    private int level = 0;
+    private int level = 1;
 
     /**
      * Experience value that should be reached in order to get next level.
      */
     private int experienceToNextLevel = 100;
+
+    /**
+     * Factor by which experience increased with each event.
+     */
+    private final int experienceIncreaseFactor = 100;
 
     /**
      * Current character experience.
@@ -59,7 +64,8 @@ public class Char extends Creature implements Serializable {
         if (experience == 0) {
             experience = (int) charEvent.experienceFactor();
         } else {
-            experience = calculateFeature(experienceToNextLevel, charEvent.experienceFactor());
+            int expLevelIncreaseFactor = experienceIncreaseFactor * level;
+            experience = experience + calculatePercentage(expLevelIncreaseFactor, charEvent.experienceFactor());
         }
 
         new ConsoleLine("Character experience increased to " + experience, FontColor.CYAN).println();
@@ -81,7 +87,7 @@ public class Char extends Creature implements Serializable {
         new ConsoleLine("Character is resting...", FontColor.GREEN).println();
         new ProgressBar(500).start();
 
-        int healthAfterRest = health + calculatePercentage(vitality, RandomUtils.integerInRange(20, 30));
+        int healthAfterRest = health + calculatePercentage(vitality, RandomUtils.integerInRange(30, 50));
         if (healthAfterRest > vitality) {
             healthAfterRest = vitality;
         }

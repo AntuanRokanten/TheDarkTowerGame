@@ -37,7 +37,7 @@ public class ExploreOption extends Option<Void> {
 
         Char mainCharacter = gameContext.getMainCharacter();
         if (gameContext.getGameMap().canMoveToNextLocation(mainCharacter)) {
-            new ConsoleLine("The character is ready to move closer to the destination!", FontColor.BLUE).println();
+            new ConsoleLine("The character is ready to move closer to the destination! Choose 'Move to the next location option'", FontColor.BLUE).println();
         }
 
         CharEvent charEvent;

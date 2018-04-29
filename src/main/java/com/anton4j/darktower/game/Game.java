@@ -63,10 +63,10 @@ public class Game {
 
         ConsoleLines graphicalMap = new ConsoleLines(mapConsoleLines);
 
-        Location theDarkTower = new Location("The Dark Tower", null, 3); // 8
-        Location discordia = new Location("Discordia", theDarkTower, 2); // 7
-        Location thunderclap = new Location("Thunderclap", discordia, 1); // 4
-        Location borderlands = new Location("Borderlands", thunderclap, 0); // 0
+        Location theDarkTower = new Location("The Dark Tower", null, 7);
+        Location discordia = new Location("Discordia", theDarkTower, 5);
+        Location thunderclap = new Location("Thunderclap", discordia, 3);
+        Location borderlands = new Location("Borderlands", thunderclap, 1);
         GameMap gameMap = new GameMap(graphicalMap, borderlands);
 
         GameContext gameContext = new GameContext();
