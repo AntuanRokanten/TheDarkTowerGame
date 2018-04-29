@@ -32,7 +32,7 @@ public class ExploreOption extends Option<Void> {
     }
 
     @Override
-    public OptionResult<Void> processOption() {
+    protected OptionResult<Void> processOptionForResult() {
         new ConsoleLine("You are exploring a current location...", FontColor.GREEN).println();
 
         Char mainCharacter = gameContext.getMainCharacter();

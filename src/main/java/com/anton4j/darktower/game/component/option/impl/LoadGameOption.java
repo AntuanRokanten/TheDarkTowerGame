@@ -32,7 +32,7 @@ public class LoadGameOption extends Option<GameContext> {
     }
 
     @Override
-    public OptionResult<GameContext> processOption() {
+    protected OptionResult<GameContext> processOptionForResult() {
         GamePreserver gamePreserver = GamePreserver.getInstance();
 
         List<Path> savesList = gamePreserver.listSaves();

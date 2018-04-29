@@ -24,7 +24,7 @@ public class NewGameOption extends Option<GameContext> {
     }
 
     @Override
-    public OptionResult<GameContext> processOption() {
+    protected OptionResult<GameContext> processOptionForResult() {
         new ConsoleLine("In order to join Ka-Tet and start journey to the Dark end-banner first create a character", FontColor.BLUE).println();
 
         CharRace charRace = new OptionsScene<>(new OptionsFromEnum<>(CharRace.values()).options(gameContext), new ConsoleLine("Choose race:"))

@@ -17,7 +17,7 @@ public class SaveOption extends Option<Void> {
     }
 
     @Override
-    public OptionResult<Void> processOption() {
+    protected OptionResult<Void> processOptionForResult() {
         GamePreserver.getInstance().save(gameContext);
         return OptionResult.success();
     }

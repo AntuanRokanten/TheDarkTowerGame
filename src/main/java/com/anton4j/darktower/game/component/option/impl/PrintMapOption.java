@@ -19,7 +19,7 @@ public class PrintMapOption extends Option<Void> {
     }
 
     @Override
-    public OptionResult<Void> processOption() {
+    protected OptionResult<Void> processOptionForResult() {
         GameMap gameMap = gameContext.getGameMap();
 
         new ConsoleLine("Character is currently at " + gameMap.currentLocationTitle() + " location", FontColor.YELLOW).println();

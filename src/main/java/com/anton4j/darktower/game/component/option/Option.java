@@ -1,5 +1,7 @@
 package com.anton4j.darktower.game.component.option;
 
+import com.anton4j.darktower.console.ConsoleLine;
+import com.anton4j.darktower.console.FontColor;
 import com.anton4j.darktower.game.GameContext;
 
 /**
@@ -31,11 +33,20 @@ public abstract class Option<T> {
         return displayText;
     }
 
+    public final OptionResult<T> processOption() {
+        try {
+            return processOptionForResult();
+        } catch (Exception e) {
+            new ConsoleLine("Error occurred while processing option.", FontColor.RED).println();
+            return OptionResult.error();
+        }
+    }
+
     /**
      * Processes this option.
      *
      * @return result of the option processing.
      */
-    public abstract OptionResult<T> processOption();
+    protected abstract OptionResult<T> processOptionForResult();
 
 }

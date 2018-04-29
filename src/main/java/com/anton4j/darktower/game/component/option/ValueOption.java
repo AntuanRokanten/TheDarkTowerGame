@@ -20,7 +20,7 @@ public class ValueOption<T> extends Option<T> {
     }
 
     @Override
-    public OptionResult<T> processOption() {
+    public OptionResult<T> processOptionForResult() {
         return OptionResult.success(value);
     }
 

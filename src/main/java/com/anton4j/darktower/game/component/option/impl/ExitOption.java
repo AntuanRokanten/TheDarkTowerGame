@@ -19,7 +19,7 @@ public class ExitOption extends Option<Void> {
     }
 
     @Override
-    public OptionResult<Void> processOption() {
+    protected OptionResult<Void> processOptionForResult() {
         YesNoScene.Response response = new YesNoScene(new ConsoleLine("Save before exit?", FontColor.GREEN)).processScene();
 
         if (response.isPositive()) {

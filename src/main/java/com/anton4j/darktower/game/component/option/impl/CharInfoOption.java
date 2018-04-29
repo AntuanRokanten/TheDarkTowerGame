@@ -19,7 +19,7 @@ public class CharInfoOption extends Option<Void> {
     }
 
     @Override
-    public OptionResult<Void> processOption() {
+    protected OptionResult<Void> processOptionForResult() {
         Char mainCharacter = gameContext.getMainCharacter();
         new ConsoleLine(mainCharacter.charInfo(), FontColor.WHITE).println();
 

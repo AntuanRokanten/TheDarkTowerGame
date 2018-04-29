@@ -19,7 +19,7 @@ public class MoveOption extends Option<Void> {
     }
 
     @Override
-    public OptionResult<Void> processOption() {
+    protected OptionResult<Void> processOptionForResult() {
         GameMap gameMap = gameContext.getGameMap();
 
         if(gameMap.canMoveToNextLocation(gameContext.getMainCharacter())) {

@@ -16,7 +16,7 @@ public class TakeRestOption extends Option<Void> {
     }
 
     @Override
-    public OptionResult<Void> processOption() {
+    protected OptionResult<Void> processOptionForResult() {
         gameContext.getMainCharacter().takeRest();
 
         return OptionResult.success();
