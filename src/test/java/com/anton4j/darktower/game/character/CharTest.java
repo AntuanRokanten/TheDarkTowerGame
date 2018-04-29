@@ -7,6 +7,7 @@ import org.junit.Test;
 import java.util.UUID;
 
 import static com.anton4j.darktower.util.CalculateUtils.calculateFeature;
+import static com.anton4j.darktower.util.CalculateUtils.calculatePercentage;
 import static org.apache.commons.lang3.reflect.FieldUtils.readField;
 import static org.junit.Assert.*;
 
@@ -52,7 +53,7 @@ public class CharTest {
         assertEquals(gender, actualGender);
 
         Integer actualLevel = (Integer) readField(character, "level", true);
-        Integer expectedInitialLevel = 0;
+        Integer expectedInitialLevel = 1;
         assertEquals(expectedInitialLevel, actualLevel);
 
         Integer actualExp = (Integer) readField(character, "experience", true);
@@ -100,8 +101,12 @@ public class CharTest {
         character.increaseExperience(charEvent);
 
         // ASSERT
+        int experienceIncreaseFactor = (Integer) readField(character, "experienceIncreaseFactor", true);
+        assertEquals(100, experienceIncreaseFactor);
+
+        Integer expectedExp = actualExp + calculatePercentage(experienceIncreaseFactor, charEvent.experienceFactor());
         actualExp = (Integer) readField(character, "experience", true);
-        assertEquals((Integer) calculateFeature(expToNextLevel, charEvent.experienceFactor()), actualExp);
+        assertEquals(expectedExp, actualExp);
 
         if (actualExp > expToNextLevel) {
             int actualLevel = character.level();

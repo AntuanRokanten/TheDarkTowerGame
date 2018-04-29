@@ -2,6 +2,7 @@ package com.anton4j.darktower.console;
 
 import java.io.Serializable;
 import java.util.List;
+import java.util.Objects;
 
 /**
  * Wrapper for collection of console lines.
@@ -36,4 +37,17 @@ public class ConsoleLines implements Serializable {
         consoleLines.forEach(ConsoleLine::println);
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        ConsoleLines that = (ConsoleLines) o;
+        return Objects.equals(consoleLines, that.consoleLines);
+    }
+
+    @Override
+    public int hashCode() {
+
+        return Objects.hash(consoleLines);
+    }
 }

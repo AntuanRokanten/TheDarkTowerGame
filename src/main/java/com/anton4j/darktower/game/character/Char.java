@@ -8,6 +8,7 @@ import com.anton4j.darktower.util.CalculateUtils;
 import com.anton4j.darktower.util.RandomUtils;
 
 import java.io.Serializable;
+import java.util.Objects;
 
 import static com.anton4j.darktower.util.CalculateUtils.calculateFeature;
 import static com.anton4j.darktower.util.CalculateUtils.calculatePercentage;
@@ -197,4 +198,21 @@ public class Char extends Creature implements Serializable {
         }
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Char aChar = (Char) o;
+        return level == aChar.level &&
+              experienceToNextLevel == aChar.experienceToNextLevel &&
+              experienceIncreaseFactor == aChar.experienceIncreaseFactor &&
+              experience == aChar.experience &&
+              Objects.equals(name, aChar.name) &&
+              gender == aChar.gender;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(name, gender, level, experienceToNextLevel, experienceIncreaseFactor, experience);
+    }
 }

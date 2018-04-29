@@ -4,6 +4,7 @@ import com.anton4j.darktower.game.character.Char;
 import com.anton4j.darktower.game.location.GameMap;
 
 import java.io.Serializable;
+import java.util.Objects;
 
 /**
  * Context of the whole game.
@@ -69,4 +70,18 @@ public class GameContext implements Serializable {
         return gameMap != null && mainCharacter != null && gameStats != null;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        GameContext that = (GameContext) o;
+        return Objects.equals(gameMap, that.gameMap) &&
+              Objects.equals(gameStats, that.gameStats) &&
+              Objects.equals(mainCharacter, that.mainCharacter);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(gameMap, gameStats, mainCharacter);
+    }
 }

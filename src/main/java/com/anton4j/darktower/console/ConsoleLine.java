@@ -1,6 +1,7 @@
 package com.anton4j.darktower.console;
 
 import java.io.Serializable;
+import java.util.Objects;
 
 /**
  * Line that can be printed in console.
@@ -79,4 +80,19 @@ public class ConsoleLine implements Serializable {
         return printValue.toString();
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        ConsoleLine that = (ConsoleLine) o;
+        return Objects.equals(value, that.value) &&
+              fontColor == that.fontColor &&
+              backgroundColor == that.backgroundColor;
+    }
+
+    @Override
+    public int hashCode() {
+
+        return Objects.hash(value, fontColor, backgroundColor);
+    }
 }

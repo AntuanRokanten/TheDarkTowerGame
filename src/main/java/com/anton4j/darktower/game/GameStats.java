@@ -1,6 +1,7 @@
 package com.anton4j.darktower.game;
 
 import java.io.Serializable;
+import java.util.Objects;
 
 /**
  * Game statistics.
@@ -52,4 +53,19 @@ public class GameStats implements Serializable {
               ", Fight loses = " + fightLoses;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        GameStats gameStats = (GameStats) o;
+        return areasExplored == gameStats.areasExplored &&
+              fightWins == gameStats.fightWins &&
+              fightLoses == gameStats.fightLoses;
+    }
+
+    @Override
+    public int hashCode() {
+
+        return Objects.hash(areasExplored, fightWins, fightLoses);
+    }
 }

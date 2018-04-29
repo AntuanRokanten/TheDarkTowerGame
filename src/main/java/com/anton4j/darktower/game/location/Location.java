@@ -1,6 +1,7 @@
 package com.anton4j.darktower.game.location;
 
 import java.io.Serializable;
+import java.util.Objects;
 
 /**
  * Location of a map.
@@ -51,4 +52,19 @@ public class Location implements Serializable {
         return accessLevel;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Location location = (Location) o;
+        return accessLevel == location.accessLevel &&
+              Objects.equals(title, location.title) &&
+              Objects.equals(next, location.next);
+    }
+
+    @Override
+    public int hashCode() {
+
+        return Objects.hash(title, next, accessLevel);
+    }
 }
