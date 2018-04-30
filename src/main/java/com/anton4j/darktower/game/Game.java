@@ -41,6 +41,13 @@ public class Game {
      */
     private final GameContext gameContext;
 
+    public Game(IntroOutro intro, IntroOutro outro, GameStage initialStage, GameContext gameContext) {
+        this.intro = intro;
+        this.outro = outro;
+        this.initialStage = initialStage;
+        this.gameContext = gameContext;
+    }
+
     public Game() {
         this.intro = initIntro();
         this.outro = initOutro();
@@ -102,9 +109,6 @@ public class Game {
      * Starts game.
      */
     public void start() {
-        new ConsoleLine("This game contains sound. Please make sure your speakers are not too loud. Press enter to continue", FontColor.WHITE, BackgroundColor.CYAN).println();
-        ConsoleUtils.readLine();
-
         intro.play();
 
         GameStage stage = initialStage;

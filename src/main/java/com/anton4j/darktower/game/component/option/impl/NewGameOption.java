@@ -36,8 +36,6 @@ public class NewGameOption extends Option<GameContext> {
         String name = new InputScene(new ConsoleLine("Enter name:"))
               .processScene();
 
-        new ConsoleLine("Great! Are you ready to defeat all the enemies and reach the Dark Tower? Let's start.", FontColor.BLUE).println();
-
         Char character = new Char.CharBuilder()
               .withGender(gender)
               .withName(name)
@@ -45,6 +43,8 @@ public class NewGameOption extends Option<GameContext> {
               .build();
 
         gameContext.setMainCharacter(character);
+
+        new ConsoleLine("Great! Are you ready to defeat all the enemies and reach the Dark Tower? Let's start.", FontColor.BLUE).println();
         return OptionResult.success();
     }
 

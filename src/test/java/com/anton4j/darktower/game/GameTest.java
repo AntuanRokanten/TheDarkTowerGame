@@ -1,16 +1,57 @@
-//package com.anton4j.darktower.game;
-//
-//import org.junit.Test;
-//
-//import static org.junit.Assert.*;
-//
-///**
-// * @author ant
-// */
-//public class GameTest {
-//
-//    @Test
-//    public void start() {
-//        new Game().start();
-//    }
-//}
+package com.anton4j.darktower.game;
+
+import com.anton4j.darktower.OutStreamsInterceprtorTest;
+import com.anton4j.darktower.game.component.stage.GameStage;
+import com.anton4j.darktower.util.TestConsoleUtils;
+import org.junit.Test;
+import org.mockito.Mockito;
+
+import java.util.UUID;
+
+import static org.junit.Assert.assertTrue;
+
+/**
+ * @author ant
+ */
+public class GameTest extends OutStreamsInterceprtorTest {
+
+    @Test
+    public void start() {
+        // ARRANGE
+        IntroOutro intro = Mockito.mock(IntroOutro.class);
+        IntroOutro outro = Mockito.mock(IntroOutro.class);
+        GameStage gameStage = Mockito.mock(GameStage.class);
+        GameStats gameStats = Mockito.mock(GameStats.class);
+        GameContext gameContext = Mockito.mock(GameContext.class);
+
+        Mockito.when(gameContext.getGameStats()).thenReturn(gameStats);
+
+        String statsString = UUID.randomUUID().toString();
+        Mockito.when(gameStats.toString()).thenReturn(statsString);
+
+        Mockito.when(gameStage.stageCompleted()).thenReturn(false, true);
+
+        Game game = new Game(intro, outro, gameStage, gameContext);
+
+        // ACT
+        TestConsoleUtils.enterValue("2");
+        game.start();
+
+        // ASSERT
+        Mockito.verify(gameContext).getGameStats();
+        Mockito.verify(intro).play();
+        Mockito.verify(outro).play();
+        Mockito.verify(gameStage).processScene(gameContext);
+        Mockito.verify(gameStage).nextStage();
+        Mockito.verify(gameStage, Mockito.times(2)).stageCompleted();
+        Mockito.verifyNoMoreInteractions(intro, outro, gameStage, gameContext);
+
+        String consoleOutput = outContent.toString();
+        assertTrue(consoleOutput.contains(statsString));
+        assertTrue(consoleOutput.contains("Start game again?"));
+        assertTrue(consoleOutput.contains("1 - Yes"));
+        assertTrue(consoleOutput.contains("2 - No"));
+        assertTrue(consoleOutput.contains("See you soon!"));
+    }
+
+}
