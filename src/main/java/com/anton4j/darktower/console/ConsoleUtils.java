@@ -16,8 +16,11 @@ public class ConsoleUtils {
      */
     public static String readLine() {
         Scanner scanner = new Scanner(System.in);
+        while (!scanner.hasNextLine()) {
+            sleep(100);
+        }
 //        if (scanner.hasNextLine()) {
-            return scanner.nextLine().trim();
+        return scanner.nextLine().trim();
 //        } else {
 //            return "";
 //        }
