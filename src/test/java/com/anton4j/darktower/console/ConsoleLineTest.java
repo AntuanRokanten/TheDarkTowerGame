@@ -11,9 +11,9 @@ import static org.junit.Assert.assertEquals;
 /**
  * @author ant
  */
-@Ignore
 public class ConsoleLineTest extends OutStreamsInterceprtorTest {
 
+    @Ignore("todo fix this test")
     @Test
     public void println() {
         // ARRANGE

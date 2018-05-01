@@ -4,22 +4,25 @@ import com.anton4j.darktower.game.GameContext;
 import com.anton4j.darktower.game.character.Char;
 import com.anton4j.darktower.game.character.CharRace;
 import com.anton4j.darktower.game.character.Gender;
-import com.anton4j.darktower.util.TestConsoleUtils;
 import org.apache.commons.lang3.reflect.FieldUtils;
-import org.junit.Ignore;
+import org.junit.Rule;
 import org.junit.Test;
+import org.junit.contrib.java.lang.system.TextFromStandardInputStream;
 
 import java.util.Random;
 import java.util.UUID;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
+import static org.junit.contrib.java.lang.system.TextFromStandardInputStream.emptyStandardInputStream;
 
 /**
  * @author ant
  */
-@Ignore("not completed yet")
 public class NewGameOptionTest {
+
+    @Rule
+    public final TextFromStandardInputStream systemInMock = emptyStandardInputStream();
 
     @Test
     public void processOption() throws IllegalAccessException, InterruptedException {
@@ -35,26 +38,10 @@ public class NewGameOptionTest {
         String name = UUID.randomUUID().toString();
 
         // ACT
-        Thread consoleInputThread = new Thread(() -> {
-            try {
-                System.err.println("ENTERING");
-                TestConsoleUtils.enterValue(raceIndex);
-                Thread.sleep(100);
-                TestConsoleUtils.enterValue(genderIndex);
-                Thread.sleep(100);
-                TestConsoleUtils.enterValue(name);
-            } catch (Exception ignored) {
-            }
-        });
+        systemInMock.provideLines(raceIndex + "", genderIndex + "", name);
+        newGameOption.processOption();
 
-        Thread processOptionsThread = new Thread(newGameOption::processOption);
-
-        processOptionsThread.start();
-        consoleInputThread.start();
-
-        processOptionsThread.join(5000);
-
-        //assert
+        //ASSERT
         Char mainCharacter = gameContext.getMainCharacter();
 
         assertNotNull(mainCharacter);
