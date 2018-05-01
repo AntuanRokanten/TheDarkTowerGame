@@ -27,7 +27,7 @@ public class ExitOption extends Option<Void> {
         }
 
         new ConsoleLine("See you soon!", FontColor.WHITE).println();
-        System.exit(1);
+        System.exit(0);
 
         return OptionResult.success();
     }

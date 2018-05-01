@@ -2,6 +2,7 @@ package com.anton4j.darktower.game.component.option.impl;
 
 import com.anton4j.darktower.console.ConsoleLine;
 import com.anton4j.darktower.game.GameContext;
+import com.anton4j.darktower.game.character.Char;
 import com.anton4j.darktower.game.component.option.Option;
 import com.anton4j.darktower.game.component.option.OptionResult;
 import com.anton4j.darktower.game.location.GameMap;
@@ -22,8 +23,9 @@ public class MoveOption extends Option<Void> {
     protected OptionResult<Void> processOptionForResult() {
         GameMap gameMap = gameContext.getGameMap();
 
-        if(gameMap.canMoveToNextLocation(gameContext.getMainCharacter())) {
-            gameMap.moveToNextLocation(gameContext.getMainCharacter());
+        Char mainCharacter = gameContext.getMainCharacter();
+        if(gameMap.canMoveToNextLocation(mainCharacter)) {
+            gameMap.moveToNextLocation(mainCharacter);
             gameContext.getGameStats().areaExplored();
         } else {
             Location nextLocation = gameMap.currentLocation().next();
