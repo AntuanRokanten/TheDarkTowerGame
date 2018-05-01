@@ -1,0 +1,1 @@
+web: java -jar target/dark-tower-0.1.jar
