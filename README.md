@@ -58,8 +58,8 @@ For details on configuration, please refer to [this guide.](https://help.github.
 If text is not colored, please try to use another shell for executing _.jar_.
 
 Tested in:
-* _Ubuntu Terminal_: works fine;
-* _Windows PowerShell_: colors are not displayed.
+- _Ubuntu Terminal_: works fine;
+- _Windows PowerShell_: colors are not displayed.
 
 ######TBD
 In order to eliminate issues with line endings and text color in console, _.jar_ can be delivered in a docker container in future releases.
