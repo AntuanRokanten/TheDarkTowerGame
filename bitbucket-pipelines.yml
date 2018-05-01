@@ -1,6 +1,8 @@
 image: maven:3.3.9
 
 pipelines:
+  clone:
+    depth: full
   default:
     - step:
         caches:
