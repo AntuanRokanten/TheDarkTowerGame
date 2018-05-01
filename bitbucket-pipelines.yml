@@ -7,3 +7,5 @@ pipelines:
           - maven
         script:
           - mvn -B verify # -B batch mode makes Maven less verbose
+        artifacts:
+          - target/**
