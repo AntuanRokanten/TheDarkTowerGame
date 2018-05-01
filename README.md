@@ -53,3 +53,9 @@ Hence the tests may fail because of it as your operating system can use differen
 In this case, please make sure you configured `git` to checkout source code with _LF_ ending.
    
 For details on configuration, please refer to [this guide.](https://help.github.com/articles/dealing-with-line-endings/#platform-windows)
+
+#####Note
+If text is not colored, please try to use another shell for executing _.jar_.
+
+######TBD
+In order to eliminate issues with line endings and text color in console, _.jar_ can be delivered in a docker container in future releases.

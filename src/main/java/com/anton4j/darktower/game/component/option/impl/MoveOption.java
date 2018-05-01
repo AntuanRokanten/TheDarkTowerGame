@@ -1,6 +1,7 @@
 package com.anton4j.darktower.game.component.option.impl;
 
 import com.anton4j.darktower.console.ConsoleLine;
+import com.anton4j.darktower.console.FontColor;
 import com.anton4j.darktower.game.GameContext;
 import com.anton4j.darktower.game.character.Char;
 import com.anton4j.darktower.game.component.option.Option;
@@ -29,7 +30,7 @@ public class MoveOption extends Option<Void> {
             gameContext.getGameStats().areaExplored();
         } else {
             Location nextLocation = gameMap.currentLocation().next();
-            new ConsoleLine("Character cannot move to the next location. Needed level is " + nextLocation.accessLevel()).println();
+            new ConsoleLine("Character cannot move to the next location. Needed level is " + nextLocation.accessLevel(), FontColor.RED).println();
         }
 
         return OptionResult.success();
