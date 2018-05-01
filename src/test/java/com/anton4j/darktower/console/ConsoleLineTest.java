@@ -1,6 +1,7 @@
 package com.anton4j.darktower.console;
 
 import com.anton4j.darktower.OutStreamsInterceprtorTest;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import java.util.UUID;
@@ -10,6 +11,7 @@ import static org.junit.Assert.assertEquals;
 /**
  * @author ant
  */
+@Ignore
 public class ConsoleLineTest extends OutStreamsInterceprtorTest {
 
     @Test

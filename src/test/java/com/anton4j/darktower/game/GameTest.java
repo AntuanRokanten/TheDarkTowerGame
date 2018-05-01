@@ -3,11 +3,13 @@ package com.anton4j.darktower.game;
 import com.anton4j.darktower.OutStreamsInterceprtorTest;
 import com.anton4j.darktower.game.component.stage.GameStage;
 import com.anton4j.darktower.util.TestConsoleUtils;
+import org.apache.commons.lang3.reflect.FieldUtils;
 import org.junit.Test;
 import org.mockito.Mockito;
 
 import java.util.UUID;
 
+import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
 /**
@@ -52,6 +54,23 @@ public class GameTest extends OutStreamsInterceprtorTest {
         assertTrue(consoleOutput.contains("1 - Yes"));
         assertTrue(consoleOutput.contains("2 - No"));
         assertTrue(consoleOutput.contains("See you soon!"));
+    }
+
+    @Test
+    public void defaultInit() throws IllegalAccessException {
+        // ACT
+        Game game = new Game();
+
+        // ASSERT
+        IntroOutro intro = (IntroOutro) FieldUtils.readField(game, "intro", true);
+        IntroOutro outro = (IntroOutro) FieldUtils.readField(game, "outro", true);
+        GameStage initialStage = (GameStage) FieldUtils.readField(game, "initialStage", true);
+        GameContext gameContext = (GameContext) FieldUtils.readField(game, "gameContext", true);
+
+        assertNotNull(intro);
+        assertNotNull(outro);
+        assertNotNull(initialStage);
+        assertNotNull(gameContext);
     }
 
 }

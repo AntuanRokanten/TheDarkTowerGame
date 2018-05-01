@@ -14,6 +14,7 @@ import java.util.List;
 import java.util.UUID;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.verifyNoMoreInteractions;
 
 /**
@@ -38,10 +39,10 @@ public class OptionsSceneTest extends OutStreamsInterceprtorTest {
 
         // ASSERT
         String actualOut = outContent.toString();
-        assertEquals(sceneTitle + "\u001B[0m\n" +
-              "1 - Human\u001B[0m\n" +
-              "2 - Taheen\u001B[0m\n" +
-              "3 - Can toi\u001B[0m\n", actualOut);
+        assertTrue(actualOut.contains(sceneTitle));
+        assertTrue(actualOut.contains("1 - Human"));
+        assertTrue(actualOut.contains("2 - Taheen"));
+        assertTrue(actualOut.contains("3 - Can toi"));
 
         assertEquals(CharRace.values()[options.size() - 2], sceneResult);
 

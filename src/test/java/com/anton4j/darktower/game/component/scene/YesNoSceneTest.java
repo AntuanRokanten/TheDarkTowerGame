@@ -10,6 +10,7 @@ import org.mockito.Mockito;
 import java.util.UUID;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.verifyNoMoreInteractions;
 
 /**
@@ -31,9 +32,9 @@ public class YesNoSceneTest extends OutStreamsInterceprtorTest {
 
         // ASSERT
         String actualOut = outContent.toString();
-        assertEquals(sceneTitle + "\u001B[0m\n" +
-              "1 - Yes\u001B[0m\n" +
-              "2 - No\u001B[0m\n", actualOut);
+        assertTrue(actualOut.contains(sceneTitle));
+        assertTrue(actualOut.contains("1 - Yes"));
+        assertTrue(actualOut.contains("2 - No"));
 
         assertEquals(YesNoScene.Response.YES, response);
 
@@ -54,9 +55,9 @@ public class YesNoSceneTest extends OutStreamsInterceprtorTest {
 
         // ASSERT
         String actualOut = outContent.toString();
-        assertEquals(sceneTitle + "\u001B[0m\n" +
-              "1 - Yes\u001B[0m\n" +
-              "2 - No\u001B[0m\n", actualOut);
+        assertTrue(actualOut.contains(sceneTitle));
+        assertTrue(actualOut.contains("1 - Yes"));
+        assertTrue(actualOut.contains("2 - No"));
 
         assertEquals(YesNoScene.Response.NO, response);
 

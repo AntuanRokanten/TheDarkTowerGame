@@ -8,6 +8,7 @@ import org.junit.Test;
 import java.util.UUID;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 /**
  * @author ant
@@ -28,7 +29,7 @@ public class InputSceneTest extends OutStreamsInterceprtorTest {
 
         // ASSERT
         assertEquals(sceneEnteredValue, sceneResult);
-        assertEquals(sceneTitle + "\u001B[0m\n", outContent.toString());
+        assertTrue(outContent.toString().contains(sceneTitle));
     }
 
 }
