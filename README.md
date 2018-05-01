@@ -16,6 +16,8 @@ You have the option to run away. However, if the enemy is fast and strong enough
  
 If the character is exhausted, you can take a rest and restore the health. 
   
+Expected game time - _10 min_.  
+  
 ## Creating a new character
 While creating a character a player is able to pick its race, gender and set a name. 
 

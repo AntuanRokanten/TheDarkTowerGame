@@ -25,7 +25,7 @@ public class MoveOption extends Option<Void> {
         GameMap gameMap = gameContext.getGameMap();
 
         Char mainCharacter = gameContext.getMainCharacter();
-        if(gameMap.canMoveToNextLocation(mainCharacter)) {
+        if (gameMap.canMoveToNextLocation(mainCharacter)) {
             gameMap.moveToNextLocation(mainCharacter);
             gameContext.getGameStats().areaExplored();
         } else {

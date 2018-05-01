@@ -29,22 +29,18 @@ public class Char extends Creature implements Serializable {
      * Character gender.
      */
     private final Gender gender;
-
-    /**
-     * Character level. Initially character is of 1 level.
-     */
-    private int level = 1;
-
-    /**
-     * Experience value that should be reached in order to get next level.
-     */
-    private int experienceToNextLevel = 100;
-
     /**
      * Factor by which experience increased with each event.
      */
     private final int experienceIncreaseFactor = 100;
-
+    /**
+     * Character level. Initially character is of 1 level.
+     */
+    private int level = 1;
+    /**
+     * Experience value that should be reached in order to get next level.
+     */
+    private int experienceToNextLevel = 100;
     /**
      * Current character experience.
      */
@@ -86,7 +82,7 @@ public class Char extends Creature implements Serializable {
         }
 
         new ConsoleLine("Character is resting...", FontColor.GREEN).println();
-        new ProgressBar(500).start();
+        new ProgressBar(300).start();
 
         int healthAfterRest = health + calculatePercentage(vitality, RandomUtils.integerInRange(30, 50));
         if (healthAfterRest > vitality) {
@@ -133,7 +129,7 @@ public class Char extends Creature implements Serializable {
      * @return experience needed to get next level.
      */
     private int calculateExperienceToNextLevel() {
-        return experienceToNextLevel * 3;
+        return experienceToNextLevel * 2;
     }
 
     /**
@@ -141,6 +137,24 @@ public class Char extends Creature implements Serializable {
      */
     public int level() {
         return level;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Char aChar = (Char) o;
+        return level == aChar.level &&
+              experienceToNextLevel == aChar.experienceToNextLevel &&
+              experienceIncreaseFactor == aChar.experienceIncreaseFactor &&
+              experience == aChar.experience &&
+              Objects.equals(name, aChar.name) &&
+              gender == aChar.gender;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(name, gender, level, experienceToNextLevel, experienceIncreaseFactor, experience);
     }
 
     /**
@@ -196,23 +210,5 @@ public class Char extends Creature implements Serializable {
 
             return new Char(gender, name, charRace, vitality, strength, defence, speed);
         }
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Char aChar = (Char) o;
-        return level == aChar.level &&
-              experienceToNextLevel == aChar.experienceToNextLevel &&
-              experienceIncreaseFactor == aChar.experienceIncreaseFactor &&
-              experience == aChar.experience &&
-              Objects.equals(name, aChar.name) &&
-              gender == aChar.gender;
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(name, gender, level, experienceToNextLevel, experienceIncreaseFactor, experience);
     }
 }

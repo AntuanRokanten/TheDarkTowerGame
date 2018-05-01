@@ -8,17 +8,9 @@ package com.anton4j.darktower.game.component.option;
 public class OptionResult<T> {
 
     /**
-     * Option result status.
-     */
-    public enum Status {
-        SUCCESS, ERROR
-    }
-
-    /**
      * Result status.
      */
     private final Status status;
-
     /**
      * Object produced by the option.
      */
@@ -71,6 +63,13 @@ public class OptionResult<T> {
      */
     public T getResultObj() {
         return resultObj;
+    }
+
+    /**
+     * Option result status.
+     */
+    public enum Status {
+        SUCCESS, ERROR
     }
 
 }

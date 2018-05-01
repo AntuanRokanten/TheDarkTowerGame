@@ -2,7 +2,10 @@ package com.anton4j.darktower.game;
 
 import com.anton4j.darktower.audio.Audio;
 import com.anton4j.darktower.audio.AudioFactory;
-import com.anton4j.darktower.console.*;
+import com.anton4j.darktower.console.BackgroundColor;
+import com.anton4j.darktower.console.ConsoleLine;
+import com.anton4j.darktower.console.ConsoleLines;
+import com.anton4j.darktower.console.FontColor;
 import com.anton4j.darktower.game.component.scene.YesNoScene;
 import com.anton4j.darktower.game.component.stage.GameStage;
 import com.anton4j.darktower.game.component.stage.impl.StartGameStage;

@@ -85,7 +85,7 @@ public class ExploreOption extends Option<Void> {
             new ConsoleLine("Character won the fight!", FontColor.CYAN).println();
             charEvent = FIGHT_VICTORY;
         } else {
-            new ConsoleLine("Character lost the encounter. Take a rest in order to heal.", FontColor.RED).println();
+            new ConsoleLine("Character lost the fight. Take a rest in order to heal.", FontColor.RED).println();
             charEvent = FIGHT_DEFEAT;
         }
 

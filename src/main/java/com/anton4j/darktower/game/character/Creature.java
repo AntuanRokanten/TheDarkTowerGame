@@ -182,7 +182,7 @@ public abstract class Creature implements Serializable {
             defends = attacks;
             attacks = temp;
 
-            sleep(1000);
+            sleep(600);
         }
 
         EncounterOutcome fightOutcome;

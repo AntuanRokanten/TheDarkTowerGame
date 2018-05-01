@@ -178,7 +178,7 @@ public class ExploreOptionTest extends OutStreamsInterceprtorTest {
         assertTrue(consoleOutput.contains("Your stats:"));
         assertTrue(consoleOutput.contains("1 - Fight"));
         assertTrue(consoleOutput.contains("2 - Run away"));
-        assertTrue(consoleOutput.contains("Character lost the encounter. Take a rest in order to heal"));
+        assertTrue(consoleOutput.contains("Character lost the fight. Take a rest in order to heal"));
     }
 
     @Test
