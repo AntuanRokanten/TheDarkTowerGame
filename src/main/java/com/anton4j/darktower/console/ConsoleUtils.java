@@ -16,11 +16,11 @@ public class ConsoleUtils {
      */
     public static String readLine() {
         Scanner scanner = new Scanner(System.in);
-        if (scanner.hasNextLine()) {
+//        if (scanner.hasNextLine()) {
             return scanner.nextLine().trim();
-        } else {
-            return "";
-        }
+//        } else {
+//            return "";
+//        }
     }
 
     /**
