@@ -43,13 +43,11 @@ public class NewGameOptionTest {
                 TestConsoleUtils.enterValue(genderIndex);
                 Thread.sleep(100);
                 TestConsoleUtils.enterValue(name);
-            } catch (Exception e) {
+            } catch (Exception ignored) {
             }
         });
 
-        Thread processOptionsThread = new Thread(() -> {
-           newGameOption.processOption();
-        });
+        Thread processOptionsThread = new Thread(newGameOption::processOption);
 
         processOptionsThread.start();
         consoleInputThread.start();

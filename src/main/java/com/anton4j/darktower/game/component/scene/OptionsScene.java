@@ -48,6 +48,7 @@ public class OptionsScene<T> extends Scene<T> {
 
     private static boolean isNumeric(String str) {
         try {
+            //noinspection ResultOfMethodCallIgnored
             Integer.parseInt(str);
         } catch (NumberFormatException nfe) {
             return false;

@@ -83,7 +83,7 @@ public class GameMap implements Serializable {
      * Checks if the character can move to the next location.
      *
      * @param character character for checking.
-     * @return true if character can move to the next locatin.
+     * @return true if character can move to the next location.
      */
     public boolean canMoveToNextLocation(Char character) {
         Location next = location.next();
