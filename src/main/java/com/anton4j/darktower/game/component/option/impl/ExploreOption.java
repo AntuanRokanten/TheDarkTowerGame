@@ -16,7 +16,7 @@ import java.util.List;
 
 import static com.anton4j.darktower.game.character.CharEvent.*;
 import static com.anton4j.darktower.game.character.encounter.EncounterOption.FIGHT;
-import static com.anton4j.darktower.game.character.encounter.EncounterOption.RUN_AWAY;
+import static com.anton4j.darktower.game.character.encounter.EncounterOption.THESE_ARE_NOT_THE_DROIDS_YOU_ARE_LOOKING_FOR;
 import static com.anton4j.darktower.game.character.encounter.EncounterOutcome.SUCCESS;
 import static com.anton4j.darktower.util.RandomUtils.randomBoolean;
 
@@ -59,8 +59,8 @@ public class ExploreOption extends Option<Void> {
 
             if (encounterOption == FIGHT) {
                 charEvent = processFight(mainCharacter, enemy);
-            } else if (encounterOption == RUN_AWAY) {
-                EncounterOutcome runOutcome = mainCharacter.runAway(enemy);
+            } else if (encounterOption == THESE_ARE_NOT_THE_DROIDS_YOU_ARE_LOOKING_FOR) {
+                EncounterOutcome runOutcome = mainCharacter.deceit(enemy);
                 if (runOutcome == SUCCESS) {
                     charEvent = RUN_SUCCESS;
                 } else {
@@ -82,10 +82,10 @@ public class ExploreOption extends Option<Void> {
 
         CharEvent charEvent;
         if (fightOutcome == SUCCESS) {
-            new ConsoleLine("Character won the fight!", FontColor.CYAN).println();
+            new ConsoleLine("You won the fight!", FontColor.CYAN).println();
             charEvent = FIGHT_VICTORY;
         } else {
-            new ConsoleLine("Character lost the fight. Take a rest in order to heal.", FontColor.RED).println();
+            new ConsoleLine("You lost the fight. Take a rest in order to heal.", FontColor.RED).println();
             charEvent = FIGHT_DEFEAT;
         }
 

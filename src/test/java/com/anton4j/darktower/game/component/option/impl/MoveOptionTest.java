@@ -87,7 +87,7 @@ public class MoveOptionTest extends OutStreamsInterceprtorTest {
       Mockito.verifyNoMoreInteractions(context, character, gameMap, gameStats, currentLocation, nextLocation);
 
       String consoleOutput = outContent.toString();
-      assertTrue(consoleOutput.contains("Character cannot move to the next location. Needed level is " + accessLevel));
+      assertTrue(consoleOutput.contains("You cannot move to the next location. Needed level is " + accessLevel));
    }
 
 }

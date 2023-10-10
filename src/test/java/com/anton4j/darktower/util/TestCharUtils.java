@@ -12,13 +12,13 @@ import java.util.UUID;
 public class TestCharUtils {
 
     public static Char randomChar() {
-        CharRace charRace = TestRandomUtils.randomEnum(CharRace.values());
+        CharRace charRole = TestRandomUtils.randomEnum(CharRace.values());
         Gender gender = TestRandomUtils.randomEnum(Gender.values());
         String name = UUID.randomUUID().toString();
 
         return new Char.CharBuilder()
               .withGender(gender)
-              .withRace(charRace)
+              .withRace(charRole)
               .withName(name)
               .build();
     }

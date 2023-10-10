@@ -39,7 +39,7 @@ public class PrintMapOptionTest extends OutStreamsInterceprtorTest {
         Mockito.verify(map).currentLocationTitle();
         Mockito.verifyNoMoreInteractions(context, map);
 
-        assertTrue(outContent.toString().contains("Character is currently at " + locationTitle + " location"));
+        assertTrue(outContent.toString().contains("You is currently at " + locationTitle + " location"));
     }
 
 }

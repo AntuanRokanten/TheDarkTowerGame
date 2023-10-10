@@ -40,9 +40,8 @@ public class OptionsSceneTest extends OutStreamsInterceprtorTest {
         // ASSERT
         String actualOut = outContent.toString();
         assertTrue(actualOut.contains(sceneTitle));
-        assertTrue(actualOut.contains("1 - Human"));
-        assertTrue(actualOut.contains("2 - Taheen"));
-        assertTrue(actualOut.contains("3 - Can toi"));
+        assertTrue(actualOut.contains("1 - Jedi"));
+        assertTrue(actualOut.contains("2 - Human"));
 
         assertEquals(CharRace.values()[options.size() - 2], sceneResult);
 

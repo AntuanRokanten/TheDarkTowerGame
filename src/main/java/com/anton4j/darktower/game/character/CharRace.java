@@ -1,35 +1,34 @@
 package com.anton4j.darktower.game.character;
 
 /**
- * Race of the {@link Char} character.
+ * Role of the {@link Char} character.
  *
  * @author ant
  */
 public enum CharRace implements Race {
 
     /* races */
-    HUMAN(100, 65, 70, 65),
-    TAHEEN(80, 75, 75, 70),
-    CAN_TOI(105, 55, 60, 80);
+    JEDI(80, 65, 75, 100),
+    HUMAN(100, 75, 65, 80);
 
     /* initial stats */
     private final int vitality;
     private final int strength;
     private final int defence;
-    private final int speed;
+    private final int deceit;
 
-    CharRace(int vitality, int strength, int defence, int speed) {
+    CharRace(int vitality, int strength, int defence, int deceit) {
         this.vitality = vitality;
         this.strength = strength;
         this.defence = defence;
-        this.speed = speed;
+        this.deceit = deceit;
     }
 
     /**
-     * @return initial race speed value.
+     * @return initial race deceit value.
      */
-    public int speed() {
-        return speed;
+    public int deceit() {
+        return deceit;
     }
 
     /**

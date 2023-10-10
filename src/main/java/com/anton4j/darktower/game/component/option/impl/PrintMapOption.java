@@ -22,7 +22,7 @@ public class PrintMapOption extends Option<Void> {
     protected OptionResult<Void> processOptionForResult() {
         GameMap gameMap = gameContext.getGameMap();
 
-        new ConsoleLine("Character is currently at " + gameMap.currentLocationTitle() + " location", FontColor.YELLOW).println();
+        new ConsoleLine("You is currently at " + gameMap.currentLocationTitle() + " location", FontColor.YELLOW).println();
         gameMap.print();
 
         return OptionResult.success();

@@ -30,7 +30,7 @@ public class MoveOption extends Option<Void> {
             gameContext.getGameStats().areaExplored();
         } else {
             Location nextLocation = gameMap.currentLocation().next();
-            new ConsoleLine("Character cannot move to the next location. Needed level is " + nextLocation.accessLevel(), FontColor.RED).println();
+            new ConsoleLine("You cannot move to the next location. Needed level is " + nextLocation.accessLevel(), FontColor.RED).println();
         }
 
         return OptionResult.success();

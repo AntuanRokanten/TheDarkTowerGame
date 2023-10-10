@@ -15,6 +15,6 @@ public enum EncounterOption {
     /**
      * If selected creature should run away from the enemy.
      */
-    RUN_AWAY
+    THESE_ARE_NOT_THE_DROIDS_YOU_ARE_LOOKING_FOR
 
 }

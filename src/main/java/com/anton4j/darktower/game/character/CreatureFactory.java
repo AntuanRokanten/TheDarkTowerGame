@@ -56,7 +56,7 @@ public class CreatureFactory {
         int defence = calculateFeature(character.defence(), defenceFactor);
         int vitality = calculateFeature(character.vitality(), vitalityFactor);
         int strength = calculateFeature(character.strength(), strengthFactor);
-        int speed = calculateFeature(character.speed(), speedFactor);
+        int speed = calculateFeature(character.deceit(), speedFactor);
 
         return new Mob(randomRace, vitality, strength, defence, speed);
     }

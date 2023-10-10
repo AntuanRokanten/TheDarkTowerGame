@@ -38,14 +38,14 @@ public abstract class Creature implements Serializable {
     int vitality;
     int strength;
     int defence;
-    int speed;
+    int deceit;
 
-    Creature(Race race, int vitality, int strength, int defence, int speed) {
+    Creature(Race race, int vitality, int strength, int defence, int deceit) {
         this.defence = defence;
         this.vitality = vitality;
         this.strength = strength;
         this.race = race;
-        this.speed = speed;
+        this.deceit = deceit;
 
         this.health = vitality;
     }
@@ -58,10 +58,10 @@ public abstract class Creature implements Serializable {
     }
 
     /**
-     * Speed value.
+     * deceit value.
      */
-    public int speed() {
-        return speed;
+    public int deceit() {
+        return deceit;
     }
 
     /**
@@ -79,18 +79,15 @@ public abstract class Creature implements Serializable {
     }
 
     /**
-     * Tries to run away from the specified creature.
-     *
-     * @param enemy creature from which this creature runs away.
-     * @return run away outcome.
+     * Tries to deceit the specified creature.
      */
-    public EncounterOutcome runAway(Creature enemy) {
-        new ConsoleLine("Character is running away", FontColor.PURPLE).println();
+    public EncounterOutcome deceit(Creature enemy) {
+        new ConsoleLine("You are applying Jedi Mind Trick: THESE AREN'T THE DROIDS YOU'RE LOOKING FOR", FontColor.PURPLE).println();
 
         EncounterOutcome encounterOutcome;
-        if (this.speed >= enemy.speed) {
-            float speedPercentage = (100 - calculatePercentValue(this.speed, enemy.speed));
-            if (speedPercentage >= 30) {
+        if (this.deceit >= enemy.deceit) {
+            float deceitPercentage = (100 - calculatePercentValue(this.deceit, enemy.deceit));
+            if (deceitPercentage >= 30) {
                 encounterOutcome = SUCCESS;
             } else if (this.health >= enemy.health) {
                 encounterOutcome = SUCCESS;
@@ -103,8 +100,8 @@ public abstract class Creature implements Serializable {
                 }
             }
         } else {
-            float speedPercentage = (100 - calculatePercentValue(enemy.speed, this.speed));
-            if (speedPercentage >= 30) {
+            float deceitPercentage = (100 - calculatePercentValue(enemy.deceit, this.deceit));
+            if (deceitPercentage >= 30) {
                 encounterOutcome = FAILURE;
             } else if (enemy.health >= this.health) {
                 encounterOutcome = FAILURE;
@@ -119,9 +116,9 @@ public abstract class Creature implements Serializable {
         }
 
         if (encounterOutcome == SUCCESS) {
-            new ConsoleLine("Character successfully run away", FontColor.PURPLE).println();
+            new ConsoleLine("You can move on", FontColor.PURPLE).println();
         } else {
-            new ConsoleLine("Character was caught by the creature", FontColor.PURPLE).println();
+            new ConsoleLine("You was caught by the creature", FontColor.PURPLE).println();
         }
 
         return encounterOutcome;
@@ -209,11 +206,11 @@ public abstract class Creature implements Serializable {
     @Override
     public String toString() {
         return "race = " + race +
-              ", vitality = " + vitality +
-              ", strength = " + strength +
-              ", defence = " + defence +
-              ", speed = " + speed +
-              ", health = " + health;
+               ", vitality = " + vitality +
+               ", strength = " + strength +
+               ", defence = " + defence +
+               ", deceit = " + deceit +
+               ", health = " + health;
     }
 
 }

@@ -46,8 +46,8 @@ public class Char extends Creature implements Serializable {
      */
     private int experience = 0;
 
-    private Char(Gender gender, String name, CharRace charRace, int vitality, int strength, int defence, int speed) {
-        super(charRace, vitality, strength, defence, speed);
+    private Char(Gender gender, String name, CharRace charRole, int vitality, int strength, int defence, int deceit) {
+        super(charRole, vitality, strength, defence, deceit);
         this.name = name;
         this.gender = gender;
     }
@@ -65,7 +65,7 @@ public class Char extends Creature implements Serializable {
             experience = experience + calculatePercentage(expLevelIncreaseFactor, charEvent.experienceFactor());
         }
 
-        new ConsoleLine("Character experience increased to " + experience, FontColor.CYAN).println();
+        new ConsoleLine("Your experience increased to " + experience, FontColor.CYAN).println();
         if (experience >= experienceToNextLevel) {
             levelUp();
             experienceToNextLevel = calculateExperienceToNextLevel();
@@ -81,7 +81,7 @@ public class Char extends Creature implements Serializable {
             return;
         }
 
-        new ConsoleLine("Character is resting...", FontColor.GREEN).println();
+        new ConsoleLine("You are resting...", FontColor.GREEN).println();
         new ProgressBar(300).start();
 
         int healthAfterRest = health + calculatePercentage(vitality, RandomUtils.integerInRange(30, 50));
@@ -91,7 +91,7 @@ public class Char extends Creature implements Serializable {
         this.health = healthAfterRest;
 
         ConsoleUtils.emptyLine();
-        new ConsoleLine("Character health increased to " + health, FontColor.GREEN).println();
+        new ConsoleLine("Your health increased to " + health, FontColor.GREEN).println();
     }
 
     /**
@@ -100,14 +100,14 @@ public class Char extends Creature implements Serializable {
     public String charInfo() {
         float healthPercentage = CalculateUtils.calculatePercentValue(vitality, health);
 
-        return "        Character info" +
-              "\nName: " + name +
-              "\nRace: " + race +
-              "\nStats: strength = " +
-              strength + "; defence = " + defence + "; speed = " + speed + "; vitality = " + vitality +
-              "\nHealth: " + health + " (" + (int) healthPercentage + "% of vitality)" +
-              "\nLevel: " + level +
-              "\nExperience: " + experience + " (gain " + experienceToNextLevel + " to get next level)";
+        return "\t\t\tCharacter info" +
+               "\nName: " + name +
+               "\nRace: " + race +
+               "\nStats: strength = " +
+               strength + "; defence = " + defence + "; mind tricks = " + deceit + "; vitality = " + vitality +
+               "\nHealth: " + health + " (" + (int) healthPercentage + "% of vitality)" +
+               "\nLevel: " + level +
+               "\nExperience: " + experience + " (gain " + experienceToNextLevel + " to get next level)";
     }
 
     /**
@@ -118,11 +118,11 @@ public class Char extends Creature implements Serializable {
 
         int newLevelFactor = 30;
         vitality = calculateFeature(vitality, newLevelFactor + gender.vitalityFactor());
-        speed = calculateFeature(speed, newLevelFactor + gender.speedFactor());
+        deceit = calculateFeature(deceit, newLevelFactor + gender.speedFactor());
         defence = calculateFeature(defence, newLevelFactor + gender.defenceFactor());
         strength = calculateFeature(strength, newLevelFactor + gender.strengthFactor());
 
-        new ConsoleLine("Character level was increased to " + level, FontColor.WHITE).println();
+        new ConsoleLine("Your level was increased to " + level, FontColor.WHITE).println();
     }
 
     /**
@@ -145,11 +145,11 @@ public class Char extends Creature implements Serializable {
         if (o == null || getClass() != o.getClass()) return false;
         Char aChar = (Char) o;
         return level == aChar.level &&
-              experienceToNextLevel == aChar.experienceToNextLevel &&
-              experienceIncreaseFactor == aChar.experienceIncreaseFactor &&
-              experience == aChar.experience &&
-              Objects.equals(name, aChar.name) &&
-              gender == aChar.gender;
+               experienceToNextLevel == aChar.experienceToNextLevel &&
+               experienceIncreaseFactor == aChar.experienceIncreaseFactor &&
+               experience == aChar.experience &&
+               Objects.equals(name, aChar.name) &&
+               gender == aChar.gender;
     }
 
     @Override
@@ -164,7 +164,7 @@ public class Char extends Creature implements Serializable {
 
         private String name;
         private Gender gender;
-        private CharRace charRace;
+        private CharRace charRole;
 
         /**
          * Sets name of the character.
@@ -191,11 +191,11 @@ public class Char extends Creature implements Serializable {
         /**
          * Sets race of the character.
          *
-         * @param charRace race to be set.
+         * @param charRole race to be set.
          * @return current builder instance.
          */
-        public CharBuilder withRace(CharRace charRace) {
-            this.charRace = charRace;
+        public CharBuilder withRace(CharRace charRole) {
+            this.charRole = charRole;
             return this;
         }
 
@@ -203,12 +203,12 @@ public class Char extends Creature implements Serializable {
          * Builds {@link Char} instance.
          */
         public Char build() {
-            int vitality = calculateFeature(charRace.vitality(), gender.vitalityFactor());
-            int strength = calculateFeature(charRace.strength(), gender.strengthFactor());
-            int defence = calculateFeature(charRace.defence(), gender.defenceFactor());
-            int speed = calculateFeature(charRace.speed(), gender.speedFactor());
+            int vitality = calculateFeature(charRole.vitality(), gender.vitalityFactor());
+            int strength = calculateFeature(charRole.strength(), gender.strengthFactor());
+            int defence = calculateFeature(charRole.defence(), gender.defenceFactor());
+            int deceit = calculateFeature(charRole.deceit(), gender.speedFactor());
 
-            return new Char(gender, name, charRace, vitality, strength, defence, speed);
+            return new Char(gender, name, charRole, vitality, strength, defence, deceit);
         }
     }
 }

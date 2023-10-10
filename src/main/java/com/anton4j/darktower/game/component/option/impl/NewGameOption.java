@@ -25,9 +25,9 @@ public class NewGameOption extends Option<GameContext> {
 
     @Override
     protected OptionResult<GameContext> processOptionForResult() {
-        new ConsoleLine("In order to join Ka-Tet and start journey to the Dark end-banner first create a character", FontColor.BLUE).println();
+        new ConsoleLine("In order to join the group and start journey across Tatooine first create a character", FontColor.BLUE).println();
 
-        CharRace charRace = new OptionsScene<>(new OptionsFromEnum<>(CharRace.values()).options(gameContext), new ConsoleLine("Choose race:"))
+        CharRace charRole = new OptionsScene<>(new OptionsFromEnum<>(CharRace.values()).options(gameContext), new ConsoleLine("Choose race:"))
               .processScene();
 
         Gender gender = new OptionsScene<>(new OptionsFromEnum<>(Gender.values()).options(gameContext), new ConsoleLine("Choose gender:"))
@@ -39,7 +39,7 @@ public class NewGameOption extends Option<GameContext> {
         Char character = new Char.CharBuilder()
               .withGender(gender)
               .withName(name)
-              .withRace(charRace)
+              .withRace(charRole)
               .build();
 
         gameContext.setMainCharacter(character);

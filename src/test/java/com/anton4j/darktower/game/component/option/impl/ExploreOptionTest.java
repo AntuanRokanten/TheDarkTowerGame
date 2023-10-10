@@ -103,7 +103,7 @@ public class ExploreOptionTest extends OutStreamsInterceprtorTest {
         verify(character).defence();
         verify(character).vitality();
         verify(character).strength();
-        verify(character).speed();
+        verify(character).deceit();
 
         verify(gameMap).canMoveToNextLocation(character);
         verify(gameStats).fightWin();
@@ -121,8 +121,8 @@ public class ExploreOptionTest extends OutStreamsInterceprtorTest {
         assertTrue(consoleOutput.contains("Beast stats: race = "));
         assertTrue(consoleOutput.contains("Your stats:"));
         assertTrue(consoleOutput.contains("1 - Fight"));
-        assertTrue(consoleOutput.contains("2 - Run away"));
-        assertTrue(consoleOutput.contains("Character won the fight"));
+        assertTrue(consoleOutput.contains("2 - These are not the droids you are looking for"));
+        assertTrue(consoleOutput.contains("You won the fight"));
     }
 
     @Test
@@ -159,7 +159,7 @@ public class ExploreOptionTest extends OutStreamsInterceprtorTest {
         verify(character).defence();
         verify(character).vitality();
         verify(character).strength();
-        verify(character).speed();
+        verify(character).deceit();
 
         verify(gameMap).canMoveToNextLocation(character);
         verify(gameStats).fightLost();
@@ -177,8 +177,8 @@ public class ExploreOptionTest extends OutStreamsInterceprtorTest {
         assertTrue(consoleOutput.contains("Beast stats: race = "));
         assertTrue(consoleOutput.contains("Your stats:"));
         assertTrue(consoleOutput.contains("1 - Fight"));
-        assertTrue(consoleOutput.contains("2 - Run away"));
-        assertTrue(consoleOutput.contains("Character lost the fight. Take a rest in order to heal"));
+        assertTrue(consoleOutput.contains("2 - These are not the droids you are looking for"));
+        assertTrue(consoleOutput.contains("You lost the fight. Take a rest in order to heal"));
     }
 
     @Test
@@ -194,7 +194,7 @@ public class ExploreOptionTest extends OutStreamsInterceprtorTest {
         when(gameContext.getGameMap()).thenReturn(gameMap);
         when(gameContext.getGameStats()).thenReturn(gameStats);
 
-        when(character.runAway(any())).thenReturn(EncounterOutcome.FAILURE);
+        when(character.deceit(any())).thenReturn(EncounterOutcome.FAILURE);
         when(character.fight(any())).thenReturn(EncounterOutcome.SUCCESS);
 
         when(gameMap.canMoveToNextLocation(character)).thenReturn(true);
@@ -213,11 +213,11 @@ public class ExploreOptionTest extends OutStreamsInterceprtorTest {
 
         verify(character).increaseExperience(CharEvent.FIGHT_VICTORY);
         verify(character).fight(any());
-        verify(character).runAway(any());
+        verify(character).deceit(any());
         verify(character).defence();
         verify(character).vitality();
         verify(character).strength();
-        verify(character).speed();
+        verify(character).deceit();
 
         verify(gameMap).canMoveToNextLocation(character);
         verify(gameStats).fightWin();
@@ -235,8 +235,8 @@ public class ExploreOptionTest extends OutStreamsInterceprtorTest {
         assertTrue(consoleOutput.contains("Beast stats: race = "));
         assertTrue(consoleOutput.contains("Your stats:"));
         assertTrue(consoleOutput.contains("1 - Fight"));
-        assertTrue(consoleOutput.contains("2 - Run away"));
-        assertTrue(consoleOutput.contains("Character won the fight"));
+        assertTrue(consoleOutput.contains("2 - These are not the droids you are looking for"));
+        assertTrue(consoleOutput.contains("You won the fight"));
     }
 
     @Test
@@ -252,7 +252,7 @@ public class ExploreOptionTest extends OutStreamsInterceprtorTest {
         when(gameContext.getGameMap()).thenReturn(gameMap);
         when(gameContext.getGameStats()).thenReturn(gameStats);
 
-        when(character.runAway(any())).thenReturn(EncounterOutcome.SUCCESS);
+        when(character.deceit(any())).thenReturn(EncounterOutcome.SUCCESS);
 
         when(gameMap.canMoveToNextLocation(character)).thenReturn(true);
 
@@ -269,11 +269,11 @@ public class ExploreOptionTest extends OutStreamsInterceprtorTest {
         assertTrue(result.isSuccess());
 
         verify(character).increaseExperience(CharEvent.RUN_SUCCESS);
-        verify(character).runAway(any());
+        verify(character).deceit(any());
         verify(character).defence();
         verify(character).vitality();
         verify(character).strength();
-        verify(character).speed();
+        verify(character).deceit();
 
         verify(gameMap).canMoveToNextLocation(character);
         verify(gameContext).getMainCharacter();
@@ -289,7 +289,7 @@ public class ExploreOptionTest extends OutStreamsInterceprtorTest {
         assertTrue(consoleOutput.contains("Beast stats: race = "));
         assertTrue(consoleOutput.contains("Your stats:"));
         assertTrue(consoleOutput.contains("1 - Fight"));
-        assertTrue(consoleOutput.contains("2 - Run away"));
+        assertTrue(consoleOutput.contains("2 - These are not the droids you are looking for"));
     }
 
 }

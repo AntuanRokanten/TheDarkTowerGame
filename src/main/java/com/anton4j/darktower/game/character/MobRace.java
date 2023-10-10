@@ -7,8 +7,8 @@ package com.anton4j.darktower.game.character;
  */
 public enum MobRace implements Race {
 
-    ORACLE,
-    ZOMBIE,
-    VAMPIRE
+    SITH,
+    STORMTROOPER,
+    SAND_PEOPLE
 
 }

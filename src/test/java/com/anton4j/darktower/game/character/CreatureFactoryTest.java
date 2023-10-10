@@ -33,7 +33,7 @@ public class CreatureFactoryTest {
         float strengthPercentage = CalculateUtils.calculatePercentValue(character.strength, enemy.strength);
         float defencePercentage = CalculateUtils.calculatePercentValue(character.defence, enemy.defence);
         float vitalityPercentage = CalculateUtils.calculatePercentValue(character.vitality, enemy.vitality);
-        float speedPercentage = CalculateUtils.calculatePercentValue(character.speed, enemy.speed);
+        float speedPercentage = CalculateUtils.calculatePercentValue(character.deceit, enemy.deceit);
 
         float healthDifference = Math.abs(100 - healthPercentage);
         float strengthDifference = Math.abs(100 - strengthPercentage);

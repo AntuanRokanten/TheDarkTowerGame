@@ -20,31 +20,31 @@ public class CharTest extends OutStreamsInterceprtorTest {
 
     private Char character;
 
-    private CharRace charRace;
+    private CharRace charRole;
     private Gender gender;
     private String name;
 
     @Before
     public void setup() {
-        charRace = TestRandomUtils.randomEnum(CharRace.values());
+        charRole = TestRandomUtils.randomEnum(CharRace.values());
         gender = TestRandomUtils.randomEnum(Gender.values());
         name = UUID.randomUUID().toString();
 
         character = new Char.CharBuilder()
               .withGender(gender)
-              .withRace(this.charRace)
+              .withRace(this.charRole)
               .withName(name)
               .build();
     }
 
     @Test
     public void testCharStats() throws IllegalAccessException {
-        assertEquals(character.health, calculateFeature(charRace.vitality(), gender.vitalityFactor()));
-        assertEquals(character.speed, calculateFeature(charRace.speed(), gender.speedFactor()));
-        assertEquals(character.defence, calculateFeature(charRace.defence(), gender.defenceFactor()));
-        assertEquals(character.strength, calculateFeature(charRace.strength(), gender.strengthFactor()));
+        assertEquals(character.health, calculateFeature(charRole.vitality(), gender.vitalityFactor()));
+        assertEquals(character.deceit, calculateFeature(charRole.deceit(), gender.speedFactor()));
+        assertEquals(character.defence, calculateFeature(charRole.defence(), gender.defenceFactor()));
+        assertEquals(character.strength, calculateFeature(charRole.strength(), gender.strengthFactor()));
 
-        assertEquals(character.race, charRace);
+        assertEquals(character.race, charRole);
 
         assertEquals(character.vitality, character.health);
 
@@ -81,7 +81,7 @@ public class CharTest extends OutStreamsInterceprtorTest {
 
         String fightLog = outContent.toString();
         assertTrue(fightLog.contains("Starting a fight"));
-        assertTrue(fightLog.contains(charRace + " attacks"));
+        assertTrue(fightLog.contains(charRole + " attacks"));
         assertTrue(fightLog.contains(enemy.race + " health after attack"));
 
         assertTrue(enemy.health < 10);
@@ -113,176 +113,176 @@ public class CharTest extends OutStreamsInterceprtorTest {
     public void runAwaySuccessSpeedHigher() {
         // ARRANGE
         Mob enemy = CreatureFactory.createCharacterEnemy(character);
-        enemy.speed = 10; // to ensure run success
+        enemy.deceit = 10; // to ensure run success
 
         // ACT
-        EncounterOutcome outcome = character.runAway(enemy);
+        EncounterOutcome outcome = character.deceit(enemy);
 
         // ASSERT
         assertEquals(EncounterOutcome.SUCCESS, outcome);
 
         String consoleOutput = outContent.toString();
 
-        assertTrue(consoleOutput.contains("Character is running away"));
-        assertTrue(consoleOutput.contains("Character successfully run away")); // not asserting font color
+        assertTrue(consoleOutput.contains("You are applying Jedi Mind Trick: THESE AREN'T THE DROIDS YOU'RE LOOKING FOR"));
+        assertTrue(consoleOutput.contains("You can move on")); // not asserting font color
     }
 
     @Test
     public void runAwaySuccessSpeedSlightlyHigherHealthHigher() {
         // ARRANGE
         Mob enemy = CreatureFactory.createCharacterEnemy(character);
-        enemy.speed = character.speed - 1;
+        enemy.deceit = character.deceit - 1;
         enemy.health = character.health - 1;
 
         // ACT
-        EncounterOutcome outcome = character.runAway(enemy);
+        EncounterOutcome outcome = character.deceit(enemy);
 
         // ASSERT
         assertEquals(EncounterOutcome.SUCCESS, outcome);
 
         String consoleOutput = outContent.toString();
 
-        assertTrue(consoleOutput.contains("Character is running away"));
-        assertTrue(consoleOutput.contains("Character successfully run away")); // not asserting font color
+        assertTrue(consoleOutput.contains("You are applying Jedi Mind Trick: THESE AREN'T THE DROIDS YOU'RE LOOKING FOR"));
+        assertTrue(consoleOutput.contains("You can move on")); // not asserting font color
     }
 
     @Test
     public void runAwaySuccessSpeedSlightlyHigherHealthSlightlyLower() {
         // ARRANGE
         Mob enemy = CreatureFactory.createCharacterEnemy(character);
-        enemy.speed = character.speed - 1;
+        enemy.deceit = character.deceit - 1;
         character.health = enemy.health - 1;
 
         // ACT
-        EncounterOutcome outcome = character.runAway(enemy);
+        EncounterOutcome outcome = character.deceit(enemy);
 
         // ASSERT
         assertEquals(EncounterOutcome.SUCCESS, outcome);
 
         String consoleOutput = outContent.toString();
 
-        assertTrue(consoleOutput.contains("Character is running away"));
-        assertTrue(consoleOutput.contains("Character successfully run away")); // not asserting font color
+        assertTrue(consoleOutput.contains("You are applying Jedi Mind Trick: THESE AREN'T THE DROIDS YOU'RE LOOKING FOR"));
+        assertTrue(consoleOutput.contains("You can move on")); // not asserting font color
     }
 
     @Test
     public void runAwayFailureSpeedSlightlyHigherHealthLower() {
         // ARRANGE
         Mob enemy = CreatureFactory.createCharacterEnemy(character);
-        enemy.speed = character.speed - 1;
+        enemy.deceit = character.deceit - 1;
         character.health = enemy.health - 100;
 
         // ACT
-        EncounterOutcome outcome = character.runAway(enemy);
+        EncounterOutcome outcome = character.deceit(enemy);
 
         // ASSERT
         assertEquals(EncounterOutcome.FAILURE, outcome);
 
         String consoleOutput = outContent.toString();
 
-        assertTrue(consoleOutput.contains("Character is running away"));
-        assertTrue(consoleOutput.contains("Character was caught by the creature")); // not asserting font color
+        assertTrue(consoleOutput.contains("You are applying Jedi Mind Trick: THESE AREN'T THE DROIDS YOU'RE LOOKING FOR"));
+        assertTrue(consoleOutput.contains("You was caught by the creature")); // not asserting font color
     }
 
     @Test
     public void runAwayFailureSpeedSlightlyLowerHealthSlightlyLower() {
         // ARRANGE
         Mob enemy = CreatureFactory.createCharacterEnemy(character);
-        character.speed = enemy.speed - 1;
+        character.deceit = enemy.deceit - 1;
         character.health = enemy.health - 1;
 
         // ACT
-        EncounterOutcome outcome = character.runAway(enemy);
+        EncounterOutcome outcome = character.deceit(enemy);
 
         // ASSERT
         assertEquals(EncounterOutcome.FAILURE, outcome);
 
         String consoleOutput = outContent.toString();
 
-        assertTrue(consoleOutput.contains("Character is running away"));
-        assertTrue(consoleOutput.contains("Character was caught by the creature")); // not asserting font color
+        assertTrue(consoleOutput.contains("You are applying Jedi Mind Trick: THESE AREN'T THE DROIDS YOU'RE LOOKING FOR"));
+        assertTrue(consoleOutput.contains("You was caught by the creature")); // not asserting font color
     }
 
     @Test
     public void runAwayFailureSpeedSlightlyLowerHealthSlightlyHigher() {
         // ARRANGE
         Mob enemy = CreatureFactory.createCharacterEnemy(character);
-        character.speed = enemy.speed - 1;
+        character.deceit = enemy.deceit - 1;
         enemy.health = character.health - 1;
 
         // ACT
-        EncounterOutcome outcome = character.runAway(enemy);
+        EncounterOutcome outcome = character.deceit(enemy);
 
         // ASSERT
         assertEquals(EncounterOutcome.FAILURE, outcome);
 
         String consoleOutput = outContent.toString();
 
-        assertTrue(consoleOutput.contains("Character is running away"));
-        assertTrue(consoleOutput.contains("Character was caught by the creature")); // not asserting font color
+        assertTrue(consoleOutput.contains("You are applying Jedi Mind Trick: THESE AREN'T THE DROIDS YOU'RE LOOKING FOR"));
+        assertTrue(consoleOutput.contains("You was caught by the creature")); // not asserting font color
     }
 
     @Test
     public void runAwayFailureSpeedSlightlyLowerHealthHigher() {
         // ARRANGE
         Mob enemy = CreatureFactory.createCharacterEnemy(character);
-        character.speed = enemy.speed - 1;
+        character.deceit = enemy.deceit - 1;
         enemy.health = character.health - 100;
 
         // ACT
-        EncounterOutcome outcome = character.runAway(enemy);
+        EncounterOutcome outcome = character.deceit(enemy);
 
         // ASSERT
         assertEquals(EncounterOutcome.SUCCESS, outcome);
 
         String consoleOutput = outContent.toString();
 
-        assertTrue(consoleOutput.contains("Character is running away"));
-        assertTrue(consoleOutput.contains("Character successfully run away")); // not asserting font color
+        assertTrue(consoleOutput.contains("You are applying Jedi Mind Trick: THESE AREN'T THE DROIDS YOU'RE LOOKING FOR"));
+        assertTrue(consoleOutput.contains("You can move on")); // not asserting font color
     }
 
     @Test
     public void runAwayFailureHealth() {
         // ARRANGE
         Mob enemy = CreatureFactory.createCharacterEnemy(character);
-        enemy.speed = character.speed - 1;
+        enemy.deceit = character.deceit - 1;
         character.health = enemy.health - 100;
 
         // ACT
-        EncounterOutcome outcome = character.runAway(enemy);
+        EncounterOutcome outcome = character.deceit(enemy);
 
         // ASSERT
         assertEquals(EncounterOutcome.FAILURE, outcome);
 
         String consoleOutput = outContent.toString();
 
-        assertTrue(consoleOutput.contains("Character is running away"));
-        assertTrue(consoleOutput.contains("Character was caught by the creature")); // not asserting font color
+        assertTrue(consoleOutput.contains("You are applying Jedi Mind Trick: THESE AREN'T THE DROIDS YOU'RE LOOKING FOR"));
+        assertTrue(consoleOutput.contains("You was caught by the creature")); // not asserting font color
     }
 
     @Test
     public void runAwayFailureSpeedLower() {
         // ARRANGE
         Mob enemy = CreatureFactory.createCharacterEnemy(character);
-        character.speed = 10; // to ensure run failure
+        character.deceit = 10; // to ensure run failure
 
         // ACT
-        EncounterOutcome outcome = character.runAway(enemy);
+        EncounterOutcome outcome = character.deceit(enemy);
 
         // ASSERT
         assertEquals(EncounterOutcome.FAILURE, outcome);
 
         String consoleOutput = outContent.toString();
 
-        assertTrue(consoleOutput.contains("Character is running away"));
-        assertTrue(consoleOutput.contains("Character was caught by the creature")); // not asserting font color
+        assertTrue(consoleOutput.contains("You are applying Jedi Mind Trick: THESE AREN'T THE DROIDS YOU'RE LOOKING FOR"));
+        assertTrue(consoleOutput.contains("You was caught by the creature")); // not asserting font color
     }
 
     @Test
     public void increaseExperience() throws IllegalAccessException {
         // ARRANGE
         CharEvent charEvent = TestRandomUtils.randomEnum(CharEvent.values());
-        int speed = character.speed;
+        int speed = character.deceit;
         int vitality = character.vitality;
         int defence = character.defence;
         int strength = character.strength;
@@ -318,7 +318,7 @@ public class CharTest extends OutStreamsInterceprtorTest {
 
             // asserting stats increased
             assertTrue(strength < character.strength);
-            assertTrue(speed < character.speed);
+            assertTrue(speed < character.deceit);
             assertTrue(vitality < character.vitality);
             assertTrue(defence < character.defence);
 

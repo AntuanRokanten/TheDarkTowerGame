@@ -70,7 +70,7 @@ public class GameMapTest extends OutStreamsInterceprtorTest {
 
         // ASSERT
         String consoleOutput = outContent.toString();
-        assertTrue(consoleOutput.contains("Character cannot move to the next location.\n" +
+        assertTrue(consoleOutput.contains("You cannot move to the next location.\n" +
               "You should gain level " + nextAccessLevel));
 
         Location currentLocation = gameMap.currentLocation();
@@ -88,7 +88,7 @@ public class GameMapTest extends OutStreamsInterceprtorTest {
 
         // ASSERT
         String consoleOutput = outContent.toString();
-        assertTrue(consoleOutput.contains("Character moved to " + nextLocation.title() + " location"));
+        assertTrue(consoleOutput.contains("You moved to " + nextLocation.title() + " location"));
 
         Location currentLocation = gameMap.currentLocation();
         assertEquals(nextLocation, currentLocation);
@@ -106,7 +106,7 @@ public class GameMapTest extends OutStreamsInterceprtorTest {
 
         // ASSERT
         String consoleOutput = outContent.toString();
-        assertTrue(consoleOutput.contains("Character already reached the final destination"));
+        assertTrue(consoleOutput.contains("You already reached the final destination"));
     }
 
     @Test

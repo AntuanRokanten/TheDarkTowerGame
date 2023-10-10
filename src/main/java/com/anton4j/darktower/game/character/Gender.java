@@ -8,26 +8,26 @@ package com.anton4j.darktower.game.character;
 @SuppressWarnings("SameParameterValue")
 public enum Gender {
 
-    MALE(15, 10, 5, 10),
-    FEMALE(10, 10, 15, 5);
+    MALE(15, 10, 5, 5),
+    FEMALE(10, 10, 15, 10);
 
     private final float vitalityFactor;
     private final float strengthFactor;
     private final float defenceFactor;
-    private final float speedFactor;
+    private final float deceitFactor;
 
-    Gender(float vitalityFactor, float strengthFactor, float defenceFactor, float speedFactor) {
+    Gender(float vitalityFactor, float strengthFactor, float defenceFactor, float deceitFactor) {
         this.vitalityFactor = vitalityFactor;
         this.strengthFactor = strengthFactor;
         this.defenceFactor = defenceFactor;
-        this.speedFactor = speedFactor;
+        this.deceitFactor = deceitFactor;
     }
 
     /**
      * @return factor that is taken into account when calculating character's speed value.
      */
     public float speedFactor() {
-        return speedFactor;
+        return deceitFactor;
     }
 
     /**

@@ -73,10 +73,10 @@ public class Game {
 
         ConsoleLines graphicalMap = new ConsoleLines(mapConsoleLines);
 
-        Location theDarkTower = new Location("The Dark Tower", null, 7);
-        Location discordia = new Location("Discordia", theDarkTower, 5);
-        Location thunderclap = new Location("Thunderclap", discordia, 3);
-        Location borderlands = new Location("Borderlands", thunderclap, 1);
+        Location theDarkTower = new Location("Mos Eisley", null, 7);
+        Location discordia = new Location("Sand People Settlement", theDarkTower, 5);
+        Location thunderclap = new Location("Great Pit of Carkoon", discordia, 3);
+        Location borderlands = new Location("Outpost", thunderclap, 1);
         GameMap gameMap = new GameMap(graphicalMap, borderlands);
 
         GameContext gameContext = new GameContext();
@@ -86,11 +86,11 @@ public class Game {
     }
 
     private IntroOutro initIntro() {
-        return initIntroOutro("banner", "The man in Black fled across the Desert, and the Gunslinger followed...");
+        return initIntroOutro("banner", "This is our most desperate hour. Help me, Obi-Wan Kenobi. You're my only hope...");
     }
 
     private IntroOutro initOutro() {
-        return initIntroOutro("end-banner", "You have reached the Dark Tower!");
+        return initIntroOutro("end-banner", "You have reached the Mos Eisley!");
     }
 
     private IntroOutro initIntroOutro(String bannerFileName, String text) {
